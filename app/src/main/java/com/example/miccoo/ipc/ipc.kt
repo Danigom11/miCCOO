@@ -5,5 +5,5 @@ import androidx.compose.runtime.Composable
 
 @Composable
 fun Ipc() {
-    Text(text = "Pantalla ipc   ")
+    Text(text = "Pantalla ipc")
 }
