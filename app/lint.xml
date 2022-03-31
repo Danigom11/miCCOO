@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<lint>
+    <issue id="IconDuplicates">
+        <ignore path="src/main/res/mipmap-hdpi/ic_launcher_foreground.png" />
+    </issue>
+    <issue id="IconLocation">
+        <ignore path="src/main/res/drawable/a_hospitalizacion.jpg" />
+        <ignore path="src/main/res/drawable/b_nacimiento.jpg" />
+        <ignore path="src/main/res/drawable/c_matrimonio.jpg" />
+        <ignore path="src/main/res/drawable/d_cumplimiento_deber.png" />
+        <ignore path="src/main/res/drawable/e_consulta_medica.jpg" />
+        <ignore path="src/main/res/drawable/f_cambio_domicilio.jpg" />
+        <ignore path="src/main/res/drawable/g_formacion.jpg" />
+        <ignore path="src/main/res/drawable/h_lactancia.jpg" />
+        <ignore path="src/main/res/drawable/i_guarda_legal.jpg" />
+        <ignore path="src/main/res/drawable/j_asuntos_propios.jpg" />
+        <ignore path="src/main/res/drawable/nomina_buscar.jpg" />
+        <ignore path="src/main/res/drawable/nomina_completa.jpg" />
+        <ignore path="src/main/res/drawable/permisos_retribuidos.jpg" />
+        <ignore path="src/main/res/drawable/punomiccoo.png" />
+        <ignore path="src/main/res/drawable/sanciones.jpg" />
+        <ignore path="src/main/res/drawable/sin_antiguedad.jpg" />
+    </issue>
+</lint>

@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "8282822727",
+    "project_id": "miccoo-535fe",
+    "storage_bucket": "miccoo-535fe.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:8282822727:android:6626f1b09ee245527f7962",
+        "android_client_info": {
+          "package_name": "com.example.miCCOO"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "8282822727-kqunvtp8c5sbj2q0h4tp6v4cas6r8qsq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyByjl1xlvM7PpFYFn3T9Rwa42uyjK9rpcc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "8282822727-kqunvtp8c5sbj2q0h4tp6v4cas6r8qsq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
