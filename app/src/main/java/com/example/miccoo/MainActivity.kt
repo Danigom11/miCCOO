@@ -8,6 +8,7 @@ import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.navigation.NavHostController
+import com.example.miccoo.ipc.ViewModelIpc
 import com.example.miccoo.nomina_completa.ViewModelNominaCompleta
 import com.example.miccoo.nomina_datos_generales.ViewModelNomina
 import com.example.miccoo.ui.theme.MiCCOOTheme
@@ -24,6 +25,7 @@ class MainActivity : ComponentActivity() {
     private lateinit var navController: NavHostController
     private val viewModelNomina by viewModels<ViewModelNomina>()
     private val viewModelNominaCompleta by viewModels<ViewModelNominaCompleta>()
+    private val viewModelIpc by viewModels<ViewModelIpc>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,7 +36,8 @@ class MainActivity : ComponentActivity() {
                 SetupNavGraph(
                     navController = navController,
                     viewModelNomina,
-                    viewModelNominaCompleta
+                    viewModelNominaCompleta,
+                    viewModelIpc
                 )
             }
         }

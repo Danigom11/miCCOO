@@ -11,6 +11,7 @@ import androidx.navigation.NavHostController
 import com.example.miccoo._pagina_principal.PaginaPrincipal
 import com.example.miccoo._pagina_principal.Screens
 import com.example.miccoo.ipc.Ipc
+import com.example.miccoo.ipc.ViewModelIpc
 import com.example.miccoo.nomina_completa.NominaCompleta
 import com.example.miccoo.nomina_completa.ViewModelNominaCompleta
 import com.example.miccoo.nomina_datos_generales.Nomina
@@ -32,7 +33,8 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 fun SetupNavGraph(
     navController: NavController,
     viewModelNomina: ViewModelNomina,
-    viewModelNominaCompleta: ViewModelNominaCompleta
+    viewModelNominaCompleta: ViewModelNominaCompleta,
+    viewModelIpc: ViewModelIpc
 ) {
 
     AnimatedNavHost(
@@ -80,7 +82,7 @@ fun SetupNavGraph(
         }
         //Pantalla ipc
         composable(Screens.IPC.ruta) {
-            Ipc()
+            Ipc(viewModelIpc = viewModelIpc)
         }
         //Pantalla sanciones
         composable(Screens.SANCIONES.ruta) {
