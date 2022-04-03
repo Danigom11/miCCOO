@@ -20,7 +20,7 @@ val listaContenidoTarjetasPantallaPrincipal: List<DataClassContenidoTarjetasPagi
         DataClassContenidoTarjetasPaginaPrincipal(
             Screens.IPC.ruta,
             R.drawable.ipc,
-            "IPC",
+            "Subida salario",
             "Atrasos y subida mensual"
         ),
         DataClassContenidoTarjetasPaginaPrincipal(

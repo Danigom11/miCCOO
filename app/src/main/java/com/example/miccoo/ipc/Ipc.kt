@@ -7,9 +7,9 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.ExperimentalMaterialApi
-import androidx.compose.material.Scaffold
+import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -21,6 +21,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import com.example.miccoo.BarraSuperiorMiCCOO
 import com.example.miccoo.nomina_completa.*
@@ -37,6 +38,8 @@ fun Ipc(viewModelIpc: ViewModelIpc) {
     val visibleTitulo by rememberSaveable { mutableStateOf(true) }
     var visibleCategoriaProfesional by rememberSaveable { mutableStateOf(true) }
     var visibleAntiguedad by rememberSaveable { mutableStateOf(false) }
+    var visiblePorcentajeSubida by rememberSaveable { mutableStateOf(false) }
+    var visibleMeses by rememberSaveable { mutableStateOf(false) }
     var visibleResultado by rememberSaveable { mutableStateOf(false) }
     val scrollState = rememberScrollState()
     val densidad = LocalDensity.current
@@ -186,7 +189,7 @@ fun Ipc(viewModelIpc: ViewModelIpc) {
                                 Boton(
                                     destino = visibleAntiguedad,
                                     destinoCambia = {
-                                        visibleAntiguedad = false; visibleResultado = true
+                                        visibleAntiguedad = false; visiblePorcentajeSubida = true
                                     },
                                     texto = "Siguiente",
                                     modifier = Modifier
@@ -195,11 +198,146 @@ fun Ipc(viewModelIpc: ViewModelIpc) {
                             Spacer(modifier = Modifier.size(20.dp))
                         }
                     }
+
+                    // Porcentaje subida
+                    AnimarVisibilidad(visible = visiblePorcentajeSubida, densidad = densidad) {
+                        Column(
+                            modifier = Modifier
+                                .height(300.dp)
+                                .border(
+                                    BorderStroke(
+                                        width = 2.dp,
+                                        brush = Brush.horizontalGradient(
+                                            listOf(
+                                                Color.Green,
+                                                Color.Red
+                                            )
+                                        )
+                                    ),
+                                    shape = RoundedCornerShape(5)
+                                ),
+                            horizontalAlignment = Alignment.CenterHorizontally
+                        ) {
+                            Column(modifier = Modifier.weight(1f)) {
+                                TextoConcepto(texto = "Porcentaje de subida")
+                                Spacer(modifier = Modifier.size(20.dp))
+                                CampoDeTextoIrpf(
+                                    visible = true,
+                                    conceptoElegido = viewModelIpc.porcentajeSubida,
+                                    conceptoElegidoCambia = { viewModelIpc.porcentajeSubidaCambia(it) },
+                                    textoLabel = "Porcentaje"
+                                )
+
+                            }
+                            Row(
+                                Modifier.fillMaxWidth(),
+                                horizontalArrangement = Arrangement.Center
+                            ) {
+                                Boton(
+                                    destino = visibleAntiguedad,
+                                    destinoCambia = {
+                                        visiblePorcentajeSubida =
+                                            false; visibleMeses = true
+                                    },
+                                    texto = "Anterior",
+                                    modifier = Modifier
+                                )
+                                Spacer(modifier = Modifier.size(20.dp))
+                                Boton(
+                                    destino = visibleAntiguedad,
+                                    destinoCambia = {
+                                        visiblePorcentajeSubida = false; visibleMeses = true
+                                    },
+                                    texto = "Siguiente",
+                                    modifier = Modifier
+                                )
+                            }
+                            Spacer(modifier = Modifier.size(20.dp))
+                        }
+                    }
+
+                    // Meses elegidos
+                    AnimarVisibilidad(visible = visibleMeses, densidad = densidad) {
+                        Column(
+                            modifier = Modifier
+                                .height(300.dp)
+                                .border(
+                                    BorderStroke(
+                                        width = 2.dp,
+                                        brush = Brush.horizontalGradient(
+                                            listOf(
+                                                Color.Green,
+                                                Color.Red
+                                            )
+                                        )
+                                    ),
+                                    shape = RoundedCornerShape(5)
+                                ),
+                            horizontalAlignment = Alignment.CenterHorizontally
+                        ) {
+                            Column(modifier = Modifier.weight(1f)) {
+                                TextoConcepto(texto = "¿Cuántos meses de atrasos?")
+                                Spacer(modifier = Modifier.size(20.dp))
+                                CampoDeTextoIrpf(
+                                    visible = true,
+                                    conceptoElegido = viewModelIpc.mesesElegidos,
+                                    conceptoElegidoCambia = { viewModelIpc.mesesElegidosCambia(it) },
+                                    textoLabel = "Meses"
+                                )
+
+                            }
+                            Row(
+                                Modifier.fillMaxWidth(),
+                                horizontalArrangement = Arrangement.Center
+                            ) {
+                                Boton(
+                                    destino = visibleAntiguedad,
+                                    destinoCambia = {
+                                        visibleMeses =
+                                            false; visiblePorcentajeSubida = true
+                                    },
+                                    texto = "Anterior",
+                                    modifier = Modifier
+                                )
+                                Spacer(modifier = Modifier.size(20.dp))
+                                Boton(
+                                    destino = visibleAntiguedad,
+                                    destinoCambia = {
+                                        visibleMeses = false; visibleResultado = true
+                                    },
+                                    texto = "Calcular",
+                                    modifier = Modifier
+                                )
+                            }
+                            Spacer(modifier = Modifier.size(20.dp))
+                        }
+                    }
+
+
                     //Resultado
                     AnimarVisibilidad(visible = visibleResultado, densidad = densidad) {
-                        Column {
-                            TextoConcepto(texto = "Resultado")
-                            ResultadoIpc(viewModelIpc = viewModelIpc)
+                        Column(
+                            modifier = Modifier
+                                .height(500.dp)
+                                .border(
+                                    BorderStroke(
+                                        width = 2.dp,
+                                        brush = Brush.horizontalGradient(
+                                            listOf(
+                                                Color.Green,
+                                                Color.Red
+                                            )
+                                        )
+                                    ),
+                                    shape = RoundedCornerShape(5)
+                                ),
+                            horizontalAlignment = Alignment.CenterHorizontally
+                        ) {
+                            Column {
+                                Spacer(modifier = Modifier.size(20.dp))
+                                TextoConcepto(texto = "Resultado")
+                                ResultadoIpc(viewModelIpc = viewModelIpc)
+                            }
                         }
                     }
                 }
@@ -207,3 +345,46 @@ fun Ipc(viewModelIpc: ViewModelIpc) {
         )
     }
 }
+
+@Composable
+fun CampoDeTextoIrpf(
+    visible: Boolean,
+    conceptoElegido: String,
+    conceptoElegidoCambia: (String) -> Unit,
+    textoLabel: String
+) {
+    Row(
+        Modifier.fillMaxWidth(),
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.Center
+    ) {
+        AnimatedVisibility(visible = visible) {
+            Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                TextField(
+                    value = conceptoElegido,
+                    onValueChange = { conceptoElegidoCambia(it) },
+                    modifier = Modifier.border(
+                        BorderStroke(
+                            width = 4.dp,
+                            brush = Brush.horizontalGradient(listOf(Color.Red, Color.Green))
+                        ),
+                        shape = RoundedCornerShape(50)
+                    ),
+                    colors = TextFieldDefaults.textFieldColors(
+                        backgroundColor = Color.Transparent,
+                        focusedIndicatorColor = Color.Transparent,
+                        unfocusedIndicatorColor = Color.Transparent
+                    ),
+                    label = {
+                        Text(
+                            text = textoLabel,
+                            color = MaterialTheme.colors.onPrimary
+                        )
+                    },
+                    keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Number)
+                )
+            }
+        }
+    }
+}
+

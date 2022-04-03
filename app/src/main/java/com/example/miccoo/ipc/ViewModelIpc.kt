@@ -168,6 +168,24 @@ class ViewModelIpc : ViewModel() {
         }
     }
 
+    // Porcentaje de subida
+    var porcentajeSubida by mutableStateOf("")
+    fun porcentajeSubidaCambia(isEnabled: String) {
+        porcentajeSubida = isEnabled
+    }
+
+    // Meses elegidos atrasos
+    var mesesElegidos by mutableStateOf("")
+    fun mesesElegidosCambia(isEnabled: String) {
+        mesesElegidos = isEnabled
+    }
+
+    // Cálculo atrasos
+    val atrasos get() = ((retribucionAnual.toDouble() / 12) * (mesesElegidos.toDouble()))
+
+    //Cálculo subida mes
+    val subidaMes get() = ((retribucionAnual.toDouble() / 12) * (mesesElegidos.toDouble()))
+
     // HORAS EXTRAS
     // Número de horas extras elegido
     var horasExtrasElegidas by mutableStateOf("")

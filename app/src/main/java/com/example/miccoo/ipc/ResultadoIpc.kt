@@ -2,8 +2,10 @@ package com.example.miccoo.ipc
 
 import android.annotation.SuppressLint
 import android.icu.text.NumberFormat
-import androidx.compose.foundation.border
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.Card
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -11,7 +13,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontStyle
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -20,251 +21,127 @@ import androidx.compose.ui.unit.sp
 @Composable
 fun ResultadoIpc(viewModelIpc: ViewModelIpc) {
     val numeroAMoneda = NumberFormat.getCurrencyInstance()
-    Column {
-        Column(
-            modifier = Modifier
-                .fillMaxWidth()
-        ) {
+    Column(
+        modifier = Modifier
+            .fillMaxWidth(),
+        horizontalAlignment = Alignment.CenterHorizontally
+
+    ) {
+        Spacer(modifier = Modifier.size(10.dp))
+        Text(
+            text = "Categoría profesional:",
+            color = MaterialTheme.colors.onPrimary,
+            textAlign = TextAlign.Start
+        )
+        Text(
+            text = viewModelIpc.seleccionadoCategoriaProfesional,
+            fontStyle = FontStyle.Italic,
+            color = MaterialTheme.colors.onPrimary,
+            textAlign = TextAlign.Start
+        )
+        Spacer(modifier = Modifier.size(size = 20.dp))
+        if (viewModelIpc.seleccionadoSwitchAntiguedad) {
             Text(
-                text = "Categoría profesional:",
+                text = "Antigüedad:",
                 color = MaterialTheme.colors.onPrimary,
                 textAlign = TextAlign.Start
             )
             Text(
-                text = viewModelIpc.seleccionadoCategoriaProfesional,
+                text = viewModelIpc.seleccionadoAntiguedad,
                 fontStyle = FontStyle.Italic,
                 color = MaterialTheme.colors.onPrimary,
                 textAlign = TextAlign.Start
             )
-            Spacer(modifier = Modifier.size(size = 20.dp))
-            if (viewModelIpc.seleccionadoSwitchAntiguedad) {
-                Text(
-                    text = "Antigüedad:",
-                    color = MaterialTheme.colors.onPrimary,
-                    textAlign = TextAlign.Start
-                )
-                Text(
-                    text = viewModelIpc.seleccionadoAntiguedad,
-                    fontStyle = FontStyle.Italic,
-                    color = MaterialTheme.colors.onPrimary,
-                    textAlign = TextAlign.Start
-                )
-            }
-            Spacer(modifier = Modifier.size(size = 20.dp))
         }
+        Spacer(modifier = Modifier.size(size = 20.dp))
+        Text(
+            text = "Porcentaje de subida:",
+            color = MaterialTheme.colors.onPrimary,
+            textAlign = TextAlign.Start
+        )
+        Text(
+            text = "${viewModelIpc.porcentajeSubida} %",
+            fontStyle = FontStyle.Italic,
+            color = MaterialTheme.colors.onPrimary,
+            textAlign = TextAlign.Start
+        )
+        Spacer(modifier = Modifier.size(size = 20.dp))
+        Text(
+            text = "Meses de atrasos:",
+            color = MaterialTheme.colors.onPrimary,
+            textAlign = TextAlign.Start
+        )
+        Text(
+            text = viewModelIpc.mesesElegidos,
+            fontStyle = FontStyle.Italic,
+            color = MaterialTheme.colors.onPrimary,
+            textAlign = TextAlign.Start
+        )
+        Spacer(modifier = Modifier.size(size = 20.dp))
 
-        Column(
+        Row(
             modifier = Modifier
-                .border(1.dp, color = Color.Green)
                 .fillMaxWidth()
-                .padding(10.dp)
+                .padding(10.dp),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.Center
         ) {
+            TarjetaModeloAtrasos(
+                colorBorde = Color.Red,
+                concepto = "Atrasos",
+                resultado = numeroAMoneda.format(viewModelIpc.atrasos),
+            )
+            Spacer(modifier = Modifier.size(size = 20.dp))
+            TarjetaModeloAtrasos(
+                colorBorde = Color.Green,
+                concepto = "Subida al mes",
+                resultado = numeroAMoneda.format("100".toDouble()),
+            )
+        }
+        Text(
+            text = "* Falta añadir: horas extras, nocturnidad...",
+            color = MaterialTheme.colors.onPrimary,
+        )
+        Text(
+            text = "* Cálculado para contrato tiempo completo",
+            color = MaterialTheme.colors.onPrimary
+        )
+    }
+}
 
-            Box(Modifier.fillMaxWidth(), contentAlignment = Alignment.Center) {
-                Text(
-                    text = "Salario base:",
-                    modifier = Modifier.align(Alignment.CenterStart),
-                    color = MaterialTheme.colors.onPrimary
-                )
-                Text(
-                    text = numeroAMoneda.format(viewModelIpc.salarioBase.toDouble()),
-                    fontSize = 20.sp,
-                    modifier = Modifier.align(Alignment.CenterEnd),
-                    color = MaterialTheme.colors.onPrimary
-                )
-            }
-            Box(Modifier.fillMaxWidth(), contentAlignment = Alignment.Center) {
-                Text(
-                    text = "Plus convenio:",
-                    modifier = Modifier.align(Alignment.CenterStart),
-                    color = MaterialTheme.colors.onPrimary
-                )
-                Text(
-                    text = numeroAMoneda.format(viewModelIpc.plusConvenio.toDouble()),
-                    fontSize = 20.sp,
-                    modifier = Modifier.align(Alignment.CenterEnd),
-                    color = MaterialTheme.colors.onPrimary
-                )
-            }
-            Box(Modifier.fillMaxWidth(), contentAlignment = Alignment.Center) {
-                Text(
-                    text = "Plus transporte:",
-                    modifier = Modifier.align(Alignment.CenterStart),
-                    color = MaterialTheme.colors.onPrimary
-                )
-                Text(
-                    text = numeroAMoneda.format(viewModelIpc.plusTransporte.toDouble()),
-                    fontSize = 20.sp,
-                    modifier = Modifier.align(Alignment.CenterEnd),
-                    color = MaterialTheme.colors.onPrimary
-                )
-            }
-            Box(Modifier.fillMaxWidth(), contentAlignment = Alignment.Center) {
-                Text(
-                    text = "Pagas extras prorrateadas:",
-                    modifier = Modifier.align(Alignment.CenterStart),
-                    color = MaterialTheme.colors.onPrimary
-                )
-                Text(
-                    text = numeroAMoneda.format(viewModelIpc.pagasExtrasProrrateadasMasAntiguedad),
-                    fontSize = 20.sp,
-                    modifier = Modifier.align(Alignment.CenterEnd),
-                    color = MaterialTheme.colors.onPrimary
-                )
-            }
-            if (viewModelIpc.seleccionadoSwitchAntiguedad) {
-                Box(Modifier.fillMaxWidth(), contentAlignment = Alignment.Center) {
-                    Text(
-                        text = "Antigüedad:",
-                        modifier = Modifier.align(Alignment.CenterStart),
-                        color = MaterialTheme.colors.onPrimary
-                    )
-                    Text(
-                        text = numeroAMoneda.format(viewModelIpc.antiguedadConcepto),
-                        fontSize = 20.sp,
-                        modifier = Modifier.align(Alignment.CenterEnd),
-                        color = MaterialTheme.colors.onPrimary
-                    )
-                }
-            }
-            if (viewModelIpc.seleccionadoSwitchHorasExtras) {
-                Box(Modifier.fillMaxWidth(), contentAlignment = Alignment.Center) {
-                    Text(
-                        text = "Horas extras: ${viewModelIpc.horasExtrasElegidas}",
-                        modifier = Modifier.align(Alignment.CenterStart),
-                        color = MaterialTheme.colors.onPrimary
-                    )
-                    Text(
-                        text = numeroAMoneda.format(viewModelIpc.horasExtrasElegidasTotal),
-                        fontSize = 20.sp,
-                        modifier = Modifier.align(Alignment.CenterEnd),
-                        color = MaterialTheme.colors.onPrimary
-                    )
-                }
-            }
-            if (viewModelIpc.seleccionadoSwitchNocturnidad) {
-                Box(Modifier.fillMaxWidth(), contentAlignment = Alignment.Center) {
-                    Text(
-                        text = "Nocturnidad:",
-                        modifier = Modifier.align(Alignment.CenterStart),
-                        color = MaterialTheme.colors.onPrimary
-                    )
-                    Text(
-                        text = numeroAMoneda.format(viewModelIpc.nocturnidad),
-                        fontSize = 20.sp,
-                        modifier = Modifier.align(Alignment.CenterEnd),
-                        color = MaterialTheme.colors.onPrimary
-                    )
-                }
-            }
-            Box(Modifier.fillMaxWidth(), contentAlignment = Alignment.Center) {
-                Text(
-                    text = "Seguro de accidentes colectivo:",
-                    modifier = Modifier.align(Alignment.CenterStart),
-                    color = MaterialTheme.colors.onPrimary
-                )
-                Text(
-                    text = numeroAMoneda.format(viewModelIpc.seguroAccidentesColectivo),
-                    fontSize = 20.sp,
-                    modifier = Modifier.align(Alignment.CenterEnd),
-                    color = MaterialTheme.colors.onPrimary
-                )
-            }
-            Box(Modifier.fillMaxWidth(), contentAlignment = Alignment.Center) {
-                Text(
-                    text = "Total ingresos:",
-                    modifier = Modifier.align(Alignment.CenterStart),
-                    color = MaterialTheme.colors.onPrimary
-                )
-                Text(
-                    text = numeroAMoneda.format(viewModelIpc.totalIngresos),
-                    fontSize = 20.sp,
-                    fontWeight = FontWeight.Black,
-                    modifier = Modifier.align(Alignment.CenterEnd),
-                    color = MaterialTheme.colors.onPrimary
-                )
-            }
-        }
-        Spacer(modifier = Modifier.height(10.dp))
-        Column(
+
+@Composable
+fun TarjetaModeloAtrasos(
+    colorBorde: Color,
+    concepto: String,
+    resultado: String
+) {
+    Column {
+        Card(
+            elevation = 4.dp,
+            border = BorderStroke(1.dp, colorBorde),
+            shape = RoundedCornerShape(20.dp),
             modifier = Modifier
-                .border(1.dp, color = Color.Red)
-                .fillMaxWidth()
-                .padding(10.dp)
+                .padding(3.dp)
+                .size(120.dp)
         ) {
-            Box(Modifier.fillMaxWidth(), contentAlignment = Alignment.Center) {
+            Column(
+                modifier = Modifier
+                    .padding(4.dp),
+                verticalArrangement = Arrangement.Center,
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
                 Text(
-                    text = "IRPF: ${viewModelIpc.irpfElegida} %",
-                    modifier = Modifier.align(Alignment.CenterStart),
-                    color = MaterialTheme.colors.onPrimary
-                )
-                Text(
-                    text = numeroAMoneda.format(viewModelIpc.totalDescuentoIrpf),
+                    text = concepto,
                     fontSize = 20.sp,
-                    modifier = Modifier.align(Alignment.CenterEnd),
-                    color = MaterialTheme.colors.onPrimary
+                    textAlign = TextAlign.Center
+                )
+                Spacer(modifier = Modifier.size(3.dp))
+                Text(
+                    text = resultado,
+                    fontSize = 20.sp
                 )
             }
-            Box(Modifier.fillMaxWidth(), contentAlignment = Alignment.Center) {
-                Text(
-                    text = "Cotización cont. comunes: 4,70 %",
-                    modifier = Modifier.align(Alignment.CenterStart),
-                    color = MaterialTheme.colors.onPrimary
-                )
-                Text(
-                    text = numeroAMoneda.format(viewModelIpc.totalDescuentoCotizacionContComunes),
-                    fontSize = 20.sp,
-                    modifier = Modifier.align(Alignment.CenterEnd),
-                    color = MaterialTheme.colors.onPrimary
-                )
-            }
-            Box(Modifier.fillMaxWidth(), contentAlignment = Alignment.Center) {
-                Text(
-                    text = "Cotización formación: 1,65 %",
-                    modifier = Modifier.align(Alignment.CenterStart),
-                    color = MaterialTheme.colors.onPrimary
-                )
-                Text(
-                    text = numeroAMoneda.format(viewModelIpc.totalDescuentoCotizacionFormacion),
-                    fontSize = 20.sp,
-                    modifier = Modifier.align(Alignment.CenterEnd),
-                    color = MaterialTheme.colors.onPrimary
-                )
-            }
-            Box(Modifier.fillMaxWidth(), contentAlignment = Alignment.Center) {
-                Text(
-                    text = "Total descuentos:",
-                    modifier = Modifier.align(Alignment.CenterStart),
-                    color = MaterialTheme.colors.onPrimary
-                )
-                Text(
-                    text = numeroAMoneda.format(viewModelIpc.totalDescuentos),
-                    fontSize = 20.sp,
-                    fontWeight = FontWeight.Black,
-                    modifier = Modifier.align(Alignment.CenterEnd),
-                    color = MaterialTheme.colors.onPrimary
-                )
-            }
-        }
-        Spacer(modifier = Modifier.height(10.dp))
-        Box(
-            Modifier
-                .fillMaxWidth()
-                .padding(10.dp), contentAlignment = Alignment.Center
-        ) {
-            Text(
-                text = "Total:",
-                modifier = Modifier.align(Alignment.CenterStart),
-                color = MaterialTheme.colors.onPrimary,
-                fontSize = 24.sp
-            )
-            Text(
-                text = numeroAMoneda.format(viewModelIpc.total),
-                fontSize = 24.sp,
-                fontWeight = FontWeight.Black,
-                modifier = Modifier.align(Alignment.CenterEnd),
-                color = MaterialTheme.colors.onPrimary
-            )
         }
     }
 }
