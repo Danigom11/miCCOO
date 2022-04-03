@@ -174,17 +174,22 @@ class ViewModelIpc : ViewModel() {
         porcentajeSubida = isEnabled
     }
 
-    // Meses elegidos atrasos
+    // Meses elegidos
     var mesesElegidos by mutableStateOf("")
     fun mesesElegidosCambia(isEnabled: String) {
         mesesElegidos = isEnabled
     }
 
     // Cálculo atrasos
-    val atrasos get() = ((retribucionAnual.toDouble() / 12) * (mesesElegidos.toDouble()))
+    val atrasos get() = subidaMes * mesesElegidos.toDouble()
 
     //Cálculo subida mes
-    val subidaMes get() = ((retribucionAnual.toDouble() / 12) * (mesesElegidos.toDouble()))
+    // (((Salario base * 15) * porcentajeSubida) * porcentajeAntigüedad) + ((plus convenio y plus transporte * 12) * porcentajeSubida)) / 12
+    val subidaMes
+        get() = (((((salarioBase.toDouble() * 15) * (porcentajeSubida.toDouble() / 100 + 1)) * antiguedadMultiplicador.toDouble()) +
+                (((plusConvenio.toDouble() + plusTransporte.toDouble()) * 12) * (porcentajeSubida.toDouble() / 100 + 1))) / 12) -
+                (((salarioBase.toDouble() * 15) * antiguedadMultiplicador.toDouble() +
+                        ((plusConvenio.toDouble() + plusTransporte.toDouble()) * 12)) / 12)
 
     // HORAS EXTRAS
     // Número de horas extras elegido

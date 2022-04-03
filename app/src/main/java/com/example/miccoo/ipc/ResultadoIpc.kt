@@ -95,7 +95,7 @@ fun ResultadoIpc(viewModelIpc: ViewModelIpc) {
             TarjetaModeloAtrasos(
                 colorBorde = Color.Green,
                 concepto = "Subida al mes",
-                resultado = numeroAMoneda.format("100".toDouble()),
+                resultado = numeroAMoneda.format(viewModelIpc.subidaMes),
             )
         }
         Text(
