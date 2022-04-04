@@ -184,7 +184,6 @@ class ViewModelIpc : ViewModel() {
     val atrasos get() = subidaMes * mesesElegidos.toDouble()
 
     //Cálculo subida mes
-    // (((Salario base * 15) * porcentajeSubida) * porcentajeAntigüedad) + ((plus convenio y plus transporte * 12) * porcentajeSubida)) / 12
     val subidaMes
         get() = (((((salarioBase.toDouble() * 15) * (porcentajeSubida.toDouble() / 100 + 1)) * antiguedadMultiplicador.toDouble()) +
                 (((plusConvenio.toDouble() + plusTransporte.toDouble()) * 12) * (porcentajeSubida.toDouble() / 100 + 1))) / 12) -
