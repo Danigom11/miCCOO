@@ -48,6 +48,7 @@ fun IndemnizacionDespido(viewModelNomina: ViewModelNomina) {
                 Text(
                     text = "Indemnización por despido",
                     textAlign = TextAlign.Center,
+                    color = MaterialTheme.colors.onPrimary,
                     fontSize = MaterialTheme.typography.h5.fontSize,
                     modifier = Modifier
                         .fillMaxWidth()
@@ -56,6 +57,7 @@ fun IndemnizacionDespido(viewModelNomina: ViewModelNomina) {
                 Text(
                     text = "¿Cómo se calcula?",
                     textAlign = TextAlign.Center,
+                    color = MaterialTheme.colors.onPrimary,
                     fontSize = MaterialTheme.typography.subtitle1.fontSize,
                     fontStyle = FontStyle.Italic,
                     modifier = Modifier
@@ -65,6 +67,7 @@ fun IndemnizacionDespido(viewModelNomina: ViewModelNomina) {
                 Text(
                     text = "1. Calcula el salario diario",
                     textAlign = TextAlign.Center,
+                    color = MaterialTheme.colors.onPrimary,
                     fontSize = MaterialTheme.typography.subtitle1.fontSize,
                     modifier = Modifier
                         .fillMaxWidth()
@@ -87,7 +90,8 @@ fun IndemnizacionDespido(viewModelNomina: ViewModelNomina) {
                         ) {
                             Text(
                                 text = "Salario\nanual",
-                                textAlign = TextAlign.Center
+                                textAlign = TextAlign.Center,
+                                color = MaterialTheme.colors.onPrimary
                             )
                             Spacer(modifier = Modifier.size(3.dp))
                             Text(
@@ -99,6 +103,7 @@ fun IndemnizacionDespido(viewModelNomina: ViewModelNomina) {
                     Text(
                         text = ":",
                         fontSize = 30.sp,
+                        color = MaterialTheme.colors.onPrimary,
                         modifier = Modifier
                             .align(CenterVertically)
                     )
@@ -119,18 +124,21 @@ fun IndemnizacionDespido(viewModelNomina: ViewModelNomina) {
                             Text(
                                 text = "Días\nlaborales\naño",
                                 textAlign = TextAlign.Center,
+                                color = MaterialTheme.colors.onPrimary,
                                 overflow = TextOverflow.Clip,
                                 modifier = Modifier.padding(3.dp)
                             )
                             Spacer(modifier = Modifier.size(1.dp))
                             Text(
                                 text = "360",
+                                color = MaterialTheme.colors.onPrimary,
                                 fontSize = 20.sp
                             )
                         }
                     }
                     Text(
                         text = "=",
+                        color = MaterialTheme.colors.onPrimary,
                         fontSize = 30.sp,
                         modifier = Modifier
                             .align(CenterVertically)
@@ -149,10 +157,15 @@ fun IndemnizacionDespido(viewModelNomina: ViewModelNomina) {
                             verticalArrangement = Arrangement.Center,
                             horizontalAlignment = Alignment.CenterHorizontally
                         ) {
-                            Text(text = "Salario\ndiario", textAlign = TextAlign.Center)
+                            Text(
+                                text = "Salario\ndiario",
+                                color = MaterialTheme.colors.onPrimary,
+                                textAlign = TextAlign.Center
+                            )
                             Spacer(modifier = Modifier.size(3.dp))
                             Text(
                                 text = viewModelNomina.salarioDiarioRedondeado,
+                                color = MaterialTheme.colors.onPrimary,
                                 fontSize = 20.sp
                             )
                         }
@@ -162,6 +175,7 @@ fun IndemnizacionDespido(viewModelNomina: ViewModelNomina) {
                 Text(
                     text = "2. Multiplica por la indemnización correspondiente",
                     textAlign = TextAlign.Center,
+                    color = MaterialTheme.colors.onPrimary,
                     fontSize = MaterialTheme.typography.subtitle1.fontSize,
                     modifier = Modifier
                         .fillMaxWidth()
@@ -170,6 +184,7 @@ fun IndemnizacionDespido(viewModelNomina: ViewModelNomina) {
                 Text(
                     text = "Finalización de contrato",
                     textAlign = TextAlign.Center,
+                    color = MaterialTheme.colors.onPrimary,
                     fontSize = MaterialTheme.typography.subtitle1.fontSize,
                     modifier = Modifier
                         .fillMaxWidth()
@@ -192,17 +207,20 @@ fun IndemnizacionDespido(viewModelNomina: ViewModelNomina) {
                         ) {
                             Text(
                                 text = "Salario\ndiario",
+                                color = MaterialTheme.colors.onPrimary,
                                 textAlign = TextAlign.Center
                             )
                             Spacer(modifier = Modifier.size(3.dp))
                             Text(
                                 text = viewModelNomina.salarioDiarioRedondeado,
+                                color = MaterialTheme.colors.onPrimary,
                                 fontSize = 16.sp
                             )
                         }
                     }
                     Text(
                         text = "x",
+                        color = MaterialTheme.colors.onPrimary,
                         fontSize = 30.sp,
                         modifier = Modifier
                             .align(CenterVertically)
@@ -223,6 +241,7 @@ fun IndemnizacionDespido(viewModelNomina: ViewModelNomina) {
                         ) {
                             Text(
                                 text = "Días\nindemnización",
+                                color = MaterialTheme.colors.onPrimary,
                                 maxLines = 2,
                                 textAlign = TextAlign.Center,
                                 overflow = TextOverflow.Ellipsis,
@@ -231,12 +250,14 @@ fun IndemnizacionDespido(viewModelNomina: ViewModelNomina) {
                             Spacer(modifier = Modifier.size(1.dp))
                             Text(
                                 text = "12",
+                                color = MaterialTheme.colors.onPrimary,
                                 fontSize = 20.sp
                             )
                         }
                     }
                     Text(
                         text = "=",
+                        color = MaterialTheme.colors.onPrimary,
                         fontSize = 30.sp,
                         modifier = Modifier
                             .align(CenterVertically)
@@ -255,10 +276,15 @@ fun IndemnizacionDespido(viewModelNomina: ViewModelNomina) {
                             verticalArrangement = Arrangement.Center,
                             horizontalAlignment = Alignment.CenterHorizontally
                         ) {
-                            Text(text = "Total por\nun año", textAlign = TextAlign.Center)
+                            Text(
+                                text = "Total por\nun año",
+                                color = MaterialTheme.colors.onPrimary,
+                                textAlign = TextAlign.Center
+                            )
                             Spacer(modifier = Modifier.size(3.dp))
                             Text(
                                 text = viewModelNomina.finalizacionContratoRedondeado,
+                                color = MaterialTheme.colors.onPrimary,
                                 fontSize = 16.sp
                             )
                         }
@@ -267,6 +293,7 @@ fun IndemnizacionDespido(viewModelNomina: ViewModelNomina) {
                 Spacer(modifier = Modifier.size(8.dp))
                 Text(
                     text = "Causas objetivas",
+                    color = MaterialTheme.colors.onPrimary,
                     textAlign = TextAlign.Center,
                     fontSize = MaterialTheme.typography.subtitle1.fontSize,
                     modifier = Modifier
@@ -290,17 +317,20 @@ fun IndemnizacionDespido(viewModelNomina: ViewModelNomina) {
                         ) {
                             Text(
                                 text = "Salario\ndiario",
+                                color = MaterialTheme.colors.onPrimary,
                                 textAlign = TextAlign.Center
                             )
                             Spacer(modifier = Modifier.size(3.dp))
                             Text(
                                 text = viewModelNomina.salarioDiarioRedondeado,
+                                color = MaterialTheme.colors.onPrimary,
                                 fontSize = 16.sp
                             )
                         }
                     }
                     Text(
                         text = "x",
+                        color = MaterialTheme.colors.onPrimary,
                         fontSize = 30.sp,
                         modifier = Modifier
                             .align(CenterVertically)
@@ -321,6 +351,7 @@ fun IndemnizacionDespido(viewModelNomina: ViewModelNomina) {
                         ) {
                             Text(
                                 text = "Días\nindemnización",
+                                color = MaterialTheme.colors.onPrimary,
                                 maxLines = 2,
                                 textAlign = TextAlign.Center,
                                 overflow = TextOverflow.Ellipsis,
@@ -329,12 +360,14 @@ fun IndemnizacionDespido(viewModelNomina: ViewModelNomina) {
                             Spacer(modifier = Modifier.size(1.dp))
                             Text(
                                 text = "20",
+                                color = MaterialTheme.colors.onPrimary,
                                 fontSize = 20.sp
                             )
                         }
                     }
                     Text(
                         text = "=",
+                        color = MaterialTheme.colors.onPrimary,
                         fontSize = 30.sp,
                         modifier = Modifier
                             .align(CenterVertically)
@@ -353,10 +386,15 @@ fun IndemnizacionDespido(viewModelNomina: ViewModelNomina) {
                             verticalArrangement = Arrangement.Center,
                             horizontalAlignment = Alignment.CenterHorizontally
                         ) {
-                            Text(text = "Total por\nun año", textAlign = TextAlign.Center)
+                            Text(
+                                text = "Total por\nun año",
+                                color = MaterialTheme.colors.onPrimary,
+                                textAlign = TextAlign.Center
+                            )
                             Spacer(modifier = Modifier.size(3.dp))
                             Text(
                                 text = viewModelNomina.causasObjetivasRedondeado,
+                                color = MaterialTheme.colors.onPrimary,
                                 fontSize = 16.sp
                             )
                         }
@@ -365,6 +403,7 @@ fun IndemnizacionDespido(viewModelNomina: ViewModelNomina) {
                 Spacer(modifier = Modifier.size(8.dp))
                 Text(
                     text = "Despido improcedente",
+                    color = MaterialTheme.colors.onPrimary,
                     textAlign = TextAlign.Center,
                     fontSize = MaterialTheme.typography.subtitle1.fontSize,
                     modifier = Modifier
@@ -388,17 +427,20 @@ fun IndemnizacionDespido(viewModelNomina: ViewModelNomina) {
                         ) {
                             Text(
                                 text = "Salario\ndiario",
+                                color = MaterialTheme.colors.onPrimary,
                                 textAlign = TextAlign.Center
                             )
                             Spacer(modifier = Modifier.size(3.dp))
                             Text(
                                 text = viewModelNomina.salarioDiarioRedondeado,
+                                color = MaterialTheme.colors.onPrimary,
                                 fontSize = 16.sp
                             )
                         }
                     }
                     Text(
                         text = "x",
+                        color = MaterialTheme.colors.onPrimary,
                         fontSize = 30.sp,
                         modifier = Modifier
                             .align(CenterVertically)
@@ -419,6 +461,7 @@ fun IndemnizacionDespido(viewModelNomina: ViewModelNomina) {
                         ) {
                             Text(
                                 text = "Días\nindemnización",
+                                color = MaterialTheme.colors.onPrimary,
                                 maxLines = 2,
                                 textAlign = TextAlign.Center,
                                 overflow = TextOverflow.Ellipsis,
@@ -427,12 +470,14 @@ fun IndemnizacionDespido(viewModelNomina: ViewModelNomina) {
                             Spacer(modifier = Modifier.size(1.dp))
                             Text(
                                 text = "33",
+                                color = MaterialTheme.colors.onPrimary,
                                 fontSize = 20.sp
                             )
                         }
                     }
                     Text(
                         text = "=",
+                        color = MaterialTheme.colors.onPrimary,
                         fontSize = 30.sp,
                         modifier = Modifier
                             .align(CenterVertically)
@@ -451,10 +496,15 @@ fun IndemnizacionDespido(viewModelNomina: ViewModelNomina) {
                             verticalArrangement = Arrangement.Center,
                             horizontalAlignment = Alignment.CenterHorizontally
                         ) {
-                            Text(text = "Total por\nun año", textAlign = TextAlign.Center)
+                            Text(
+                                text = "Total por\nun año",
+                                color = MaterialTheme.colors.onPrimary,
+                                textAlign = TextAlign.Center
+                            )
                             Spacer(modifier = Modifier.size(3.dp))
                             Text(
                                 text = viewModelNomina.despidoImprocedenteRedondeado,
+                                color = MaterialTheme.colors.onPrimary,
                                 fontSize = 16.sp
                             )
                         }

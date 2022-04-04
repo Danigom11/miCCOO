@@ -19,6 +19,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
@@ -211,10 +212,12 @@ fun Boton(
     texto: String,
     modifier: Modifier
 ) {
+    val keyboardController = LocalSoftwareKeyboardController.current
     Box(contentAlignment = Alignment.BottomCenter) {
         OutlinedButton(
             onClick = {
                 destinoCambia(!destino)
+                keyboardController?.hide()
             },
             modifier = modifier,
             shape = RoundedCornerShape(10.dp),

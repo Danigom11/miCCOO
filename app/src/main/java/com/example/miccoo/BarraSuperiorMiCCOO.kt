@@ -76,12 +76,12 @@ fun BarraSuperiorMiCCOO() {
 
 
                 ) {
-                    Text(text = "+INFO")
+                    Text(text = "+INFO", color = MaterialTheme.colors.onPrimary)
                 }
                 if (openDialog) {
                     AlertDialog(
                         onDismissRequest = { openDialog = false },
-                        title = { Text(text = "+Info") },
+                        title = { Text(text = "+Info", color = MaterialTheme.colors.onPrimary) },
                         text = {
 
                             Text(
@@ -89,7 +89,8 @@ fun BarraSuperiorMiCCOO() {
                                         " - Información válida solo para convenio de Guadalajara.\n\n" +
                                         " - Es posible que existan acuerdos en tu centro de trabajo que modifiquen algo.\n\n" +
                                         " - Si tienes alguna pregunta acude a tú comité de empresa o a tú sindicato.",
-                                fontSize = 20.sp
+                                fontSize = 20.sp,
+                                color = MaterialTheme.colors.onPrimary
                             )
 
                         },
@@ -106,7 +107,7 @@ fun BarraSuperiorMiCCOO() {
                                 },
 
                                 ) {
-                                Text(text = "Volver")
+                                Text(text = "Volver", color = MaterialTheme.colors.onPrimary)
                             }
                         }
                     )

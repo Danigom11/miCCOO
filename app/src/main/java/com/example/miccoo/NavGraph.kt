@@ -10,8 +10,6 @@ import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import com.example.miccoo._pagina_principal.PaginaPrincipal
 import com.example.miccoo._pagina_principal.Screens
-import com.example.miccoo.ipc.Ipc
-import com.example.miccoo.ipc.ViewModelIpc
 import com.example.miccoo.nomina_completa.NominaCompleta
 import com.example.miccoo.nomina_completa.ViewModelNominaCompleta
 import com.example.miccoo.nomina_datos_generales.Nomina
@@ -19,6 +17,8 @@ import com.example.miccoo.nomina_datos_generales.ViewModelNomina
 import com.example.miccoo.nomina_datos_generales.conceptos_otros.conceptos_explicados.*
 import com.example.miccoo.permisos_retribuidos.PermisosRetribuidos
 import com.example.miccoo.sanciones.Sanciones
+import com.example.miccoo.subidaSalario.Ipc
+import com.example.miccoo.subidaSalario.ViewModelIpc
 import com.google.accompanist.navigation.animation.AnimatedNavHost
 import com.google.accompanist.navigation.animation.composable
 import com.google.accompanist.pager.ExperimentalPagerApi

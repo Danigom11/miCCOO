@@ -1,4 +1,4 @@
-package com.example.miccoo.ipc
+package com.example.miccoo.subidaSalario
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -8,17 +8,11 @@ import androidx.lifecycle.ViewModel
 class ViewModelIpc : ViewModel() {
 
     // CONCEPTOS NÓMINA
-    var salarioBase by mutableStateOf("1008.98")
-    var plusTransporte by mutableStateOf("162.51")
+    private var salarioBase by mutableStateOf("1008.98")
+    private var plusTransporte by mutableStateOf("162.51")
     var plusConvenio by mutableStateOf("")
     private var retribucionConvenio by mutableStateOf("")
     private var retribucionAnual by mutableStateOf("")
-    private var totalHorasAno by mutableStateOf("1800")
-    val seguroAccidentesColectivo = 0.73
-    private val cotizacionContComunes = 4.70
-    private val cotizacionFormacion = 1.65
-    val pagasExtrasProrrateadasMasAntiguedad
-        get() = ((salarioBase.toDouble() * 3 / 12) * antiguedadMultiplicador.toDouble())
 
     // CATEGORÍA PROFESIONAL
     // Estado de expandir desplegable categoria profesional
@@ -118,10 +112,6 @@ class ViewModelIpc : ViewModel() {
         seleccionadoSwitchAntiguedad = isEnabled
     }
 
-    // Concepto antigüedad
-    val antiguedadConcepto
-        get() = (salarioBase.toDouble() * (antiguedadMultiplicador.toDouble() - 1))
-
     // Estado elemento seleccionado en antigüedad
     var seleccionadoAntiguedad by mutableStateOf("")
 
@@ -181,142 +171,36 @@ class ViewModelIpc : ViewModel() {
     }
 
     // Cálculo atrasos
-    val atrasos get() = subidaMes * mesesElegidos.toDouble()
+    val atrasos
+        get() =
+            if (mesesElegidos == "") {
+                mesesElegidos = "0"
+                subidaMes * mesesElegidos.replace(",", ".").toDouble()
+            } else {
+                subidaMes * mesesElegidos.replace(",", ".").toDouble()
+            }
 
     //Cálculo subida mes
     val subidaMes
-        get() = (((((salarioBase.toDouble() * 15) * (porcentajeSubida.toDouble() / 100 + 1)) * antiguedadMultiplicador.toDouble()) +
-                (((plusConvenio.toDouble() + plusTransporte.toDouble()) * 12) * (porcentajeSubida.toDouble() / 100 + 1))) / 12) -
-                (((salarioBase.toDouble() * 15) * antiguedadMultiplicador.toDouble() +
-                        ((plusConvenio.toDouble() + plusTransporte.toDouble()) * 12)) / 12)
-
-    // HORAS EXTRAS
-    // Número de horas extras elegido
-    var horasExtrasElegidas by mutableStateOf("")
-    fun horasExtrasElegidasCambia(isEnabled: String) {
-        horasExtrasElegidas = isEnabled
-    }
-
-    // Hora extra
-    private val horaExtra
-        get() = ((retribucionAnual.toDouble() / totalHorasAno.toDouble()) * 1.25)
-
-    // Suma total horas extras elegidas
-    val horasExtrasElegidasTotal
         get() =
-            if (horasExtrasElegidas.isEmpty() || !seleccionadoSwitchHorasExtras) {
-                "0".toDouble()
+            if (porcentajeSubida == "") {
+                porcentajeSubida = "0"
+                (((((salarioBase.toDouble() * 15) * (porcentajeSubida.replace(",", ".")
+                    .toDouble() / 100 + 1)) * antiguedadMultiplicador.toDouble()) +
+                        (((plusConvenio.toDouble() + plusTransporte.toDouble()) * 12) * (porcentajeSubida.replace(
+                            ",",
+                            "."
+                        ).toDouble() / 100 + 1))) / 12) -
+                        (((salarioBase.toDouble() * 15) * antiguedadMultiplicador.toDouble() +
+                                ((plusConvenio.toDouble() + plusTransporte.toDouble()) * 12)) / 12)
             } else {
-                (horasExtrasElegidas.replace(",", ".").toDouble() * horaExtra)
+                (((((salarioBase.toDouble() * 15) * (porcentajeSubida.replace(",", ".")
+                    .toDouble() / 100 + 1)) * antiguedadMultiplicador.toDouble()) +
+                        (((plusConvenio.toDouble() + plusTransporte.toDouble()) * 12) * (porcentajeSubida.replace(
+                            ",",
+                            "."
+                        ).toDouble() / 100 + 1))) / 12) -
+                        (((salarioBase.toDouble() * 15) * antiguedadMultiplicador.toDouble() +
+                                ((plusConvenio.toDouble() + plusTransporte.toDouble()) * 12)) / 12)
             }
-
-    // Estado switch horas extras
-    var seleccionadoSwitchHorasExtras by mutableStateOf(false)
-    fun seleccionadoSwitchCambiaHorasExtras(isEnabled: Boolean) {
-        seleccionadoSwitchHorasExtras = isEnabled
-    }
-
-    // NOCTURNIDAD
-    // Controla estado switch nocturnidad
-    var seleccionadoSwitchNocturnidad by mutableStateOf(false)
-    fun seleccionadoSwitchCambiaNocturnidad(isEnabled: Boolean) {
-        seleccionadoSwitchNocturnidad = isEnabled
-    }
-/*
-    // Número de horas extras elegido
-    var horasAntiguedadElegidas by mutableStateOf("")
-    fun horasAntiguedadElegidasCambia(isEnabled: String) {
-        horasAntiguedadElegidas = isEnabled
-    }*/
-
-    // Variable cálculo nocturnidad
-    val nocturnidad
-        get() = if (seleccionadoSwitchNocturnidad) {
-            (salarioBase.toDouble() * 0.25)
-        } else {
-            0.toDouble()
-        }
-
-    // TOTAL INGRESOS
-    val totalIngresos
-        get() = (
-                salarioBase.toDouble() +
-                        plusConvenio.toDouble() +
-                        plusTransporte.toDouble() +
-                        pagasExtrasProrrateadasMasAntiguedad +
-                        antiguedadConcepto +
-                        horasExtrasElegidasTotal +
-                        nocturnidad +
-                        seguroAccidentesColectivo
-                )
-
-    // IRPF
-    //Variable IRPF
-    var irpfElegida by mutableStateOf("")
-    fun irpfElegidaCambia(isEnabled: String) {
-        irpfElegida = isEnabled
-    }
-
-    // Calcula total descuento IRPF
-    val totalDescuentoIrpf
-        get() = if (irpfElegida.isNotEmpty()) {
-            (
-                    (retribucionConvenio.toDouble() +
-                            pagasExtrasProrrateadasMasAntiguedad +
-                            antiguedadConcepto +
-                            horasExtrasElegidasTotal) *
-                            (irpfElegida.replace(",", ".").toDouble() * 0.01)
-                    )
-        } else {
-            0.toDouble()
-        }
-
-    // COTIZACIÓN CONTINGENCIAS COMUNES
-    val totalDescuentoCotizacionContComunes
-        get() = (
-                totalIngresos *
-                        (cotizacionContComunes * 0.01)
-                )
-
-    // COTIZACIÓN FORMACIÓN
-    val totalDescuentoCotizacionFormacion
-        get() = (
-                totalIngresos *
-                        (cotizacionFormacion * 0.01)
-                )
-
-    // RESULTADO NÓMINA
-    val total
-        get() = (
-                totalIngresos - totalDescuentos - seguroAccidentesColectivo
-                )
-
-    // TOTAL DESCUENTOS
-    val totalDescuentos
-        get() = (
-                totalDescuentoIrpf +
-                        totalDescuentoCotizacionFormacion +
-                        totalDescuentoCotizacionContComunes
-                )
-
-    /*
-    // Hora ordinaria
-    val horaOrdinaria
-        get() = (retribucionAnual.toDouble() / totalHorasAno.toDouble())
-
-    // HUELGA
-    // Salario diario = Salario anual entre 15 pagas y entre 30 días del mes
-    val salarioDiaHuelga
-        get() = (retribucionAnual.toDouble() / 15 / 30)
-
-    // Sumar parte proporcional días descanso semanal
-    val huelga
-        get() = ((retribucionAnual.toDouble() / 15 / 30) * 1.4)
-
-    // SANCIÓN
-    // Hora ordinaria por 8 horas día
-    val sancion
-        get() = ((retribucionAnual.toDouble() / totalHorasAno.toDouble()) * 8)
-    */
-
 }

@@ -8,9 +8,9 @@ import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.navigation.NavHostController
-import com.example.miccoo.ipc.ViewModelIpc
 import com.example.miccoo.nomina_completa.ViewModelNominaCompleta
 import com.example.miccoo.nomina_datos_generales.ViewModelNomina
+import com.example.miccoo.subidaSalario.ViewModelIpc
 import com.example.miccoo.ui.theme.MiCCOOTheme
 import com.google.accompanist.navigation.animation.rememberAnimatedNavController
 import com.google.accompanist.pager.ExperimentalPagerApi

@@ -1,4 +1,4 @@
-package com.example.miccoo.ipc
+package com.example.miccoo.subidaSalario
 
 import android.annotation.SuppressLint
 import android.icu.text.NumberFormat
@@ -103,7 +103,7 @@ fun ResultadoIpc(viewModelIpc: ViewModelIpc) {
             color = MaterialTheme.colors.onPrimary,
         )
         Text(
-            text = "* Cálculado para contrato tiempo completo",
+            text = "* Calculado para contrato a tiempo completo",
             color = MaterialTheme.colors.onPrimary
         )
     }

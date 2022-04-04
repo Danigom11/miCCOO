@@ -1,4 +1,4 @@
-package com.example.miccoo.ipc
+package com.example.miccoo.subidaSalario
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.ExperimentalAnimationApi
@@ -227,7 +227,6 @@ fun Ipc(viewModelIpc: ViewModelIpc) {
                                     conceptoElegidoCambia = { viewModelIpc.porcentajeSubidaCambia(it) },
                                     textoLabel = "Porcentaje"
                                 )
-
                             }
                             Row(
                                 Modifier.fillMaxWidth(),
@@ -318,7 +317,7 @@ fun Ipc(viewModelIpc: ViewModelIpc) {
                     AnimarVisibilidad(visible = visibleResultado, densidad = densidad) {
                         Column(
                             modifier = Modifier
-                                .height(500.dp)
+                                .height(520.dp)
                                 .border(
                                     BorderStroke(
                                         width = 2.dp,
