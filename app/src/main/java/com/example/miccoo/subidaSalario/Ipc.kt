@@ -236,7 +236,7 @@ fun Ipc(viewModelIpc: ViewModelIpc) {
                                     destino = visibleAntiguedad,
                                     destinoCambia = {
                                         visiblePorcentajeSubida =
-                                            false; visibleMeses = true
+                                            false; visibleAntiguedad = true
                                     },
                                     texto = "Anterior",
                                     modifier = Modifier
