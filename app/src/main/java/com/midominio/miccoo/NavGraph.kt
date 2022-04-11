@@ -21,7 +21,7 @@ import com.midominio.miccoo.nomina_datos_generales.conceptos_otros.conceptos_exp
 import com.midominio.miccoo.permisos_retribuidos.PermisosRetribuidos
 import com.midominio.miccoo.sanciones.Sanciones
 import com.midominio.miccoo.subidaSalario.Ipc
-import com.midominio.miccoo.subidaSalario.ViewModelIpc
+import com.midominio.miccoo.subidaSalario.ViewModelSubidaSalario
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 
 @ExperimentalCoroutinesApi
@@ -34,7 +34,7 @@ fun SetupNavGraph(
     navController: NavController,
     viewModelNomina: ViewModelNomina,
     viewModelNominaCompleta: ViewModelNominaCompleta,
-    viewModelIpc: ViewModelIpc
+    viewModelSubidaSalario: ViewModelSubidaSalario
 ) {
 
     AnimatedNavHost(
@@ -82,7 +82,7 @@ fun SetupNavGraph(
         }
         //Pantalla ipc
         composable(Screens.IPC.ruta) {
-            Ipc(viewModelIpc = viewModelIpc)
+            Ipc(viewModelSubidaSalario = viewModelSubidaSalario)
         }
         //Pantalla sanciones
         composable(Screens.SANCIONES.ruta) {

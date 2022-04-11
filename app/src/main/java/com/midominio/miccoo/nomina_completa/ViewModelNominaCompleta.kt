@@ -35,8 +35,8 @@ val opcionesAntiguedadNominaCompleta = listOf(
 class ViewModelNominaCompleta : ViewModel() {
 
     // CONCEPTOS NÓMINA
-    var salarioBase by mutableStateOf("1008.98")
-    var plusTransporte by mutableStateOf("162.51")
+    var salarioBase by mutableStateOf("1069.30")
+    var plusTransporte by mutableStateOf("172.22")
     var plusConvenio by mutableStateOf("")
     private var retribucionConvenio by mutableStateOf("")
     private var retribucionAnual by mutableStateOf("")
@@ -61,74 +61,74 @@ class ViewModelNominaCompleta : ViewModel() {
     fun seleccionadoCambiaCategoriaProfesional(isEnabled: String) {
         seleccionadoCategoriaProfesional = isEnabled
         if (seleccionadoCategoriaProfesional == "Mozo ordinario, limpiador, repartidor" || seleccionadoCategoriaProfesional.isEmpty()) {
-            plusConvenio = "163.77"
-            retribucionConvenio = "1335.26"
-            retribucionAnual = "19050.09"
+            plusConvenio = "173.56"
+            retribucionConvenio = "1415.08"
+            retribucionAnual = "20188.89"
         }
         if (seleccionadoCategoriaProfesional == "Mozo especialista, ayudante") {
-            plusConvenio = "177.75"
-            retribucionConvenio = "1349.24"
-            retribucionAnual = "19217.86"
+            plusConvenio = "188.38"
+            retribucionConvenio = "1429.90"
+            retribucionAnual = "20366.74"
         }
         if (seleccionadoCategoriaProfesional == "Engradador lavador") {
-            plusConvenio = "184.17"
-            retribucionConvenio = "1355.66"
-            retribucionAnual = "19294.91"
+            plusConvenio = "195.18"
+            retribucionConvenio = "1436.70"
+            retribucionAnual = "20448.33"
         }
         if (seleccionadoCategoriaProfesional == "Conductor 2ª, Oficial taller") {
-            plusConvenio = "195.69"
-            retribucionConvenio = "1367.18"
-            retribucionAnual = "19433.08"
+            plusConvenio = "207.39"
+            retribucionConvenio = "1448.91"
+            retribucionAnual = "20594.78"
         }
         if (seleccionadoCategoriaProfesional == "Conductor 1ª, Oficial Taller") {
-            plusConvenio = "216.39"
-            retribucionConvenio = "1387.88"
-            retribucionAnual = "19681.53"
+            plusConvenio = "229.33"
+            retribucionConvenio = "1470.85"
+            retribucionAnual = "20858.10"
         }
         if (seleccionadoCategoriaProfesional == "Vigilante") {
-            plusConvenio = "167.96"
-            retribucionConvenio = "1339.45"
-            retribucionAnual = "19100.40"
+            plusConvenio = "178.00"
+            retribucionConvenio = "1419.53"
+            retribucionAnual = "20242.21"
         }
         if (seleccionadoCategoriaProfesional == "Jefe Almacén") {
-            plusConvenio = "213.32"
-            retribucionConvenio = "1384.81"
-            retribucionAnual = "19644.73"
+            plusConvenio = "226.08"
+            retribucionConvenio = "1467.60"
+            retribucionAnual = "20819.06"
         }
         if (seleccionadoCategoriaProfesional == "Conductor, Mecánico, Jefe Taller") {
-            plusConvenio = "216.39"
-            retribucionConvenio = "1387.88"
-            retribucionAnual = "19681.53"
+            plusConvenio = "229.33"
+            retribucionConvenio = "1470.85"
+            retribucionAnual = "20858.10"
         }
         if (seleccionadoCategoriaProfesional == "Auxiliar") {
-            plusConvenio = "165.50"
-            retribucionConvenio = "1336.99"
-            retribucionAnual = "19070.78"
+            plusConvenio = "175.39"
+            retribucionConvenio = "1416.91"
+            retribucionAnual = "20210.82"
         }
         if (seleccionadoCategoriaProfesional == "Oficial 2ª Administración") {
-            plusConvenio = "209.12"
-            retribucionConvenio = "1380.61"
-            retribucionAnual = "19594.30"
+            plusConvenio = "221.62"
+            retribucionConvenio = "1463.14"
+            retribucionAnual = "20765.62"
         }
         if (seleccionadoCategoriaProfesional == "Oficial 1ª Administración") {
-            plusConvenio = "218.18"
-            retribucionConvenio = "1389.67"
-            retribucionAnual = "19702.97"
+            plusConvenio = "231.22"
+            retribucionConvenio = "1472.74"
+            retribucionAnual = "20880.80"
         }
         if (seleccionadoCategoriaProfesional == "Jefe administración, capataz") {
-            plusConvenio = "251.57"
-            retribucionConvenio = "1423.06"
-            retribucionAnual = "20103.68"
+            plusConvenio = "266.61"
+            retribucionConvenio = "1508.13"
+            retribucionAnual = "21305.50"
         }
         if (seleccionadoCategoriaProfesional == "Inspector principal") {
-            plusConvenio = "327.90"
-            retribucionConvenio = "1499.39"
-            retribucionAnual = "21019.67"
+            plusConvenio = "347.50"
+            retribucionConvenio = "1589.02"
+            retribucionAnual = "22276.17"
         }
         if (seleccionadoCategoriaProfesional == "Encargado almacén, jefe de servicio") {
-            plusConvenio = "408.54"
-            retribucionConvenio = "1580.03"
-            retribucionAnual = "21987.36"
+            plusConvenio = "432.96"
+            retribucionConvenio = "1674.48"
+            retribucionAnual = "23301.71"
         }
     }
 
@@ -227,12 +227,6 @@ class ViewModelNominaCompleta : ViewModel() {
     fun seleccionadoSwitchCambiaNocturnidad(isEnabled: Boolean) {
         seleccionadoSwitchNocturnidad = isEnabled
     }
-/*
-    // Número de horas extras elegido
-    var horasAntiguedadElegidas by mutableStateOf("")
-    fun horasAntiguedadElegidasCambia(isEnabled: String) {
-        horasAntiguedadElegidas = isEnabled
-    }*/
 
     // Variable cálculo nocturnidad
     val nocturnidad
@@ -299,29 +293,9 @@ class ViewModelNominaCompleta : ViewModel() {
     // TOTAL DESCUENTOS
     val totalDescuentos
         get() = (
-                        totalDescuentoIrpf +
+                totalDescuentoIrpf +
                         totalDescuentoCotizacionFormacion +
                         totalDescuentoCotizacionContComunes
                 )
-
-    /*
-    // Hora ordinaria
-    val horaOrdinaria
-        get() = (retribucionAnual.toDouble() / totalHorasAno.toDouble())
-
-    // HUELGA
-    // Salario diario = Salario anual entre 15 pagas y entre 30 días del mes
-    val salarioDiaHuelga
-        get() = (retribucionAnual.toDouble() / 15 / 30)
-
-    // Sumar parte proporcional días descanso semanal
-    val huelga
-        get() = ((retribucionAnual.toDouble() / 15 / 30) * 1.4)
-
-    // SANCIÓN
-    // Hora ordinaria por 8 horas día
-    val sancion
-        get() = ((retribucionAnual.toDouble() / totalHorasAno.toDouble()) * 8)
-    */
 
 }

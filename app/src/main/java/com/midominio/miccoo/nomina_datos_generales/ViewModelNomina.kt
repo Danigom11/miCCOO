@@ -12,13 +12,13 @@ import kotlinx.coroutines.flow.StateFlow
 
 class ViewModelNomina : ViewModel() {
     // Variables que controlan cada elemento y su estado que muta
-    val salarioBaseTexto get() = numberFormat.format("1008.98".toDouble()).toString()
-    private val salarioBaseFijo by mutableStateOf("1008.98")
-    var salarioBase by mutableStateOf("1008.98")
-    var plusConvenio by mutableStateOf("163.77")
-    var plusTransporte by mutableStateOf("162.51")
-    var retribucionConvenio by mutableStateOf("1335.26")
-    var retribucionAnual by mutableStateOf("19050.09")
+    val salarioBaseTexto get() = numberFormat.format("1069.30".toDouble()).toString()
+    private val salarioBaseFijo by mutableStateOf("1069.30")
+    var salarioBase by mutableStateOf("1069.30")
+    var plusConvenio by mutableStateOf("173.56")
+    var plusTransporte by mutableStateOf("172.22")
+    var retribucionConvenio by mutableStateOf("1415.08")
+    var retribucionAnual by mutableStateOf("20188.89")
     var totalHorasAno by mutableStateOf("1800")
 
     // Variable que cambia el número a formato moneda
