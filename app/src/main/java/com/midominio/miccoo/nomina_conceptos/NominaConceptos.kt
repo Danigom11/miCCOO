@@ -1,11 +1,11 @@
 package com.midominio.miccoo.nomina_conceptos
 
 import androidx.compose.animation.*
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.border
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -15,6 +15,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.text.font.FontStyle
@@ -22,8 +23,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.midominio.miccoo.BarraSuperior
 import com.midominio.miccoo.ViewModelNomina
-import com.midominio.miccoo.nomina_calculadora.Boton
-import com.midominio.miccoo.nomina_calculadora.Desplegable
+import com.midominio.miccoo.nomina_calculadora.*
 import com.midominio.miccoo.nomina_conceptos.conceptos_fijos.ScreenConceptosFijos
 import com.midominio.miccoo.nomina_conceptos.conceptos_otros.ScreenConceptosOtros
 import com.midominio.miccoo.opcionesAntiguedad
@@ -39,6 +39,8 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 @Composable
 fun Nomina(viewModelNomina: ViewModelNomina, navController: NavController) {
     var visible by rememberSaveable { mutableStateOf(false) }
+    val densidad = LocalDensity.current
+    var visiblePreguntas by rememberSaveable { mutableStateOf(true) }
     val density = LocalDensity.current
     MiCCOOTheme {
         Scaffold(
@@ -49,61 +51,90 @@ fun Nomina(viewModelNomina: ViewModelNomina, navController: NavController) {
                 BarraSuperior()
             },
             content = {
-                Column {
-                    AnimatedVisibility(
-                        visible = !visible,
-                        enter = slideInVertically {
-                            with(density) { -40.dp.roundToPx() }
-                        } + expandVertically(
-                            expandFrom = Alignment.Top
-                        ) + fadeIn(
-                            initialAlpha = 0.3f
-                        ),
-                        exit = slideOutVertically() + shrinkVertically() + fadeOut()
-                    ) {
-                        Column {
-                            Desplegable(
-                                visible = true,
-                                expandible = viewModelNomina.expandirCategoriaProfesional,
-                                expandibleCambia = {
-                                    viewModelNomina.cambiarExpandirCategoriaProfesional(
-                                        it
-                                    )
-                                },
-                                seleccionado = viewModelNomina.seleccionadoCategoriaProfesional,
-                                seleccionadoCambia = {
-                                    viewModelNomina.seleccionadoCambiaCategoriaProfesional(
-                                        it
-                                    )
-                                },
-                                label = "Categoría profesional",
-                                opciones = opcionesCategoriaProfesional
-                            )
-                            Desplegable(
-                                visible = true,
-                                expandible = viewModelNomina.expandirAntiguedad,
-                                expandibleCambia = {
-                                    viewModelNomina.cambiarExpandirAntiguedad(
-                                        it
-                                    )
-                                },
-                                seleccionado = viewModelNomina.seleccionadoAntiguedad,
-                                seleccionadoCambia = {
-                                    viewModelNomina.seleccionadoCambiaAntiguedad(
-                                        it
-                                    )
-                                },
-                                label = "Antigüedad",
-                                opciones = opcionesAntiguedad
-                            )
+                Column(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(start = 10.dp, end = 10.dp),
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+                    TextoTitulo(texto = "Conceptos de una nómina")
+                    Spacer(modifier = Modifier.size(10.dp))
+
+
+                    // Categoría profesional
+                    AnimarVisibilidad(visible = visiblePreguntas, densidad = densidad) {
+                        Column(
+                            modifier = Modifier
+                                .height(300.dp)
+                                .border(
+                                    BorderStroke(
+                                        width = 2.dp,
+                                        brush = Brush.horizontalGradient(
+                                            listOf(
+                                                Color.Green,
+                                                Color.Red
+                                            )
+                                        )
+                                    ),
+                                    shape = RoundedCornerShape(5)
+                                ),
+                            horizontalAlignment = Alignment.CenterHorizontally
+                        ) {
+                            Column(modifier = Modifier.weight(1f)) {
+                                TextoConcepto(texto = "Solo dos preguntas")
+                                Spacer(modifier = Modifier.size(20.dp))
+                                Desplegable(
+                                    visible = true,
+                                    expandible = viewModelNomina.expandirCategoriaProfesional,
+                                    expandibleCambia = {
+                                        viewModelNomina.cambiarExpandirCategoriaProfesional(
+                                            it
+                                        )
+                                    },
+                                    seleccionado = viewModelNomina.seleccionadoCategoriaProfesional,
+                                    seleccionadoCambia = {
+                                        viewModelNomina.seleccionadoCambiaCategoriaProfesional(
+                                            it
+                                        )
+                                    },
+                                    label = "Categoría profesional",
+                                    opciones = opcionesCategoriaProfesional
+                                )
+                                Spacer(modifier = Modifier.size(20.dp))
+                                Desplegable(
+                                    visible = true,
+                                    expandible = viewModelNomina.expandirAntiguedad,
+                                    expandibleCambia = {
+                                        viewModelNomina.cambiarExpandirAntiguedad(
+                                            it
+                                        )
+                                    },
+                                    seleccionado = viewModelNomina.seleccionadoAntiguedad,
+                                    seleccionadoCambia = {
+                                        viewModelNomina.seleccionadoCambiaAntiguedad(
+                                            it
+                                        )
+                                    },
+                                    label = "Antigüedad",
+                                    opciones = opcionesAntiguedad
+                                )
+                            }
                         }
                     }
-                    Boton(
-                        destino = !visible,
-                        destinoCambia = { visible = !visible },
-                        texto = "Calcular",
-                        modifier = Modifier
-                    )
+                    Column(
+                        horizontalAlignment = Alignment.CenterHorizontally,
+                        verticalArrangement = Arrangement.Bottom
+                    ) {
+                        Spacer(modifier = Modifier.size(10.dp))
+                        Boton(
+                            destino = !visible,
+                            destinoCambia = {
+                                visible = !visible; visiblePreguntas = !visiblePreguntas
+                            },
+                            texto = "Calcular",
+                            modifier = Modifier
+                        )
+                    }
                     AnimatedVisibility(
                         visible = visible,
                         enter = slideInVertically {

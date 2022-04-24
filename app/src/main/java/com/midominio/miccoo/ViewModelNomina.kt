@@ -36,12 +36,12 @@ val opcionesAntiguedad = listOf(
 class ViewModelNomina : ViewModel() {
 
     // CONCEPTOS NÓMINA
-    var salarioBase by mutableStateOf("1069.30")
-    var plusTransporte by mutableStateOf("172.22")
-    var plusConvenio by mutableStateOf("")
-    var retribucionConvenio by mutableStateOf("")
-    var retribucionAnual by mutableStateOf("")
-    var totalHorasAno by mutableStateOf("1800")
+    val salarioBase by mutableStateOf("1069.30")
+    val plusTransporte by mutableStateOf("172.22")
+    var plusConvenio by mutableStateOf("173.56")
+    var retribucionConvenio by mutableStateOf("1415.08")
+    var retribucionAnual by mutableStateOf("20188.89")
+    val totalHorasAno by mutableStateOf("1800")
     val seguroAccidentesColectivo = 0.73
     val cotizacionContComunes = 4.70
     val cotizacionFormacion = 1.65
@@ -303,7 +303,7 @@ class ViewModelNomina : ViewModel() {
 
     // Pagas extras sin cambios
     val pagasExtrasProrrateadasFijasAntiguedadTotal
-        get() = (salarioBase.toDouble() * 3 / 12) * antiguedadConcepto.toDouble()
+        get() = (salarioBase.toDouble() * 3 / 12) * antiguedadConcepto
 
     val pagasExtrasProrrateadasFijasAntiguedadDiferencia
         get() = (salarioBase.toDouble() * 3 / 12) * (antiguedadMultiplicador.toDouble() - 1)
