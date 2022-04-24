@@ -86,27 +86,22 @@ fun BarraSuperior() {
 
                             Text(
                                 text = "IMPORTANTE:\n\n" +
-                                        " - Información válida solo para convenio de Guadalajara.\n\n" +
-                                        " - Es posible que existan acuerdos en tu centro de trabajo que modifiquen algo.\n\n" +
-                                        " - Si tienes alguna pregunta acude a tú comité de empresa o a tú sindicato.",
+                                        " - Información válida solo para el convenio de Guadalajara.\n\n" +
+                                        " - Es posible que existan acuerdos en tu centro de trabajo que modifiquen algún dato.\n\n" +
+                                        " - Si tienes alguna pregunta acude a tu comité de empresa o a tu sindicato.",
                                 fontSize = 20.sp,
                                 color = MaterialTheme.colors.onPrimary
                             )
-
                         },
-
-
                         confirmButton = {
                         },
-
                         dismissButton = {
                             OutlinedButton(
                                 border = BorderStroke(1.dp, MaterialTheme.colors.onPrimary),
                                 onClick = {
                                     openDialog = false
                                 },
-
-                                ) {
+                            ) {
                                 Text(text = "Volver", color = MaterialTheme.colors.onPrimary)
                             }
                         }
