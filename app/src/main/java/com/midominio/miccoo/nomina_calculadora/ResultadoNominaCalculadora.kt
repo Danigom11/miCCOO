@@ -1,4 +1,4 @@
-package com.midominio.miccoo.nomina_completa
+package com.midominio.miccoo.nomina_calculadora
 
 import android.annotation.SuppressLint
 import android.icu.text.NumberFormat
@@ -15,36 +15,37 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.midominio.miccoo.ViewModelNomina
 
 @SuppressLint("StateFlowValueCalledInComposition")
 @Composable
-fun ResultadoNominaCompleta(viewModelNominaCompleta: ViewModelNominaCompleta) {
+fun ResultadoNominaCompleta(viewModelNomina: ViewModelNomina) {
     val numeroAMoneda = NumberFormat.getCurrencyInstance()
     Column {
         Column(
             modifier = Modifier
                 .fillMaxWidth()
-            ) {
+        ) {
             Text(
                 text = "Categoría profesional:",
                 color = MaterialTheme.colors.onPrimary,
                 textAlign = TextAlign.Start
             )
             Text(
-                text = viewModelNominaCompleta.seleccionadoCategoriaProfesional,
+                text = viewModelNomina.seleccionadoCategoriaProfesional,
                 fontStyle = FontStyle.Italic,
                 color = MaterialTheme.colors.onPrimary,
                 textAlign = TextAlign.Start
             )
             Spacer(modifier = Modifier.size(size = 20.dp))
-            if (viewModelNominaCompleta.seleccionadoSwitchAntiguedad) {
+            if (viewModelNomina.seleccionadoSwitchAntiguedad) {
                 Text(
                     text = "Antigüedad:",
                     color = MaterialTheme.colors.onPrimary,
                     textAlign = TextAlign.Start
                 )
                 Text(
-                    text = viewModelNominaCompleta.seleccionadoAntiguedad,
+                    text = viewModelNomina.seleccionadoAntiguedad,
                     fontStyle = FontStyle.Italic,
                     color = MaterialTheme.colors.onPrimary,
                     textAlign = TextAlign.Start
@@ -67,7 +68,7 @@ fun ResultadoNominaCompleta(viewModelNominaCompleta: ViewModelNominaCompleta) {
                     color = MaterialTheme.colors.onPrimary
                 )
                 Text(
-                    text = numeroAMoneda.format(viewModelNominaCompleta.salarioBase.toDouble()),
+                    text = numeroAMoneda.format(viewModelNomina.salarioBase.toDouble()),
                     fontSize = 20.sp,
                     modifier = Modifier.align(Alignment.CenterEnd),
                     color = MaterialTheme.colors.onPrimary
@@ -80,7 +81,7 @@ fun ResultadoNominaCompleta(viewModelNominaCompleta: ViewModelNominaCompleta) {
                     color = MaterialTheme.colors.onPrimary
                 )
                 Text(
-                    text = numeroAMoneda.format(viewModelNominaCompleta.plusConvenio.toDouble()),
+                    text = numeroAMoneda.format(viewModelNomina.plusConvenio.toDouble()),
                     fontSize = 20.sp,
                     modifier = Modifier.align(Alignment.CenterEnd),
                     color = MaterialTheme.colors.onPrimary
@@ -93,7 +94,7 @@ fun ResultadoNominaCompleta(viewModelNominaCompleta: ViewModelNominaCompleta) {
                     color = MaterialTheme.colors.onPrimary
                 )
                 Text(
-                    text = numeroAMoneda.format(viewModelNominaCompleta.plusTransporte.toDouble()),
+                    text = numeroAMoneda.format(viewModelNomina.plusTransporte.toDouble()),
                     fontSize = 20.sp,
                     modifier = Modifier.align(Alignment.CenterEnd),
                     color = MaterialTheme.colors.onPrimary
@@ -106,13 +107,13 @@ fun ResultadoNominaCompleta(viewModelNominaCompleta: ViewModelNominaCompleta) {
                     color = MaterialTheme.colors.onPrimary
                 )
                 Text(
-                    text = numeroAMoneda.format(viewModelNominaCompleta.pagasExtrasProrrateadasMasAntiguedad),
+                    text = numeroAMoneda.format(viewModelNomina.pagasExtrasProrrateadasMasAntiguedad),
                     fontSize = 20.sp,
                     modifier = Modifier.align(Alignment.CenterEnd),
                     color = MaterialTheme.colors.onPrimary
                 )
             }
-            if (viewModelNominaCompleta.seleccionadoSwitchAntiguedad) {
+            if (viewModelNomina.seleccionadoSwitchAntiguedad) {
                 Box(Modifier.fillMaxWidth(), contentAlignment = Alignment.Center) {
                     Text(
                         text = "Antigüedad:",
@@ -120,29 +121,29 @@ fun ResultadoNominaCompleta(viewModelNominaCompleta: ViewModelNominaCompleta) {
                         color = MaterialTheme.colors.onPrimary
                     )
                     Text(
-                        text = numeroAMoneda.format(viewModelNominaCompleta.antiguedadConcepto),
+                        text = numeroAMoneda.format(viewModelNomina.antiguedadConcepto),
                         fontSize = 20.sp,
                         modifier = Modifier.align(Alignment.CenterEnd),
                         color = MaterialTheme.colors.onPrimary
                     )
                 }
             }
-            if (viewModelNominaCompleta.seleccionadoSwitchHorasExtras) {
+            if (viewModelNomina.seleccionadoSwitchHorasExtras) {
                 Box(Modifier.fillMaxWidth(), contentAlignment = Alignment.Center) {
                     Text(
-                        text = "Horas extras: ${viewModelNominaCompleta.horasExtrasElegidas}",
+                        text = "Horas extras: ${viewModelNomina.horasExtrasElegidas}",
                         modifier = Modifier.align(Alignment.CenterStart),
                         color = MaterialTheme.colors.onPrimary
                     )
                     Text(
-                        text = numeroAMoneda.format(viewModelNominaCompleta.horasExtrasElegidasTotal),
+                        text = numeroAMoneda.format(viewModelNomina.horasExtrasElegidasTotal),
                         fontSize = 20.sp,
                         modifier = Modifier.align(Alignment.CenterEnd),
                         color = MaterialTheme.colors.onPrimary
                     )
                 }
             }
-            if (viewModelNominaCompleta.seleccionadoSwitchNocturnidad) {
+            if (viewModelNomina.seleccionadoSwitchNocturnidad) {
                 Box(Modifier.fillMaxWidth(), contentAlignment = Alignment.Center) {
                     Text(
                         text = "Nocturnidad:",
@@ -150,7 +151,7 @@ fun ResultadoNominaCompleta(viewModelNominaCompleta: ViewModelNominaCompleta) {
                         color = MaterialTheme.colors.onPrimary
                     )
                     Text(
-                        text = numeroAMoneda.format(viewModelNominaCompleta.nocturnidad),
+                        text = numeroAMoneda.format(viewModelNomina.nocturnidad),
                         fontSize = 20.sp,
                         modifier = Modifier.align(Alignment.CenterEnd),
                         color = MaterialTheme.colors.onPrimary
@@ -164,7 +165,7 @@ fun ResultadoNominaCompleta(viewModelNominaCompleta: ViewModelNominaCompleta) {
                     color = MaterialTheme.colors.onPrimary
                 )
                 Text(
-                    text = numeroAMoneda.format(viewModelNominaCompleta.seguroAccidentesColectivo),
+                    text = numeroAMoneda.format(viewModelNomina.seguroAccidentesColectivo),
                     fontSize = 20.sp,
                     modifier = Modifier.align(Alignment.CenterEnd),
                     color = MaterialTheme.colors.onPrimary
@@ -177,7 +178,7 @@ fun ResultadoNominaCompleta(viewModelNominaCompleta: ViewModelNominaCompleta) {
                     color = MaterialTheme.colors.onPrimary
                 )
                 Text(
-                    text = numeroAMoneda.format(viewModelNominaCompleta.totalIngresos),
+                    text = numeroAMoneda.format(viewModelNomina.totalIngresos),
                     fontSize = 20.sp,
                     fontWeight = FontWeight.Black,
                     modifier = Modifier.align(Alignment.CenterEnd),
@@ -194,12 +195,12 @@ fun ResultadoNominaCompleta(viewModelNominaCompleta: ViewModelNominaCompleta) {
         ) {
             Box(Modifier.fillMaxWidth(), contentAlignment = Alignment.Center) {
                 Text(
-                    text = "IRPF: ${viewModelNominaCompleta.irpfElegida} %",
+                    text = "IRPF: ${viewModelNomina.irpfElegida} %",
                     modifier = Modifier.align(Alignment.CenterStart),
                     color = MaterialTheme.colors.onPrimary
                 )
                 Text(
-                    text = numeroAMoneda.format(viewModelNominaCompleta.totalDescuentoIrpf),
+                    text = numeroAMoneda.format(viewModelNomina.totalDescuentoIrpf),
                     fontSize = 20.sp,
                     modifier = Modifier.align(Alignment.CenterEnd),
                     color = MaterialTheme.colors.onPrimary
@@ -212,7 +213,7 @@ fun ResultadoNominaCompleta(viewModelNominaCompleta: ViewModelNominaCompleta) {
                     color = MaterialTheme.colors.onPrimary
                 )
                 Text(
-                    text = numeroAMoneda.format(viewModelNominaCompleta.totalDescuentoCotizacionContComunes),
+                    text = numeroAMoneda.format(viewModelNomina.totalDescuentoCotizacionContComunes),
                     fontSize = 20.sp,
                     modifier = Modifier.align(Alignment.CenterEnd),
                     color = MaterialTheme.colors.onPrimary
@@ -225,7 +226,7 @@ fun ResultadoNominaCompleta(viewModelNominaCompleta: ViewModelNominaCompleta) {
                     color = MaterialTheme.colors.onPrimary
                 )
                 Text(
-                    text = numeroAMoneda.format(viewModelNominaCompleta.totalDescuentoCotizacionFormacion),
+                    text = numeroAMoneda.format(viewModelNomina.totalDescuentoCotizacionFormacion),
                     fontSize = 20.sp,
                     modifier = Modifier.align(Alignment.CenterEnd),
                     color = MaterialTheme.colors.onPrimary
@@ -238,7 +239,7 @@ fun ResultadoNominaCompleta(viewModelNominaCompleta: ViewModelNominaCompleta) {
                     color = MaterialTheme.colors.onPrimary
                 )
                 Text(
-                    text = numeroAMoneda.format(viewModelNominaCompleta.totalDescuentos),
+                    text = numeroAMoneda.format(viewModelNomina.totalDescuentos),
                     fontSize = 20.sp,
                     fontWeight = FontWeight.Black,
                     modifier = Modifier.align(Alignment.CenterEnd),
@@ -259,7 +260,7 @@ fun ResultadoNominaCompleta(viewModelNominaCompleta: ViewModelNominaCompleta) {
                 fontSize = 24.sp
             )
             Text(
-                text = numeroAMoneda.format(viewModelNominaCompleta.total),
+                text = numeroAMoneda.format(viewModelNomina.total),
                 fontSize = 24.sp,
                 fontWeight = FontWeight.Black,
                 modifier = Modifier.align(Alignment.CenterEnd),

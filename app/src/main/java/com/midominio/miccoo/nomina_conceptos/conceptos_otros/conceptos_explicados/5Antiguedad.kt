@@ -1,5 +1,6 @@
-package com.midominio.miccoo.nomina_datos_generales.conceptos_otros.conceptos_explicados
+package com.midominio.miccoo.nomina_conceptos.conceptos_otros.conceptos_explicados
 
+import android.icu.text.NumberFormat
 import androidx.compose.animation.*
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.*
@@ -24,12 +25,12 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.lifecycle.viewmodel.compose.viewModel
-import com.midominio.miccoo.BarraSuperiorMiCCOO
+import com.midominio.miccoo.BarraSuperior
 import com.midominio.miccoo.R
-import com.midominio.miccoo.nomina_datos_generales.BotonCalcular
-import com.midominio.miccoo.nomina_datos_generales.ViewModelNomina
-import com.midominio.miccoo.nomina_datos_generales.seleccion_antiguedad.SeleccionAntiguedad
+import com.midominio.miccoo.ViewModelNomina
+import com.midominio.miccoo.nomina_calculadora.Boton
+import com.midominio.miccoo.nomina_calculadora.Desplegable
+import com.midominio.miccoo.opcionesAntiguedad
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 
 
@@ -39,6 +40,7 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 @ExperimentalComposeUiApi
 @Composable
 fun Antiguedad(viewModelNomina: ViewModelNomina) {
+    val numeroAMoneda = NumberFormat.getCurrencyInstance()
     val scrollState = rememberScrollState()
     var visible by rememberSaveable { mutableStateOf(true) }
     val density = LocalDensity.current
@@ -48,7 +50,7 @@ fun Antiguedad(viewModelNomina: ViewModelNomina) {
         modifier = Modifier
             .padding(8.dp),
         topBar = {
-            BarraSuperiorMiCCOO()
+            BarraSuperior()
         },
         content = {
             Column(
@@ -69,13 +71,30 @@ fun Antiguedad(viewModelNomina: ViewModelNomina) {
                     exit = slideOutVertically() + shrinkVertically() + fadeOut()
                 ) {
                     Column {
-                        SeleccionAntiguedad(viewModelNomina = viewModelNomina)
+                        Desplegable(
+                            visible = true,
+                            expandible = viewModelNomina.expandirAntiguedad,
+                            expandibleCambia = {
+                                viewModelNomina.cambiarExpandirAntiguedad(
+                                    it
+                                )
+                            },
+                            seleccionado = viewModelNomina.seleccionadoAntiguedad,
+                            seleccionadoCambia = {
+                                viewModelNomina.seleccionadoCambiaAntiguedad(
+                                    it
+                                )
+                            },
+                            label = "Antigüedad",
+                            opciones = opcionesAntiguedad
+                        )
                     }
                 }
-                BotonCalcular(
-                    viewModelNomina = viewModel(),
-                    visible = !visible,
-                    visibleCambia = { visible = !visible }
+                Boton(
+                    destino = !visible,
+                    destinoCambia = { visible = !visible },
+                    texto = "Calcular",
+                    modifier = Modifier
                 )
                 AnimatedVisibility(
                     visible = visible,
@@ -89,7 +108,7 @@ fun Antiguedad(viewModelNomina: ViewModelNomina) {
                     exit = slideOutVertically() + shrinkVertically() + fadeOut()
                 ) {
                     Spacer(modifier = Modifier.size(6.dp))
-                    if (viewModelNomina.seleccionadoAntiguedad.value == "Sin antiguedad" || viewModelNomina.seleccionadoAntiguedad.value.isNullOrEmpty()) {
+                    if (viewModelNomina.seleccionadoAntiguedad == "Sin antiguedad" || viewModelNomina.seleccionadoAntiguedad.isEmpty()) {
                         Column {
                             Spacer(modifier = Modifier.size(30.dp))
                             Box(
@@ -136,7 +155,7 @@ fun Antiguedad(viewModelNomina: ViewModelNomina) {
                         ) {
                             Spacer(modifier = Modifier.size(18.dp))
                             Text(
-                                text = viewModelNomina.seleccionadoAntiguedad.value.toString(),
+                                text = viewModelNomina.seleccionadoAntiguedad,
                                 color = MaterialTheme.colors.onPrimary,
                                 textAlign = TextAlign.Center
                             )
@@ -163,7 +182,7 @@ fun Antiguedad(viewModelNomina: ViewModelNomina) {
                                         )
                                         Spacer(modifier = Modifier.size(3.dp))
                                         Text(
-                                            text = viewModelNomina.salarioBaseTexto,
+                                            text = numeroAMoneda.format(viewModelNomina.salarioBase.toDouble()),
                                             color = MaterialTheme.colors.onPrimary,
                                             fontSize = 16.sp
                                         )
@@ -233,7 +252,7 @@ fun Antiguedad(viewModelNomina: ViewModelNomina) {
                                         )
                                         Spacer(modifier = Modifier.size(3.dp))
                                         Text(
-                                            text = viewModelNomina.antiguedadConceptoRedondeada,
+                                            text = numeroAMoneda.format(viewModelNomina.antiguedadConceptoRedondeada),
                                             color = MaterialTheme.colors.onPrimary,
                                             fontSize = 16.sp
                                         )
@@ -262,7 +281,7 @@ fun Antiguedad(viewModelNomina: ViewModelNomina) {
                                         )
                                         Spacer(modifier = Modifier.size(3.dp))
                                         Text(
-                                            text = viewModelNomina.pagasExtrasProrrateadasFijas,
+                                            text = numeroAMoneda.format(viewModelNomina.pagasExtrasProrrateadasFijas),
                                             color = MaterialTheme.colors.onPrimary,
                                             fontSize = 16.sp
                                         )
@@ -337,7 +356,7 @@ fun Antiguedad(viewModelNomina: ViewModelNomina) {
                                             fontSize = 16.sp
                                         )
                                         Text(
-                                            text = "= ${viewModelNomina.pagasExtrasProrrateadasFijasAntiguedadTotal}",
+                                            text = "= ${numeroAMoneda.format(viewModelNomina.pagasExtrasProrrateadasFijasAntiguedadTotal)}",
                                             color = MaterialTheme.colors.onPrimary,
                                             fontSize = 16.sp
                                         )
@@ -366,7 +385,7 @@ fun Antiguedad(viewModelNomina: ViewModelNomina) {
                                         )
                                         Spacer(modifier = Modifier.size(3.dp))
                                         Text(
-                                            text = viewModelNomina.antiguedadConceptoRedondeada,
+                                            text = numeroAMoneda.format(viewModelNomina.antiguedadConceptoRedondeada),
                                             color = MaterialTheme.colors.onPrimary,
                                             fontSize = 16.sp
                                         )
@@ -402,7 +421,7 @@ fun Antiguedad(viewModelNomina: ViewModelNomina) {
                                         )
                                         Spacer(modifier = Modifier.size(3.dp))
                                         Text(
-                                            text = viewModelNomina.pagasExtrasProrrateadasFijasAntiguedadDiferencia,
+                                            text = numeroAMoneda.format(viewModelNomina.pagasExtrasProrrateadasFijasAntiguedadDiferencia),
                                             color = MaterialTheme.colors.onPrimary,
                                             fontSize = 16.sp
                                         )
@@ -436,7 +455,7 @@ fun Antiguedad(viewModelNomina: ViewModelNomina) {
                                         )
                                         Spacer(modifier = Modifier.size(3.dp))
                                         Text(
-                                            text = viewModelNomina.antiguedadTotalMes,
+                                            text = numeroAMoneda.format(viewModelNomina.antiguedadTotalMes),
                                             color = MaterialTheme.colors.onPrimary,
                                             fontSize = 16.sp
                                         )

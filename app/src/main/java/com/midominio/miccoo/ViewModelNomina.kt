@@ -1,4 +1,4 @@
-package com.midominio.miccoo.nomina_completa
+package com.midominio.miccoo
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -22,7 +22,8 @@ val opcionesCategoriaProfesional = listOf(
     "Encargado almacén, jefe de servicio"
 )
 
-val opcionesAntiguedadNominaCompleta = listOf(
+val opcionesAntiguedad = listOf(
+    "Sin antigüedad",
     "Un bienio (+2 años)",
     "Dos bienios (+4 años)",
     "Dos bienios y un quinquenios (+9 años)",
@@ -32,18 +33,18 @@ val opcionesAntiguedadNominaCompleta = listOf(
     "Dos bienios y cinco quinquenios (+29 años)"
 )
 
-class ViewModelNominaCompleta : ViewModel() {
+class ViewModelNomina : ViewModel() {
 
     // CONCEPTOS NÓMINA
     var salarioBase by mutableStateOf("1069.30")
     var plusTransporte by mutableStateOf("172.22")
     var plusConvenio by mutableStateOf("")
-    private var retribucionConvenio by mutableStateOf("")
-    private var retribucionAnual by mutableStateOf("")
-    private var totalHorasAno by mutableStateOf("1800")
+    var retribucionConvenio by mutableStateOf("")
+    var retribucionAnual by mutableStateOf("")
+    var totalHorasAno by mutableStateOf("1800")
     val seguroAccidentesColectivo = 0.73
-    private val cotizacionContComunes = 4.70
-    private val cotizacionFormacion = 1.65
+    val cotizacionContComunes = 4.70
+    val cotizacionFormacion = 1.65
     val pagasExtrasProrrateadasMasAntiguedad
         get() = ((salarioBase.toDouble() * 3 / 12) * antiguedadMultiplicador.toDouble())
 
@@ -153,10 +154,10 @@ class ViewModelNominaCompleta : ViewModel() {
     var seleccionadoAntiguedad by mutableStateOf("")
 
     // Variable para multiplicar la antigüedad elegida
-    private var antiguedadMultiplicador by mutableStateOf("1")
+    var antiguedadMultiplicador by mutableStateOf("1")
 
     // Variable para texto porcentaje antigüedad elegida
-    private var antiguedadPorcentaje by mutableStateOf("0")
+    var antiguedadPorcentaje by mutableStateOf("0")
 
     // Controla los cambios en antigüedad
     fun seleccionadoCambiaAntiguedad(isEnabled: String) {
@@ -203,7 +204,7 @@ class ViewModelNominaCompleta : ViewModel() {
     }
 
     // Hora extra
-    private val horaExtra
+    val horaExtra
         get() = ((retribucionAnual.toDouble() / totalHorasAno.toDouble()) * 1.25)
 
     // Suma total horas extras elegidas
@@ -297,5 +298,65 @@ class ViewModelNominaCompleta : ViewModel() {
                         totalDescuentoCotizacionFormacion +
                         totalDescuentoCotizacionContComunes
                 )
+
+    // ANTIGÜO VIEWMODEL VERIFICAR!!!!
+
+    // Pagas extras sin cambios
+    val pagasExtrasProrrateadasFijasAntiguedadTotal
+        get() = (salarioBase.toDouble() * 3 / 12) * antiguedadConcepto.toDouble()
+
+    val pagasExtrasProrrateadasFijasAntiguedadDiferencia
+        get() = (salarioBase.toDouble() * 3 / 12) * (antiguedadMultiplicador.toDouble() - 1)
+
+    val pagasExtrasProrrateadasFijas
+        get() = salarioBase.toDouble() * 3 / 12
+
+    // Hora ordinaria
+    val horaOrdinariaRedondeada
+        get() = retribucionAnual.toDouble() / totalHorasAno.toDouble()
+
+    // Hora extra
+    val horaExtraRedondeada
+        get() = (retribucionAnual.toDouble() / totalHorasAno.toDouble()) * 1.25
+
+
+    // Antigüedades
+    val antiguedadConceptoRedondeada
+        get() = salarioBase.toDouble() * (antiguedadMultiplicador.toDouble() - 1)
+    val antiguedadTotalMes
+        get() = (salarioBase.toDouble() * 3 / 12) * (antiguedadMultiplicador.toDouble() - 1) + (salarioBase.toDouble() * (antiguedadMultiplicador.toDouble() - 1))
+
+    // Indemnización despido
+
+    // Salario diario: salario bruto anual : dias laborales año (360)
+    val salarioDiarioRedondeado
+        get() = retribucionAnual.toDouble() / 360
+
+    // Tipos despidos
+    // Finalización de contrato
+    val finalizacionContratoRedondeado
+        get() = (retribucionAnual.toDouble() / 360) * 12
+
+    // Causas objetivas
+    val causasObjetivasRedondeado
+        get() = (retribucionAnual.toDouble() / 360) * 20
+
+    // Despido improcedente
+    val despidoImprocedenteRedondeado
+        get() = (retribucionAnual.toDouble() / 360) * 33
+
+    // Huelga
+    // Salario diario = Salario anual entre 15 pagas y entre 30 días del mes
+    val salarioDiaHuelgaRedondeado
+        get() = retribucionAnual.toDouble() / 15 / 30
+
+    // Sumar parte proporcional días descanso semanal
+    val huelgaRedondeado
+        get() = (retribucionAnual.toDouble() / 15 / 30) * 1.4
+
+    // Sanción
+    // Hora ordinaria por 8 horas día
+    val sancionRedondeado
+        get() = (retribucionAnual.toDouble() / totalHorasAno.toDouble()) * 8
 
 }

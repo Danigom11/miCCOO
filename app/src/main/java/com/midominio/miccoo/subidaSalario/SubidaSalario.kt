@@ -23,8 +23,10 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
-import com.midominio.miccoo.BarraSuperiorMiCCOO
-import com.midominio.miccoo.nomina_completa.*
+import com.midominio.miccoo.BarraSuperior
+import com.midominio.miccoo.nomina_calculadora.*
+import com.midominio.miccoo.opcionesAntiguedad
+import com.midominio.miccoo.opcionesCategoriaProfesional
 import com.midominio.miccoo.ui.theme.MiCCOOTheme
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 
@@ -50,7 +52,7 @@ fun Ipc(viewModelSubidaSalario: ViewModelSubidaSalario) {
             modifier = Modifier
                 .padding(8.dp),
             topBar = {
-                BarraSuperiorMiCCOO()
+                BarraSuperior()
             },
             content = {
                 Column(
@@ -169,7 +171,7 @@ fun Ipc(viewModelSubidaSalario: ViewModelSubidaSalario) {
                                         )
                                     },
                                     label = "Antigüedad",
-                                    opciones = opcionesAntiguedadNominaCompleta
+                                    opciones = opcionesAntiguedad
                                 )
                             }
                             Row(

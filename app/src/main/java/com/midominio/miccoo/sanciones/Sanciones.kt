@@ -12,7 +12,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.google.accompanist.pager.*
-import com.midominio.miccoo.BarraSuperiorMiCCOO
+import com.midominio.miccoo.BarraSuperior
 import com.midominio.miccoo.ui.theme.MiCCOOTheme
 import kotlinx.coroutines.launch
 
@@ -33,7 +33,7 @@ fun Sanciones() {
             modifier = Modifier
                 .padding(8.dp),
             topBar = {
-                BarraSuperiorMiCCOO()
+                BarraSuperior()
             },
             content = {
                 Column {

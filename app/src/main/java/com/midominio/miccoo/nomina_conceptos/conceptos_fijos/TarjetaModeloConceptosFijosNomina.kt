@@ -1,7 +1,6 @@
-package com.midominio.miccoo.nomina_datos_generales.conceptos_otros
+package com.midominio.miccoo.nomina_conceptos.conceptos_fijos
 
 import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
@@ -13,30 +12,21 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.navigation.NavController
-import com.midominio.miccoo._pagina_principal.Screens
 
 @Composable
-fun TarjetaModeloConceptosOtros(
-    navController: NavController,
+fun TarjetaModeloConceptosFijosNomina(
     colorBorde: Color,
-    conceptoOtro: String,
-    resultado: String,
-    click: String
+    conceptoFijo: String,
+    resultado: String
 ) {
     Column {
         Card(
             elevation = 4.dp,
-            border = BorderStroke(1.dp, colorBorde),
+            border = BorderStroke(3.dp, colorBorde),
             shape = RoundedCornerShape(20.dp),
             modifier = Modifier
-                .padding(3.dp)
-                .size(120.dp)
-                .clickable {
-                    navController.navigate(click) {
-                        popUpTo(Screens.NOMINA.ruta)
-                    }
-                }
+                .padding(6.dp)
+                .size(100.dp)
         ) {
             Column(
                 modifier = Modifier
@@ -45,14 +35,13 @@ fun TarjetaModeloConceptosOtros(
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Text(
-                    text = conceptoOtro,
-                    fontSize = 20.sp,
+                    text = conceptoFijo,
                     textAlign = TextAlign.Center
                 )
                 Spacer(modifier = Modifier.size(3.dp))
                 Text(
                     text = resultado,
-                    fontSize = 20.sp
+                    fontSize = 16.sp
                 )
             }
         }

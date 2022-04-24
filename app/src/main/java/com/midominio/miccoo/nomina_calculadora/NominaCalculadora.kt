@@ -1,4 +1,4 @@
-package com.midominio.miccoo.nomina_completa
+package com.midominio.miccoo.nomina_calculadora
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.ExperimentalAnimationApi
@@ -26,7 +26,10 @@ import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.midominio.miccoo.BarraSuperiorMiCCOO
+import com.midominio.miccoo.BarraSuperior
+import com.midominio.miccoo.ViewModelNomina
+import com.midominio.miccoo.opcionesAntiguedad
+import com.midominio.miccoo.opcionesCategoriaProfesional
 import com.midominio.miccoo.ui.theme.MiCCOOTheme
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 
@@ -36,7 +39,7 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 @ExperimentalComposeUiApi
 @ExperimentalMaterialApi
 @Composable
-fun NominaCompleta(viewModelNominaCompleta: ViewModelNominaCompleta) {
+fun NominaCompleta(viewModelNomina: ViewModelNomina) {
     var visibleTitulo by rememberSaveable { mutableStateOf(true) }
     var visibleCategoriaProfesional by rememberSaveable { mutableStateOf(true) }
     var visibleAntiguedad by rememberSaveable { mutableStateOf(false) }
@@ -53,7 +56,7 @@ fun NominaCompleta(viewModelNominaCompleta: ViewModelNominaCompleta) {
             modifier = Modifier
                 .padding(8.dp),
             topBar = {
-                BarraSuperiorMiCCOO()
+                BarraSuperior()
             },
             content = {
                 Column(
@@ -92,15 +95,15 @@ fun NominaCompleta(viewModelNominaCompleta: ViewModelNominaCompleta) {
                                 Spacer(modifier = Modifier.size(20.dp))
                                 Desplegable(
                                     visible = true,
-                                    expandible = viewModelNominaCompleta.expandirCategoriaProfesional,
+                                    expandible = viewModelNomina.expandirCategoriaProfesional,
                                     expandibleCambia = {
-                                        viewModelNominaCompleta.cambiarExpandirCategoriaProfesional(
+                                        viewModelNomina.cambiarExpandirCategoriaProfesional(
                                             it
                                         )
                                     },
-                                    seleccionado = viewModelNominaCompleta.seleccionadoCategoriaProfesional,
+                                    seleccionado = viewModelNomina.seleccionadoCategoriaProfesional,
                                     seleccionadoCambia = {
-                                        viewModelNominaCompleta.seleccionadoCambiaCategoriaProfesional(
+                                        viewModelNomina.seleccionadoCambiaCategoriaProfesional(
                                             it
                                         )
                                     },
@@ -108,7 +111,7 @@ fun NominaCompleta(viewModelNominaCompleta: ViewModelNominaCompleta) {
                                     opciones = opcionesCategoriaProfesional
                                 )
                             }
-                            AnimatedVisibility(visible = viewModelNominaCompleta.plusConvenio.isNotEmpty()) {
+                            AnimatedVisibility(visible = viewModelNomina.plusConvenio.isNotEmpty()) {
                                 Column(
                                     horizontalAlignment = Alignment.CenterHorizontally,
                                     verticalArrangement = Arrangement.Bottom
@@ -150,29 +153,29 @@ fun NominaCompleta(viewModelNominaCompleta: ViewModelNominaCompleta) {
                             Column(modifier = Modifier.weight(1f)) {
                                 TextoConcepto(texto = "Antigüedad (+2 años)")
                                 Switch(
-                                    seleccionadoSwitch = viewModelNominaCompleta.seleccionadoSwitchAntiguedad,
+                                    seleccionadoSwitch = viewModelNomina.seleccionadoSwitchAntiguedad,
                                     seleccionadoSwitchCambia = {
-                                        viewModelNominaCompleta.seleccionadoSwitchCambiaAntiguedad(
+                                        viewModelNomina.seleccionadoSwitchCambiaAntiguedad(
                                             it
                                         )
                                     }
                                 )
                                 Desplegable(
-                                    visible = viewModelNominaCompleta.seleccionadoSwitchAntiguedad,
-                                    expandible = viewModelNominaCompleta.expandirAntiguedad,
+                                    visible = viewModelNomina.seleccionadoSwitchAntiguedad,
+                                    expandible = viewModelNomina.expandirAntiguedad,
                                     expandibleCambia = {
-                                        viewModelNominaCompleta.cambiarExpandirAntiguedad(
+                                        viewModelNomina.cambiarExpandirAntiguedad(
                                             it
                                         )
                                     },
-                                    seleccionado = viewModelNominaCompleta.seleccionadoAntiguedad,
+                                    seleccionado = viewModelNomina.seleccionadoAntiguedad,
                                     seleccionadoCambia = {
-                                        viewModelNominaCompleta.seleccionadoCambiaAntiguedad(
+                                        viewModelNomina.seleccionadoCambiaAntiguedad(
                                             it
                                         )
                                     },
                                     label = "Antigüedad",
-                                    opciones = opcionesAntiguedadNominaCompleta
+                                    opciones = opcionesAntiguedad
                                 )
                             }
                             Row(
@@ -225,17 +228,17 @@ fun NominaCompleta(viewModelNominaCompleta: ViewModelNominaCompleta) {
                             Column(modifier = Modifier.weight(1f)) {
                                 TextoConcepto(texto = "¿Horas extras?")
                                 Switch(
-                                    seleccionadoSwitch = viewModelNominaCompleta.seleccionadoSwitchHorasExtras,
+                                    seleccionadoSwitch = viewModelNomina.seleccionadoSwitchHorasExtras,
                                     seleccionadoSwitchCambia = {
-                                        viewModelNominaCompleta.seleccionadoSwitchCambiaHorasExtras(
+                                        viewModelNomina.seleccionadoSwitchCambiaHorasExtras(
                                             it
                                         )
                                     })
                                 CampoDeTexto(
-                                    visible = viewModelNominaCompleta.seleccionadoSwitchHorasExtras,
-                                    conceptoElegido = viewModelNominaCompleta.horasExtrasElegidas,
+                                    visible = viewModelNomina.seleccionadoSwitchHorasExtras,
+                                    conceptoElegido = viewModelNomina.horasExtrasElegidas,
                                     conceptoElegidoCambia = {
-                                        viewModelNominaCompleta.horasExtrasElegidasCambia(
+                                        viewModelNomina.horasExtrasElegidasCambia(
                                             it
                                         )
                                     },
@@ -289,9 +292,9 @@ fun NominaCompleta(viewModelNominaCompleta: ViewModelNominaCompleta) {
                             Column(modifier = Modifier.weight(1f)) {
                                 TextoConcepto(texto = "¿Nocturnidad? (de 22:00 a 06:00)")
                                 Switch(
-                                    seleccionadoSwitch = viewModelNominaCompleta.seleccionadoSwitchNocturnidad,
+                                    seleccionadoSwitch = viewModelNomina.seleccionadoSwitchNocturnidad,
                                     seleccionadoSwitchCambia = {
-                                        viewModelNominaCompleta.seleccionadoSwitchCambiaNocturnidad(
+                                        viewModelNomina.seleccionadoSwitchCambiaNocturnidad(
                                             it
                                         )
                                     }
@@ -358,9 +361,9 @@ fun NominaCompleta(viewModelNominaCompleta: ViewModelNominaCompleta) {
                                 TextoConcepto(texto = "IRPF")
                                 CampoDeTexto(
                                     visible = true,
-                                    conceptoElegido = viewModelNominaCompleta.irpfElegida,
+                                    conceptoElegido = viewModelNomina.irpfElegida,
                                     conceptoElegidoCambia = {
-                                        viewModelNominaCompleta.irpfElegidaCambia(
+                                        viewModelNomina.irpfElegidaCambia(
                                             it
                                         )
                                     },
@@ -394,7 +397,7 @@ fun NominaCompleta(viewModelNominaCompleta: ViewModelNominaCompleta) {
                     AnimarVisibilidad(visible = visibleResultado, densidad = densidad) {
                         Column {
                             TextoConcepto(texto = "Resultado")
-                            ResultadoNominaCompleta(viewModelNominaCompleta = viewModelNominaCompleta)
+                            ResultadoNominaCompleta(viewModelNomina = viewModelNomina)
                         }
                     }
                 }

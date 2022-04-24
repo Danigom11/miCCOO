@@ -1,6 +1,7 @@
-package com.midominio.miccoo.nomina_datos_generales.conceptos_otros.conceptos_explicados
+package com.midominio.miccoo.nomina_conceptos.conceptos_otros.conceptos_explicados
 
 
+import android.icu.text.NumberFormat
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.*
@@ -16,8 +17,8 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.midominio.miccoo.BarraSuperiorMiCCOO
-import com.midominio.miccoo.nomina_datos_generales.ViewModelNomina
+import com.midominio.miccoo.BarraSuperior
+import com.midominio.miccoo.ViewModelNomina
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 
 
@@ -27,12 +28,13 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 @ExperimentalMaterialApi
 @Composable
 fun HoraFestiva(viewModelNomina: ViewModelNomina) {
+    val numeroAMoneda = NumberFormat.getCurrencyInstance()
     Scaffold(
         backgroundColor = Color.Transparent,
         modifier = Modifier
             .padding(8.dp),
         topBar = {
-            BarraSuperiorMiCCOO()
+            BarraSuperior()
         },
         content = {
             Column(
@@ -96,10 +98,9 @@ fun HoraFestiva(viewModelNomina: ViewModelNomina) {
                                 )
                                 Spacer(modifier = Modifier.size(3.dp))
                                 Text(
-                                    text = viewModelNomina.horaOrdinariaRedondeada,
+                                    text = numeroAMoneda.format(viewModelNomina.horaOrdinariaRedondeada),
                                     fontSize = 20.sp
                                 )
-
                             }
                         }
                         Text(
@@ -163,7 +164,7 @@ fun HoraFestiva(viewModelNomina: ViewModelNomina) {
                             Text(text = "=", textAlign = TextAlign.Center)
                             Spacer(modifier = Modifier.size(3.dp))
                             Text(
-                                text = viewModelNomina.horaExtraRedondeada,
+                                text = numeroAMoneda.format(viewModelNomina.horaExtraRedondeada),
                                 fontSize = 20.sp
                             )
 

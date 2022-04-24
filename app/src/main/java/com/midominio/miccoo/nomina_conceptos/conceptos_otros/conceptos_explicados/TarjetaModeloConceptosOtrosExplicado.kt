@@ -1,4 +1,4 @@
-package com.midominio.miccoo.nomina_datos_generales.conceptos_otros.conceptos_explicados
+package com.midominio.miccoo.nomina_conceptos.conceptos_otros.conceptos_explicados
 
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.BorderStroke

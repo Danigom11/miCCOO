@@ -13,11 +13,9 @@ import com.google.accompanist.navigation.animation.composable
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.midominio.miccoo._pagina_principal.PaginaPrincipal
 import com.midominio.miccoo._pagina_principal.Screens
-import com.midominio.miccoo.nomina_completa.NominaCompleta
-import com.midominio.miccoo.nomina_completa.ViewModelNominaCompleta
-import com.midominio.miccoo.nomina_datos_generales.Nomina
-import com.midominio.miccoo.nomina_datos_generales.ViewModelNomina
-import com.midominio.miccoo.nomina_datos_generales.conceptos_otros.conceptos_explicados.*
+import com.midominio.miccoo.nomina_calculadora.NominaCompleta
+import com.midominio.miccoo.nomina_conceptos.Nomina
+import com.midominio.miccoo.nomina_conceptos.conceptos_otros.conceptos_explicados.*
 import com.midominio.miccoo.permisos_retribuidos.PermisosRetribuidos
 import com.midominio.miccoo.sanciones.Sanciones
 import com.midominio.miccoo.subidaSalario.Ipc
@@ -33,7 +31,6 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 fun SetupNavGraph(
     navController: NavController,
     viewModelNomina: ViewModelNomina,
-    viewModelNominaCompleta: ViewModelNominaCompleta,
     viewModelSubidaSalario: ViewModelSubidaSalario
 ) {
 
@@ -74,7 +71,7 @@ fun SetupNavGraph(
         }
         //Pantalla calculos
         composable(Screens.NOMINACOMPLETA.ruta) {
-            NominaCompleta(viewModelNominaCompleta = viewModelNominaCompleta)
+            NominaCompleta(viewModelNomina = viewModelNomina)
         }
         //Pantalla calculos
         composable(Screens.NOMINA.ruta) {

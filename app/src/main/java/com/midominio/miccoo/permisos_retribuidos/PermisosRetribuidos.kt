@@ -28,7 +28,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.midominio.miccoo.BarraSuperiorMiCCOO
+import com.midominio.miccoo.BarraSuperior
 import com.midominio.miccoo.ui.theme.MiCCOOTheme
 import com.midominio.miccoo.ui.theme.tarjetaExpandidaColorFondo
 
@@ -42,7 +42,7 @@ fun PermisosRetribuidos() {
             modifier = Modifier
                 .padding(8.dp),
             topBar = {
-                BarraSuperiorMiCCOO()
+                BarraSuperior()
             },
             content = {
                 PantallaPermisosRetribuidos(listaContenido = listaContenidoTarjetasPermisoRetribuido)

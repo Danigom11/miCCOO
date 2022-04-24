@@ -21,7 +21,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import com.midominio.miccoo.BarraSuperiorMiCCOO
+import com.midominio.miccoo.BarraSuperior
 import com.midominio.miccoo.ui.theme.MiCCOOTheme
 
 @ExperimentalAnimationApi
@@ -34,7 +34,7 @@ fun PaginaPrincipal(navController: NavController) {
             modifier = Modifier
                 .padding(8.dp),
             topBar = {
-                BarraSuperiorMiCCOO()
+                BarraSuperior()
             },
             content = {
                 TarjetasPaginaPrincipal(

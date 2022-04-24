@@ -22,7 +22,7 @@ import com.midominio.miccoo.ui.theme.MiCCOOTheme
 
 @ExperimentalAnimationApi
 @Composable
-fun BarraSuperiorMiCCOO() {
+fun BarraSuperior() {
     var openDialog by remember { mutableStateOf(false) }
     MiCCOOTheme {
         TopAppBar(

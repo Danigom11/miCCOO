@@ -1,4 +1,4 @@
-package com.midominio.miccoo.nomina_completa
+package com.midominio.miccoo.nomina_calculadora
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.ExperimentalAnimationApi

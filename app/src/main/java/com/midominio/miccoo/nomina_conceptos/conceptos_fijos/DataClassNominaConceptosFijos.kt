@@ -1,4 +1,4 @@
-package com.midominio.miccoo.nomina_datos_generales.conceptos_fijos
+package com.midominio.miccoo.nomina_conceptos.conceptos_fijos
 
 import androidx.compose.ui.graphics.Color
 

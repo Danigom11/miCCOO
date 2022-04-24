@@ -1,4 +1,4 @@
-package com.midominio.miccoo.nomina_datos_generales.conceptos_otros
+package com.midominio.miccoo.nomina_conceptos.conceptos_otros
 
 import android.os.Parcelable
 import androidx.compose.ui.graphics.Color

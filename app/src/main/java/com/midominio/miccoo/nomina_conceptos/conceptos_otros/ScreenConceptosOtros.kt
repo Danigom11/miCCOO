@@ -1,12 +1,12 @@
-package com.midominio.miccoo.nomina_datos_generales.conceptos_otros
+package com.midominio.miccoo.nomina_conceptos.conceptos_otros
 
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 import androidx.navigation.NavController
+import com.midominio.miccoo.ViewModelNomina
 import com.midominio.miccoo._pagina_principal.Screens
-import com.midominio.miccoo.nomina_datos_generales.ViewModelNomina
 
 @Composable
 fun ScreenConceptosOtros(
@@ -19,21 +19,21 @@ fun ScreenConceptosOtros(
             ClassDatosTarjetaConceptoOtros(
                 colorBorde = Color.Red,
                 concepto = "Hora\nordinaria",
-                valor = viewModelNomina.horaOrdinariaRedondeada,
+                valor = viewModelNomina.horaOrdinariaRedondeada.toString(),
                 click = Screens.HORAORDINARIA.ruta
             ),
             // Hora extra
             ClassDatosTarjetaConceptoOtros(
                 colorBorde = Color.Blue,
                 concepto = "Hora\nextra",
-                valor = viewModelNomina.horaExtraRedondeada,
+                valor = viewModelNomina.horaExtraRedondeada.toString(),
                 click = Screens.HORAEXTRA.ruta
             ),
             // Hora festiva
             ClassDatosTarjetaConceptoOtros(
                 colorBorde = Color.Yellow,
                 concepto = "Hora\nfestiva",
-                valor = viewModelNomina.horaExtraRedondeada,
+                valor = viewModelNomina.horaExtraRedondeada.toString(),
                 click = Screens.HORAFESTIVA.ruta
             )
         )
@@ -43,21 +43,21 @@ fun ScreenConceptosOtros(
             ClassDatosTarjetaConceptoOtros(
                 colorBorde = Color.Green,
                 concepto = "Nocturnidad",
-                valor = viewModelNomina.nocturnidadRedondeada,
+                valor = viewModelNomina.nocturnidad.toString(),
                 click = Screens.NOCTURNIDAD.ruta
             ),
             // Antigüedad
             ClassDatosTarjetaConceptoOtros(
                 colorBorde = Color.Magenta,
                 concepto = "Antigüedad",
-                valor = viewModelNomina.antiguedadConceptoRedondeada,
+                valor = viewModelNomina.antiguedadConceptoRedondeada.toString(),
                 click = Screens.ANTIGUEDAD.ruta
             ),
             // Despido
             ClassDatosTarjetaConceptoOtros(
                 colorBorde = Color.Red,
                 concepto = "Despido",
-                valor = viewModelNomina.despidoImprocedenteRedondeado,
+                valor = viewModelNomina.despidoImprocedenteRedondeado.toString(),
                 click = Screens.DESPIDO.ruta
             )
         )
@@ -67,14 +67,14 @@ fun ScreenConceptosOtros(
             ClassDatosTarjetaConceptoOtros(
                 colorBorde = Color.Blue,
                 concepto = "Huelga",
-                valor = viewModelNomina.huelgaRedondeado,
+                valor = viewModelNomina.huelgaRedondeado.toString(),
                 click = Screens.HUELGA.ruta
             ),
             // Sanción
             ClassDatosTarjetaConceptoOtros(
                 colorBorde = Color.Gray,
                 concepto = "Sanción",
-                valor = viewModelNomina.sancionRedondeado,
+                valor = viewModelNomina.sancionRedondeado.toString(),
                 click = Screens.SANCION.ruta
             )
         )
