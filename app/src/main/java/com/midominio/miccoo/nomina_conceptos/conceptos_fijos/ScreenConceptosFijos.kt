@@ -16,19 +16,19 @@ fun ScreenConceptosFijos(viewModelNomina: ViewModelNomina) {
             DataClassNominaConceptosFijos(
                 Color.Red,
                 "Salario\nmensual",
-                numeroAMoneda.format(viewModelNomina.retribucionConvenio.toDouble())
+                numeroAMoneda.format(viewModelNomina.retribucionConvenioConAntiguedad)
             ),
             // Salario anual
             DataClassNominaConceptosFijos(
                 Color.Green,
                 "Salario\nanual",
-                numeroAMoneda.format(viewModelNomina.retribucionAnual.toDouble())
+                numeroAMoneda.format(viewModelNomina.retribucionAnualConAntiguedad)
             ),
             // Pagas extras prorrateadas
             DataClassNominaConceptosFijos(
                 Color.Blue,
                 "Pagas\nprorrateadas",
-                numeroAMoneda.format(viewModelNomina.pagasExtrasProrrateadasFijas)
+                numeroAMoneda.format(viewModelNomina.pagasExtrasProrrateadasMasAntiguedad)
             ),
             // Salario base
             DataClassNominaConceptosFijos(

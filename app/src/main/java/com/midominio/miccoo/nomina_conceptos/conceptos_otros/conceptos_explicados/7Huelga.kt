@@ -94,7 +94,7 @@ fun Huelga(viewModelNomina: ViewModelNomina) {
                             )
                             Spacer(modifier = Modifier.size(3.dp))
                             Text(
-                                text = numeroAMoneda.format(viewModelNomina.retribucionAnual.toDouble()),
+                                text = numeroAMoneda.format(viewModelNomina.retribucionAnualConAntiguedad),
                                 fontSize = 16.sp
                             )
                         }

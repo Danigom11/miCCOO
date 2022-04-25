@@ -35,7 +35,7 @@ fun HoraOrdinaria(viewModelNomina: ViewModelNomina) {
                 TarjetaModeloConceptosOtrosExplicado(
                     concepto = "Hora ordinaria",
                     conceptoPrimero = "Retribución\nanual",
-                    resultadoPrimero = numeroAMoneda.format(viewModelNomina.retribucionAnual),
+                    resultadoPrimero = numeroAMoneda.format(viewModelNomina.retribucionAnualConAntiguedad),
                     operador = ":",
                     conceptoSegundo = "Total\nhoras año",
                     resultadoSegundo = viewModelNomina.totalHorasAno,

@@ -54,6 +54,7 @@ fun TarjetaModeloConceptosOtrosExplicado(
                 text = concepto,
                 textAlign = TextAlign.Center,
                 fontSize = MaterialTheme.typography.h5.fontSize,
+                color = MaterialTheme.colors.onPrimary,
                 modifier = Modifier
                     .fillMaxWidth()
             )
@@ -62,6 +63,7 @@ fun TarjetaModeloConceptosOtrosExplicado(
                 text = "¿Cómo se calcula?",
                 textAlign = TextAlign.Center,
                 fontSize = MaterialTheme.typography.subtitle1.fontSize,
+                color = MaterialTheme.colors.onPrimary,
                 fontStyle = FontStyle.Italic,
                 modifier = Modifier
                     .fillMaxWidth()
@@ -85,11 +87,13 @@ fun TarjetaModeloConceptosOtrosExplicado(
                         Text(
                             text = conceptoPrimero,
                             fontSize = 20.sp,
+                            color = MaterialTheme.colors.onPrimary,
                             textAlign = TextAlign.Center
                         )
                         Spacer(modifier = Modifier.size(3.dp))
                         Text(
                             text = resultadoPrimero,
+                            color = MaterialTheme.colors.onPrimary,
                             fontSize = 20.sp
                         )
 
@@ -98,6 +102,7 @@ fun TarjetaModeloConceptosOtrosExplicado(
                 Text(
                     text = operador,
                     fontSize = 30.sp,
+                    color = MaterialTheme.colors.onPrimary,
                     modifier = Modifier
                         .align(CenterVertically)
                         .padding(20.dp)
@@ -120,12 +125,14 @@ fun TarjetaModeloConceptosOtrosExplicado(
                             text = conceptoSegundo,
                             fontSize = 20.sp,
                             textAlign = TextAlign.Center,
+                            color = MaterialTheme.colors.onPrimary,
                             overflow = TextOverflow.Clip,
                             modifier = Modifier.padding(3.dp)
                         )
                         Spacer(modifier = Modifier.size(3.dp))
                         Text(
                             text = resultadoSegundo,
+                            color = MaterialTheme.colors.onPrimary,
                             fontSize = 20.sp
                         )
                     }
@@ -147,12 +154,21 @@ fun TarjetaModeloConceptosOtrosExplicado(
                     verticalArrangement = Arrangement.Center,
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
-                    Text(text = "Resultado", fontSize = 20.sp, textAlign = TextAlign.Center)
+                    Text(
+                        text = "Resultado",
+                        fontSize = 20.sp,
+                        color = MaterialTheme.colors.onPrimary,
+                        textAlign = TextAlign.Center
+                    )
                     Spacer(modifier = Modifier.size(3.dp))
-                    Text(text = "=", textAlign = TextAlign.Center)
+                    Text(
+                        text = "=", textAlign = TextAlign.Center,
+                        color = MaterialTheme.colors.onPrimary
+                    )
                     Spacer(modifier = Modifier.size(3.dp))
                     Text(
                         text = resultado,
+                        color = MaterialTheme.colors.onPrimary,
                         fontSize = 20.sp
                     )
 

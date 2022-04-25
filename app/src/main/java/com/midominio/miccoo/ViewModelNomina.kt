@@ -45,8 +45,13 @@ class ViewModelNomina : ViewModel() {
     val seguroAccidentesColectivo = 0.73
     val cotizacionContComunes = 4.70
     val cotizacionFormacion = 1.65
+
+    // Conceptos fijos más la antigüedad
     val pagasExtrasProrrateadasMasAntiguedad
         get() = ((salarioBase.toDouble() * 3 / 12) * antiguedadMultiplicador.toDouble())
+    val retribucionConvenioConAntiguedad get() = retribucionConvenio.toDouble() * antiguedadMultiplicador.toDouble()
+    val retribucionAnualConAntiguedad get() = retribucionAnual.toDouble() + (antiguedadTotalMes * 12)
+
 
     // CATEGORÍA PROFESIONAL
     // Estado de expandir desplegable categoria profesional
@@ -205,7 +210,7 @@ class ViewModelNomina : ViewModel() {
 
     // Hora extra
     val horaExtra
-        get() = ((retribucionAnual.toDouble() / totalHorasAno.toDouble()) * 1.25)
+        get() = ((retribucionAnualConAntiguedad / totalHorasAno.toDouble()) * 1.25)
 
     // Suma total horas extras elegidas
     val horasExtrasElegidasTotal
@@ -236,6 +241,9 @@ class ViewModelNomina : ViewModel() {
         } else {
             0.toDouble()
         }
+
+    val nocturnidadConcepto = salarioBase.toDouble() * 0.25
+
 
     // TOTAL INGRESOS
     val totalIngresos
@@ -303,7 +311,7 @@ class ViewModelNomina : ViewModel() {
 
     // Pagas extras sin cambios
     val pagasExtrasProrrateadasFijasAntiguedadTotal
-        get() = (salarioBase.toDouble() * 3 / 12) * antiguedadConcepto
+        get() = (salarioBase.toDouble() * 3 / 12) * antiguedadMultiplicador.toDouble()
 
     val pagasExtrasProrrateadasFijasAntiguedadDiferencia
         get() = (salarioBase.toDouble() * 3 / 12) * (antiguedadMultiplicador.toDouble() - 1)
@@ -313,11 +321,11 @@ class ViewModelNomina : ViewModel() {
 
     // Hora ordinaria
     val horaOrdinariaRedondeada
-        get() = retribucionAnual.toDouble() / totalHorasAno.toDouble()
+        get() = retribucionAnualConAntiguedad / totalHorasAno.toDouble()
 
     // Hora extra
     val horaExtraRedondeada
-        get() = (retribucionAnual.toDouble() / totalHorasAno.toDouble()) * 1.25
+        get() = (retribucionAnualConAntiguedad / totalHorasAno.toDouble()) * 1.25
 
 
     // Antigüedades
@@ -330,33 +338,33 @@ class ViewModelNomina : ViewModel() {
 
     // Salario diario: salario bruto anual : dias laborales año (360)
     val salarioDiarioRedondeado
-        get() = retribucionAnual.toDouble() / 360
+        get() = retribucionAnualConAntiguedad / 360
 
     // Tipos despidos
     // Finalización de contrato
     val finalizacionContratoRedondeado
-        get() = (retribucionAnual.toDouble() / 360) * 12
+        get() = (retribucionAnualConAntiguedad / 360) * 12
 
     // Causas objetivas
     val causasObjetivasRedondeado
-        get() = (retribucionAnual.toDouble() / 360) * 20
+        get() = (retribucionAnualConAntiguedad / 360) * 20
 
     // Despido improcedente
     val despidoImprocedenteRedondeado
-        get() = (retribucionAnual.toDouble() / 360) * 33
+        get() = (retribucionAnualConAntiguedad / 360) * 33
 
     // Huelga
     // Salario diario = Salario anual entre 15 pagas y entre 30 días del mes
     val salarioDiaHuelgaRedondeado
-        get() = retribucionAnual.toDouble() / 15 / 30
+        get() = retribucionAnualConAntiguedad / 15 / 30
 
     // Sumar parte proporcional días descanso semanal
     val huelgaRedondeado
-        get() = (retribucionAnual.toDouble() / 15 / 30) * 1.4
+        get() = (retribucionAnualConAntiguedad / 15 / 30) * 1.4
 
     // Sanción
     // Hora ordinaria por 8 horas día
     val sancionRedondeado
-        get() = (retribucionAnual.toDouble() / totalHorasAno.toDouble()) * 8
+        get() = (retribucionAnualConAntiguedad / totalHorasAno.toDouble()) * 8
 
 }

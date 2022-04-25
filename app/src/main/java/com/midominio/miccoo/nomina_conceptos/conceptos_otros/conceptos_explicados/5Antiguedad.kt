@@ -71,6 +71,7 @@ fun Antiguedad(viewModelNomina: ViewModelNomina) {
                     exit = slideOutVertically() + shrinkVertically() + fadeOut()
                 ) {
                     Column {
+                        Spacer(modifier = Modifier.size(20.dp))
                         Desplegable(
                             visible = true,
                             expandible = viewModelNomina.expandirAntiguedad,
@@ -88,6 +89,7 @@ fun Antiguedad(viewModelNomina: ViewModelNomina) {
                             label = "Antigüedad",
                             opciones = opcionesAntiguedad
                         )
+                        Spacer(modifier = Modifier.size(20.dp))
                     }
                 }
                 Boton(
@@ -351,7 +353,7 @@ fun Antiguedad(viewModelNomina: ViewModelNomina) {
                                         )
                                         Spacer(modifier = Modifier.size(3.dp))
                                         Text(
-                                            text = "+ ${viewModelNomina.pagasExtrasProrrateadasFijasAntiguedadDiferencia}",
+                                            text = "+ ${numeroAMoneda.format(viewModelNomina.pagasExtrasProrrateadasFijasAntiguedadDiferencia)}",
                                             color = MaterialTheme.colors.onPrimary,
                                             fontSize = 16.sp
                                         )
