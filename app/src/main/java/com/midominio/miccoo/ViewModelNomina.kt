@@ -42,11 +42,11 @@ val opcionesTablasSalariales = listOf(
 class ViewModelNomina : ViewModel() {
 
     // CONCEPTOS NÓMINA
-    var salarioBase by mutableStateOf("1069.30")
-    var plusTransporte by mutableStateOf("172.22")
-    var plusConvenio by mutableStateOf("173.56")
-    var retribucionConvenio by mutableStateOf("1415.08")
-    var retribucionAnual by mutableStateOf("20188.89")
+    var salarioBase by mutableStateOf("1")
+    var plusTransporte by mutableStateOf("1")
+    var plusConvenio by mutableStateOf("1")
+    var retribucionConvenio by mutableStateOf("1")
+    var retribucionAnual by mutableStateOf("1")
     val totalHorasAno by mutableStateOf("1800")
     val seguroAccidentesColectivo = 0.73
     val cotizacionContComunes = 4.70
@@ -68,6 +68,10 @@ class ViewModelNomina : ViewModel() {
     // Estado elemento seleccionado en menú desplegable tablas salariales
     var seleccionadoTablasSalariales by mutableStateOf("")
 
+    fun seleccionadoCambiaTablasSalariales(isEnabled: String) {
+        seleccionadoTablasSalariales = isEnabled
+    }
+
     // CATEGORÍA PROFESIONAL
     // Estado de expandir desplegable categoria profesional
     var expandirCategoriaProfesional by mutableStateOf(false)
@@ -84,7 +88,7 @@ class ViewModelNomina : ViewModel() {
 
         // Tablas salariales 2021
         if (seleccionadoTablasSalariales == "2021") {
-            if (seleccionadoCategoriaProfesional == "Mozo ordinario, limpiador, repartidor" || seleccionadoCategoriaProfesional.isEmpty()) {
+            if (seleccionadoCategoriaProfesional == "Mozo ordinario, limpiador, repartidor") {
                 salarioBase = "1008.98"
                 plusTransporte = "162.51"
                 plusConvenio = "163.77"
@@ -186,7 +190,7 @@ class ViewModelNomina : ViewModel() {
 
         // Tablas salariales 2021 (Definitivas)
         if (seleccionadoTablasSalariales == "2021 (Definitivas)") {
-            if (seleccionadoCategoriaProfesional == "Mozo ordinario, limpiador, repartidor" || seleccionadoCategoriaProfesional.isEmpty()) {
+            if (seleccionadoCategoriaProfesional == "Mozo ordinario, limpiador, repartidor") {
                 salarioBase = "1053.5"
                 plusTransporte = "169.68"
                 plusConvenio = "171.00"
