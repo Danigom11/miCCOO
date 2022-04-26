@@ -33,11 +33,17 @@ val opcionesAntiguedad = listOf(
     "Dos bienios y cinco quinquenios (+29 años)"
 )
 
+val opcionesTablasSalariales = listOf(
+    "2021",
+    "2021 (Definitivas)",
+    "2022"
+)
+
 class ViewModelNomina : ViewModel() {
 
     // CONCEPTOS NÓMINA
-    val salarioBase by mutableStateOf("1069.30")
-    val plusTransporte by mutableStateOf("172.22")
+    var salarioBase by mutableStateOf("1069.30")
+    var plusTransporte by mutableStateOf("172.22")
     var plusConvenio by mutableStateOf("173.56")
     var retribucionConvenio by mutableStateOf("1415.08")
     var retribucionAnual by mutableStateOf("20188.89")
@@ -52,6 +58,15 @@ class ViewModelNomina : ViewModel() {
     val retribucionConvenioConAntiguedad get() = retribucionConvenio.toDouble() * antiguedadMultiplicador.toDouble()
     val retribucionAnualConAntiguedad get() = retribucionAnual.toDouble() + (antiguedadTotalMes * 12)
 
+    // TABLAS SALARIALES
+    // Estado de expandir desplegable tablas salariales
+    var expandirTablasSalariales by mutableStateOf(false)
+    fun cambiarExpandirTablasSalariales(isEnabled: Boolean) {
+        expandirTablasSalariales = isEnabled
+    }
+
+    // Estado elemento seleccionado en menú desplegable tablas salariales
+    var seleccionadoTablasSalariales by mutableStateOf("")
 
     // CATEGORÍA PROFESIONAL
     // Estado de expandir desplegable categoria profesional
@@ -66,75 +81,311 @@ class ViewModelNomina : ViewModel() {
     // Modifica selección categorías profesionales y los conceptos que cambian
     fun seleccionadoCambiaCategoriaProfesional(isEnabled: String) {
         seleccionadoCategoriaProfesional = isEnabled
-        if (seleccionadoCategoriaProfesional == "Mozo ordinario, limpiador, repartidor" || seleccionadoCategoriaProfesional.isEmpty()) {
-            plusConvenio = "173.56"
-            retribucionConvenio = "1415.08"
-            retribucionAnual = "20188.89"
+
+        // Tablas salariales 2021
+        if (seleccionadoTablasSalariales == "2021") {
+            if (seleccionadoCategoriaProfesional == "Mozo ordinario, limpiador, repartidor" || seleccionadoCategoriaProfesional.isEmpty()) {
+                salarioBase = "1008.98"
+                plusTransporte = "162.51"
+                plusConvenio = "163.77"
+                retribucionConvenio = "1335.26"
+                retribucionAnual = "19050.09"
+            }
+            if (seleccionadoCategoriaProfesional == "Mozo especialista, ayudante") {
+                salarioBase = "1008.98"
+                plusTransporte = "162.51"
+                plusConvenio = "177.75"
+                retribucionConvenio = "1349.24"
+                retribucionAnual = "19217.86"
+            }
+            if (seleccionadoCategoriaProfesional == "Engradador lavador") {
+                salarioBase = "1008.98"
+                plusTransporte = "162.51"
+                plusConvenio = "184.17"
+                retribucionConvenio = "1355.66"
+                retribucionAnual = "19294.91"
+            }
+            if (seleccionadoCategoriaProfesional == "Conductor 2ª, Oficial taller") {
+                salarioBase = "1008.98"
+                plusTransporte = "162.51"
+                plusConvenio = "195.69"
+                retribucionConvenio = "1367.18"
+                retribucionAnual = "19433.08"
+            }
+            if (seleccionadoCategoriaProfesional == "Conductor 1ª, Oficial Taller") {
+                salarioBase = "1008.98"
+                plusTransporte = "162.51"
+                plusConvenio = "216.39"
+                retribucionConvenio = "1387.88"
+                retribucionAnual = "19681.53"
+            }
+            if (seleccionadoCategoriaProfesional == "Vigilante") {
+                salarioBase = "1008.98"
+                plusTransporte = "162.51"
+                plusConvenio = "167.96"
+                retribucionConvenio = "1339.45"
+                retribucionAnual = "19100.40"
+            }
+            if (seleccionadoCategoriaProfesional == "Jefe Almacén") {
+                salarioBase = "1008.98"
+                plusTransporte = "162.51"
+                plusConvenio = "213.32"
+                retribucionConvenio = "1384.81"
+                retribucionAnual = "19644.73"
+            }
+            if (seleccionadoCategoriaProfesional == "Conductor, Mecánico, Jefe Taller") {
+                salarioBase = "1008.98"
+                plusTransporte = "162.51"
+                plusConvenio = "216.39"
+                retribucionConvenio = "1387.88"
+                retribucionAnual = "19681.53"
+            }
+            if (seleccionadoCategoriaProfesional == "Auxiliar") {
+                salarioBase = "1008.98"
+                plusTransporte = "162.51"
+                plusConvenio = "165.50"
+                retribucionConvenio = "1336.99"
+                retribucionAnual = "19070.78"
+            }
+            if (seleccionadoCategoriaProfesional == "Oficial 2ª Administración") {
+                salarioBase = "1008.98"
+                plusTransporte = "162.51"
+                plusConvenio = "209.12"
+                retribucionConvenio = "1380.61"
+                retribucionAnual = "19594.30"
+            }
+            if (seleccionadoCategoriaProfesional == "Oficial 1ª Administración") {
+                salarioBase = "1008.98"
+                plusTransporte = "162.51"
+                plusConvenio = "218.18"
+                retribucionConvenio = "1389.67"
+                retribucionAnual = "19702.97"
+            }
+            if (seleccionadoCategoriaProfesional == "Jefe administración, capataz") {
+                salarioBase = "1008.98"
+                plusTransporte = "162.51"
+                plusConvenio = "251.57"
+                retribucionConvenio = "1423.06"
+                retribucionAnual = "20103.68"
+            }
+            if (seleccionadoCategoriaProfesional == "Inspector principal") {
+                salarioBase = "1008.98"
+                plusTransporte = "162.51"
+                plusConvenio = "327.90"
+                retribucionConvenio = "1499.39"
+                retribucionAnual = "21019.67"
+            }
+            if (seleccionadoCategoriaProfesional == "Encargado almacén, jefe de servicio") {
+                salarioBase = "1008.98"
+                plusTransporte = "162.51"
+                plusConvenio = "408.54"
+                retribucionConvenio = "1580.03"
+                retribucionAnual = "21987.36"
+            }
         }
-        if (seleccionadoCategoriaProfesional == "Mozo especialista, ayudante") {
-            plusConvenio = "188.38"
-            retribucionConvenio = "1429.90"
-            retribucionAnual = "20366.74"
+
+        // Tablas salariales 2021 (Definitivas)
+        if (seleccionadoTablasSalariales == "2021 (Definitivas)") {
+            if (seleccionadoCategoriaProfesional == "Mozo ordinario, limpiador, repartidor" || seleccionadoCategoriaProfesional.isEmpty()) {
+                salarioBase = "1053.5"
+                plusTransporte = "169.68"
+                plusConvenio = "171.00"
+                retribucionConvenio = "1394.17"
+                retribucionAnual = "19890.54"
+            }
+            if (seleccionadoCategoriaProfesional == "Mozo especialista, ayudante") {
+                salarioBase = "1053.5"
+                plusTransporte = "169.68"
+                plusConvenio = "185.60"
+                retribucionConvenio = "1408.77"
+                retribucionAnual = "20065.75"
+            }
+            if (seleccionadoCategoriaProfesional == "Engradador lavador") {
+                salarioBase = "1053.5"
+                plusTransporte = "169.68"
+                plusConvenio = "192.30"
+                retribucionConvenio = "1415.47"
+                retribucionAnual = "20146.14"
+            }
+            if (seleccionadoCategoriaProfesional == "Conductor 2ª, Oficial taller") {
+                salarioBase = "1053.5"
+                plusTransporte = "169.68"
+                plusConvenio = "204.32"
+                retribucionConvenio = "1427.49"
+                retribucionAnual = "20290.42"
+            }
+            if (seleccionadoCategoriaProfesional == "Conductor 1ª, Oficial Taller") {
+                salarioBase = "1053.5"
+                plusTransporte = "169.68"
+                plusConvenio = "225.94"
+                retribucionConvenio = "1449.11"
+                retribucionAnual = "20549.86"
+            }
+            if (seleccionadoCategoriaProfesional == "Vigilante") {
+                salarioBase = "1053.5"
+                plusTransporte = "169.68"
+                plusConvenio = "175.37"
+                retribucionConvenio = "1398.55"
+                retribucionAnual = "19943.06"
+            }
+            if (seleccionadoCategoriaProfesional == "Jefe Almacén") {
+                salarioBase = "1053.5"
+                plusTransporte = "169.68"
+                plusConvenio = "222.73"
+                retribucionConvenio = "1445.91"
+                retribucionAnual = "20511.39"
+            }
+            if (seleccionadoCategoriaProfesional == "Conductor, Mecánico, Jefe Taller") {
+                salarioBase = "1053.5"
+                plusTransporte = "169.68"
+                plusConvenio = "225.94"
+                retribucionConvenio = "1449.11"
+                retribucionAnual = "20549.86"
+            }
+            if (seleccionadoCategoriaProfesional == "Auxiliar") {
+                salarioBase = "1053.5"
+                plusTransporte = "169.68"
+                plusConvenio = "172.80"
+                retribucionConvenio = "1395.97"
+                retribucionAnual = "19912.13"
+            }
+            if (seleccionadoCategoriaProfesional == "Oficial 2ª Administración") {
+                salarioBase = "1053.5"
+                plusTransporte = "169.68"
+                plusConvenio = "218.35"
+                retribucionConvenio = "1441.52"
+                retribucionAnual = "20458.74"
+            }
+            if (seleccionadoCategoriaProfesional == "Oficial 1ª Administración") {
+                salarioBase = "1053.5"
+                plusTransporte = "169.68"
+                plusConvenio = "227.80"
+                retribucionConvenio = "1450.98"
+                retribucionAnual = "20572.22"
+            }
+            if (seleccionadoCategoriaProfesional == "Jefe administración, capataz") {
+                salarioBase = "1053.5"
+                plusTransporte = "169.68"
+                plusConvenio = "262.67"
+                retribucionConvenio = "1485.85"
+                retribucionAnual = "20990.64"
+            }
+            if (seleccionadoCategoriaProfesional == "Inspector principal") {
+                salarioBase = "1053.5"
+                plusTransporte = "169.68"
+                plusConvenio = "342.37"
+                retribucionConvenio = "1565.54"
+                retribucionAnual = "21946.97"
+            }
+            if (seleccionadoCategoriaProfesional == "Encargado almacén, jefe de servicio") {
+                salarioBase = "1053.5"
+                plusTransporte = "169.68"
+                plusConvenio = "426.56"
+                retribucionConvenio = "1649.74"
+                retribucionAnual = "22957.35"
+            }
         }
-        if (seleccionadoCategoriaProfesional == "Engradador lavador") {
-            plusConvenio = "195.18"
-            retribucionConvenio = "1436.70"
-            retribucionAnual = "20448.33"
-        }
-        if (seleccionadoCategoriaProfesional == "Conductor 2ª, Oficial taller") {
-            plusConvenio = "207.39"
-            retribucionConvenio = "1448.91"
-            retribucionAnual = "20594.78"
-        }
-        if (seleccionadoCategoriaProfesional == "Conductor 1ª, Oficial Taller") {
-            plusConvenio = "229.33"
-            retribucionConvenio = "1470.85"
-            retribucionAnual = "20858.10"
-        }
-        if (seleccionadoCategoriaProfesional == "Vigilante") {
-            plusConvenio = "178.00"
-            retribucionConvenio = "1419.53"
-            retribucionAnual = "20242.21"
-        }
-        if (seleccionadoCategoriaProfesional == "Jefe Almacén") {
-            plusConvenio = "226.08"
-            retribucionConvenio = "1467.60"
-            retribucionAnual = "20819.06"
-        }
-        if (seleccionadoCategoriaProfesional == "Conductor, Mecánico, Jefe Taller") {
-            plusConvenio = "229.33"
-            retribucionConvenio = "1470.85"
-            retribucionAnual = "20858.10"
-        }
-        if (seleccionadoCategoriaProfesional == "Auxiliar") {
-            plusConvenio = "175.39"
-            retribucionConvenio = "1416.91"
-            retribucionAnual = "20210.82"
-        }
-        if (seleccionadoCategoriaProfesional == "Oficial 2ª Administración") {
-            plusConvenio = "221.62"
-            retribucionConvenio = "1463.14"
-            retribucionAnual = "20765.62"
-        }
-        if (seleccionadoCategoriaProfesional == "Oficial 1ª Administración") {
-            plusConvenio = "231.22"
-            retribucionConvenio = "1472.74"
-            retribucionAnual = "20880.80"
-        }
-        if (seleccionadoCategoriaProfesional == "Jefe administración, capataz") {
-            plusConvenio = "266.61"
-            retribucionConvenio = "1508.13"
-            retribucionAnual = "21305.50"
-        }
-        if (seleccionadoCategoriaProfesional == "Inspector principal") {
-            plusConvenio = "347.50"
-            retribucionConvenio = "1589.02"
-            retribucionAnual = "22276.17"
-        }
-        if (seleccionadoCategoriaProfesional == "Encargado almacén, jefe de servicio") {
-            plusConvenio = "432.96"
-            retribucionConvenio = "1674.48"
-            retribucionAnual = "23301.71"
+
+        // Tablas salariales 2022
+        if (seleccionadoTablasSalariales == "2022") {
+            if (seleccionadoCategoriaProfesional == "Mozo ordinario, limpiador, repartidor" || seleccionadoCategoriaProfesional.isEmpty()) {
+                salarioBase = "1069.30"
+                plusTransporte = "172.22"
+                plusConvenio = "173.56"
+                retribucionConvenio = "1415.08"
+                retribucionAnual = "20188.89"
+            }
+            if (seleccionadoCategoriaProfesional == "Mozo especialista, ayudante") {
+                salarioBase = "1069.30"
+                plusTransporte = "172.22"
+                plusConvenio = "188.38"
+                retribucionConvenio = "1429.90"
+                retribucionAnual = "20366.74"
+            }
+            if (seleccionadoCategoriaProfesional == "Engradador lavador") {
+                salarioBase = "1069.30"
+                plusTransporte = "172.22"
+                plusConvenio = "195.18"
+                retribucionConvenio = "1436.70"
+                retribucionAnual = "20448.33"
+            }
+            if (seleccionadoCategoriaProfesional == "Conductor 2ª, Oficial taller") {
+                salarioBase = "1069.30"
+                plusTransporte = "172.22"
+                plusConvenio = "207.39"
+                retribucionConvenio = "1448.91"
+                retribucionAnual = "20594.78"
+            }
+            if (seleccionadoCategoriaProfesional == "Conductor 1ª, Oficial Taller") {
+                salarioBase = "1069.30"
+                plusTransporte = "172.22"
+                plusConvenio = "229.33"
+                retribucionConvenio = "1470.85"
+                retribucionAnual = "20858.10"
+            }
+            if (seleccionadoCategoriaProfesional == "Vigilante") {
+                salarioBase = "1069.30"
+                plusTransporte = "172.22"
+                plusConvenio = "178.00"
+                retribucionConvenio = "1419.53"
+                retribucionAnual = "20242.21"
+            }
+            if (seleccionadoCategoriaProfesional == "Jefe Almacén") {
+                salarioBase = "1069.30"
+                plusTransporte = "172.22"
+                plusConvenio = "226.08"
+                retribucionConvenio = "1467.60"
+                retribucionAnual = "20819.06"
+            }
+            if (seleccionadoCategoriaProfesional == "Conductor, Mecánico, Jefe Taller") {
+                salarioBase = "1069.30"
+                plusTransporte = "172.22"
+                plusConvenio = "229.33"
+                retribucionConvenio = "1470.85"
+                retribucionAnual = "20858.10"
+            }
+            if (seleccionadoCategoriaProfesional == "Auxiliar") {
+                salarioBase = "1069.30"
+                plusTransporte = "172.22"
+                plusConvenio = "175.39"
+                retribucionConvenio = "1416.91"
+                retribucionAnual = "20210.82"
+            }
+            if (seleccionadoCategoriaProfesional == "Oficial 2ª Administración") {
+                salarioBase = "1069.30"
+                plusTransporte = "172.22"
+                plusConvenio = "221.62"
+                retribucionConvenio = "1463.14"
+                retribucionAnual = "20765.62"
+            }
+            if (seleccionadoCategoriaProfesional == "Oficial 1ª Administración") {
+                salarioBase = "1069.30"
+                plusTransporte = "172.22"
+                plusConvenio = "231.22"
+                retribucionConvenio = "1472.74"
+                retribucionAnual = "20880.80"
+            }
+            if (seleccionadoCategoriaProfesional == "Jefe administración, capataz") {
+                salarioBase = "1069.30"
+                plusTransporte = "172.22"
+                plusConvenio = "266.61"
+                retribucionConvenio = "1508.13"
+                retribucionAnual = "21305.50"
+            }
+            if (seleccionadoCategoriaProfesional == "Inspector principal") {
+                salarioBase = "1069.30"
+                plusTransporte = "172.22"
+                plusConvenio = "347.50"
+                retribucionConvenio = "1589.02"
+                retribucionAnual = "22276.17"
+            }
+            if (seleccionadoCategoriaProfesional == "Encargado almacén, jefe de servicio") {
+                salarioBase = "1069.30"
+                plusTransporte = "172.22"
+                plusConvenio = "432.96"
+                retribucionConvenio = "1674.48"
+                retribucionAnual = "23301.71"
+            }
         }
     }
 
