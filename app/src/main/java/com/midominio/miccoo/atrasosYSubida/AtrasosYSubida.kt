@@ -1,4 +1,4 @@
-package com.midominio.miccoo.subidaSalario
+package com.midominio.miccoo.atrasosYSubida
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.ExperimentalAnimationApi
@@ -23,10 +23,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
-import com.midominio.miccoo.BarraSuperior
+import com.midominio.miccoo.*
 import com.midominio.miccoo.nomina_calculadora.*
-import com.midominio.miccoo.opcionesAntiguedad
-import com.midominio.miccoo.opcionesCategoriaProfesional
 import com.midominio.miccoo.ui.theme.MiCCOOTheme
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 
@@ -36,9 +34,10 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 @ExperimentalComposeUiApi
 @ExperimentalMaterialApi
 @Composable
-fun Ipc(viewModelSubidaSalario: ViewModelSubidaSalario) {
+fun AtrasosYSubida(viewModelNomina: ViewModelNomina) {
     val visibleTitulo by rememberSaveable { mutableStateOf(true) }
-    var visibleCategoriaProfesional by rememberSaveable { mutableStateOf(true) }
+    var visibleTablasSalariales by rememberSaveable { mutableStateOf(true) }
+    var visibleCategoriaProfesional by rememberSaveable { mutableStateOf(false) }
     var visibleAntiguedad by rememberSaveable { mutableStateOf(false) }
     var visiblePorcentajeSubida by rememberSaveable { mutableStateOf(false) }
     var visibleMeses by rememberSaveable { mutableStateOf(false) }
@@ -66,6 +65,65 @@ fun Ipc(viewModelSubidaSalario: ViewModelSubidaSalario) {
                         TextoTitulo(texto = "Calculemos los atrasos")
                         Spacer(modifier = Modifier.size(10.dp))
                     }
+                    // Tablas salariales
+                    AnimarVisibilidad(visible = visibleTablasSalariales, densidad = densidad) {
+                        Column(
+                            modifier = Modifier
+                                .height(300.dp)
+                                .border(
+                                    BorderStroke(
+                                        width = 2.dp,
+                                        brush = Brush.horizontalGradient(
+                                            listOf(
+                                                Color.Green,
+                                                Color.Red
+                                            )
+                                        )
+                                    ),
+                                    shape = RoundedCornerShape(5)
+                                ),
+                            horizontalAlignment = Alignment.CenterHorizontally
+                        ) {
+                            Column(modifier = Modifier.weight(1f)) {
+                                TextoConcepto(texto = "Selecciona una tabla salarial")
+                                Spacer(modifier = Modifier.size(20.dp))
+                                Desplegable(
+                                    visible = true,
+                                    expandible = viewModelNomina.expandirTablasSalariales,
+                                    expandibleCambia = {
+                                        viewModelNomina.cambiarExpandirTablasSalariales(
+                                            it
+                                        )
+                                    },
+                                    seleccionado = viewModelNomina.seleccionadoTablasSalariales,
+                                    seleccionadoCambia = {
+                                        viewModelNomina.seleccionadoCambiaTablasSalariales(
+                                            it
+                                        )
+                                    },
+                                    label = "Tablas salariales",
+                                    opciones = opcionesTablasSalariales
+                                )
+                            }
+                            AnimatedVisibility(visible = viewModelNomina.seleccionadoTablasSalariales.isNotEmpty()) {
+                                Column(
+                                    horizontalAlignment = Alignment.CenterHorizontally,
+                                    verticalArrangement = Arrangement.Bottom
+                                ) {
+                                    Boton(
+                                        destino = visibleTablasSalariales,
+                                        destinoCambia = {
+                                            visibleTablasSalariales =
+                                                false; visibleCategoriaProfesional = true
+                                        },
+                                        texto = "Siguiente",
+                                        modifier = Modifier
+                                    )
+                                }
+                            }
+                            Spacer(modifier = Modifier.size(20.dp))
+                        }
+                    }
 
                     // Categoría profesional
                     AnimarVisibilidad(visible = visibleCategoriaProfesional, densidad = densidad) {
@@ -91,15 +149,15 @@ fun Ipc(viewModelSubidaSalario: ViewModelSubidaSalario) {
                                 Spacer(modifier = Modifier.size(20.dp))
                                 Desplegable(
                                     visible = true,
-                                    expandible = viewModelSubidaSalario.expandirCategoriaProfesional,
+                                    expandible = viewModelNomina.expandirCategoriaProfesional,
                                     expandibleCambia = {
-                                        viewModelSubidaSalario.cambiarExpandirCategoriaProfesional(
+                                        viewModelNomina.cambiarExpandirCategoriaProfesional(
                                             it
                                         )
                                     },
-                                    seleccionado = viewModelSubidaSalario.seleccionadoCategoriaProfesional,
+                                    seleccionado = viewModelNomina.seleccionadoCategoriaProfesional,
                                     seleccionadoCambia = {
-                                        viewModelSubidaSalario.seleccionadoCambiaCategoriaProfesional(
+                                        viewModelNomina.seleccionadoCambiaCategoriaProfesional(
                                             it
                                         )
                                     },
@@ -107,26 +165,48 @@ fun Ipc(viewModelSubidaSalario: ViewModelSubidaSalario) {
                                     opciones = opcionesCategoriaProfesional
                                 )
                             }
-                            AnimatedVisibility(visible = viewModelSubidaSalario.plusConvenio.isNotEmpty()) {
+                            AnimatedVisibility(visible = viewModelNomina.seleccionadoCategoriaProfesional.isNotEmpty()) {
                                 Column(
                                     horizontalAlignment = Alignment.CenterHorizontally,
                                     verticalArrangement = Arrangement.Bottom
                                 ) {
-                                    Boton(
-                                        destino = visibleCategoriaProfesional,
-                                        destinoCambia = {
-                                            visibleCategoriaProfesional =
-                                                false; visibleAntiguedad = true
-                                        },
-                                        texto = "Siguiente",
-                                        modifier = Modifier
-                                    )
+                                    Row(
+                                        Modifier.fillMaxWidth(),
+                                        horizontalArrangement = Arrangement.Center
+                                    ) {
+                                        Boton(
+                                            destino = visibleAntiguedad,
+                                            destinoCambia = {
+                                                visibleCategoriaProfesional =
+                                                    false; visibleTablasSalariales = true
+                                            },
+                                            texto = "Anterior",
+                                            modifier = Modifier
+                                        )
+                                        Spacer(modifier = Modifier.size(20.dp))
+                                        Boton(
+                                            destino = visibleCategoriaProfesional,
+                                            destinoCambia = {
+                                                viewModelNomina.seleccionadoCambiaTablasSalariales(
+                                                    viewModelNomina.tablasSalariales
+                                                )
+                                                viewModelNomina.seleccionadoCambiaCategoriaProfesional(
+                                                    viewModelNomina.seleccionadoCategoriaProfesional
+                                                )
+                                                visibleCategoriaProfesional = false
+                                                visibleAntiguedad = true
+
+                                            },
+                                            texto = "Siguiente",
+                                            modifier = Modifier
+                                        )
+                                    }
+
                                 }
                             }
                             Spacer(modifier = Modifier.size(20.dp))
                         }
                     }
-
                     //Antigüedad
                     AnimarVisibilidad(visible = visibleAntiguedad, densidad = densidad) {
                         Column(
@@ -149,24 +229,24 @@ fun Ipc(viewModelSubidaSalario: ViewModelSubidaSalario) {
                             Column(modifier = Modifier.weight(1f)) {
                                 TextoConcepto(texto = "Antigüedad (+2 años)")
                                 Switch(
-                                    seleccionadoSwitch = viewModelSubidaSalario.seleccionadoSwitchAntiguedad,
+                                    seleccionadoSwitch = viewModelNomina.seleccionadoSwitchAntiguedad,
                                     seleccionadoSwitchCambia = {
-                                        viewModelSubidaSalario.seleccionadoSwitchCambiaAntiguedad(
+                                        viewModelNomina.seleccionadoSwitchCambiaAntiguedad(
                                             it
                                         )
                                     }
                                 )
                                 Desplegable(
-                                    visible = viewModelSubidaSalario.seleccionadoSwitchAntiguedad,
-                                    expandible = viewModelSubidaSalario.expandirAntiguedad,
+                                    visible = viewModelNomina.seleccionadoSwitchAntiguedad,
+                                    expandible = viewModelNomina.expandirAntiguedad,
                                     expandibleCambia = {
-                                        viewModelSubidaSalario.cambiarExpandirAntiguedad(
+                                        viewModelNomina.cambiarExpandirAntiguedad(
                                             it
                                         )
                                     },
-                                    seleccionado = viewModelSubidaSalario.seleccionadoAntiguedad,
+                                    seleccionado = viewModelNomina.seleccionadoAntiguedad,
                                     seleccionadoCambia = {
-                                        viewModelSubidaSalario.seleccionadoCambiaAntiguedad(
+                                        viewModelNomina.seleccionadoCambiaAntiguedad(
                                             it
                                         )
                                     },
@@ -225,9 +305,9 @@ fun Ipc(viewModelSubidaSalario: ViewModelSubidaSalario) {
                                 Spacer(modifier = Modifier.size(20.dp))
                                 CampoDeTextoIrpf(
                                     visible = true,
-                                    conceptoElegido = viewModelSubidaSalario.porcentajeSubida,
+                                    conceptoElegido = viewModelNomina.porcentajeSubida,
                                     conceptoElegidoCambia = {
-                                        viewModelSubidaSalario.porcentajeSubidaCambia(
+                                        viewModelNomina.porcentajeSubidaCambia(
                                             it
                                         )
                                     },
@@ -285,9 +365,9 @@ fun Ipc(viewModelSubidaSalario: ViewModelSubidaSalario) {
                                 Spacer(modifier = Modifier.size(20.dp))
                                 CampoDeTextoIrpf(
                                     visible = true,
-                                    conceptoElegido = viewModelSubidaSalario.mesesElegidos,
+                                    conceptoElegido = viewModelNomina.mesesElegidos,
                                     conceptoElegidoCambia = {
-                                        viewModelSubidaSalario.mesesElegidosCambia(
+                                        viewModelNomina.mesesElegidosCambia(
                                             it
                                         )
                                     },
@@ -345,7 +425,7 @@ fun Ipc(viewModelSubidaSalario: ViewModelSubidaSalario) {
                             Column {
                                 Spacer(modifier = Modifier.size(20.dp))
                                 TextoConcepto(texto = "Resultado")
-                                ResultadoIpc(viewModelSubidaSalario = viewModelSubidaSalario)
+                                ResultadoIpc(viewModelNomina = viewModelNomina)
                             }
                         }
                     }

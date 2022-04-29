@@ -1,4 +1,4 @@
-package com.midominio.miccoo.subidaSalario
+package com.midominio.miccoo.atrasosYSubida
 
 import android.annotation.SuppressLint
 import android.icu.text.NumberFormat
@@ -16,10 +16,11 @@ import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.midominio.miccoo.ViewModelNomina
 
 @SuppressLint("StateFlowValueCalledInComposition")
 @Composable
-fun ResultadoIpc(viewModelSubidaSalario: ViewModelSubidaSalario) {
+fun ResultadoIpc(viewModelNomina: ViewModelNomina) {
     val numeroAMoneda = NumberFormat.getCurrencyInstance()
     Column(
         modifier = Modifier
@@ -34,20 +35,20 @@ fun ResultadoIpc(viewModelSubidaSalario: ViewModelSubidaSalario) {
             textAlign = TextAlign.Start
         )
         Text(
-            text = viewModelSubidaSalario.seleccionadoCategoriaProfesional,
+            text = viewModelNomina.seleccionadoCategoriaProfesional,
             fontStyle = FontStyle.Italic,
             color = MaterialTheme.colors.onPrimary,
             textAlign = TextAlign.Start
         )
         Spacer(modifier = Modifier.size(size = 20.dp))
-        if (viewModelSubidaSalario.seleccionadoSwitchAntiguedad) {
+        if (viewModelNomina.seleccionadoSwitchAntiguedad) {
             Text(
                 text = "Antigüedad:",
                 color = MaterialTheme.colors.onPrimary,
                 textAlign = TextAlign.Start
             )
             Text(
-                text = viewModelSubidaSalario.seleccionadoAntiguedad,
+                text = viewModelNomina.seleccionadoAntiguedad,
                 fontStyle = FontStyle.Italic,
                 color = MaterialTheme.colors.onPrimary,
                 textAlign = TextAlign.Start
@@ -60,7 +61,7 @@ fun ResultadoIpc(viewModelSubidaSalario: ViewModelSubidaSalario) {
             textAlign = TextAlign.Start
         )
         Text(
-            text = "${viewModelSubidaSalario.porcentajeSubida} %",
+            text = "${viewModelNomina.porcentajeSubida} %",
             fontStyle = FontStyle.Italic,
             color = MaterialTheme.colors.onPrimary,
             textAlign = TextAlign.Start
@@ -72,7 +73,7 @@ fun ResultadoIpc(viewModelSubidaSalario: ViewModelSubidaSalario) {
             textAlign = TextAlign.Start
         )
         Text(
-            text = viewModelSubidaSalario.mesesElegidos,
+            text = viewModelNomina.mesesElegidos,
             fontStyle = FontStyle.Italic,
             color = MaterialTheme.colors.onPrimary,
             textAlign = TextAlign.Start
@@ -86,22 +87,18 @@ fun ResultadoIpc(viewModelSubidaSalario: ViewModelSubidaSalario) {
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.Center
         ) {
-            TarjetaModeloAtrasos(
+            TarjetaModeloAtrasosYSubida(
                 colorBorde = Color.Red,
                 concepto = "Atrasos",
-                resultado = numeroAMoneda.format(viewModelSubidaSalario.atrasos),
+                resultado = numeroAMoneda.format(viewModelNomina.atrasos),
             )
             Spacer(modifier = Modifier.size(size = 20.dp))
-            TarjetaModeloAtrasos(
+            TarjetaModeloAtrasosYSubida(
                 colorBorde = Color.Green,
                 concepto = "Subida al mes",
-                resultado = numeroAMoneda.format(viewModelSubidaSalario.subidaMes),
+                resultado = numeroAMoneda.format(viewModelNomina.subidaMes),
             )
         }
-        Text(
-            text = "- Subida a tablas de 2021 sin actualizar",
-            color = MaterialTheme.colors.onPrimary
-        )
         Text(
             text = "- Falta añadir: horas extras, nocturnidad...",
             color = MaterialTheme.colors.onPrimary,
@@ -110,12 +107,16 @@ fun ResultadoIpc(viewModelSubidaSalario: ViewModelSubidaSalario) {
             text = "- Calculado para contrato a tiempo completo",
             color = MaterialTheme.colors.onPrimary
         )
+        Text(
+            text = "- Resultado en bruto",
+            color = MaterialTheme.colors.onPrimary
+        )
     }
 }
 
 
 @Composable
-fun TarjetaModeloAtrasos(
+fun TarjetaModeloAtrasosYSubida(
     colorBorde: Color,
     concepto: String,
     resultado: String

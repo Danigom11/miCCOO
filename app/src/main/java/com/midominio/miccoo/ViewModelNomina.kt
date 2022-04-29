@@ -34,9 +34,10 @@ val opcionesAntiguedad = listOf(
 )
 
 val opcionesTablasSalariales = listOf(
-    "2021",
-    "2021 (Definitivas)",
-    "2022"
+    "2020 (Definitivas)",
+    "2021 (+2%)",
+    "2021 (Definitivas +6,5%)",
+    "2022 (+1,5%)"
 )
 
 class ViewModelNomina : ViewModel() {
@@ -71,14 +72,17 @@ class ViewModelNomina : ViewModel() {
 
     fun seleccionadoCambiaTablasSalariales(isEnabled: String) {
         seleccionadoTablasSalariales = isEnabled
-        if (seleccionadoTablasSalariales == "2021") {
-            tablasSalariales = "2021"
+        if (seleccionadoTablasSalariales == "2020 (Definitivas)") {
+            tablasSalariales = "2020 (Definitivas)"
         }
-        if (seleccionadoTablasSalariales == "2021 (Definitivas)") {
-            tablasSalariales = "2021 (Definitivas)"
+        if (seleccionadoTablasSalariales == "2021 (+2%)") {
+            tablasSalariales = "2021 (+2%)"
         }
-        if (seleccionadoTablasSalariales == "2022") {
-            tablasSalariales = "2022"
+        if (seleccionadoTablasSalariales == "2021 (Definitivas +6,5%)") {
+            tablasSalariales = "2021 (Definitivas +6,5%)"
+        }
+        if (seleccionadoTablasSalariales == "2022 (+1,5%)") {
+            tablasSalariales = "2022 (+1,5%)"
         }
     }
 
@@ -96,8 +100,110 @@ class ViewModelNomina : ViewModel() {
     fun seleccionadoCambiaCategoriaProfesional(isEnabled: String) {
         seleccionadoCategoriaProfesional = isEnabled
 
-        // Tablas salariales 2021
-        if (tablasSalariales == "2021") {
+        // Tablas salariales "2020 (Definitivas)"
+        if (tablasSalariales == "2020 (Definitivas)") {
+            if (seleccionadoCategoriaProfesional == "Mozo ordinario, limpiador, repartidor") {
+                salarioBase = "943.40"
+                plusTransporte = "151.95"
+                plusConvenio = "153.12"
+                retribucionConvenio = "1248.47"
+                retribucionAnual = "17811.83"
+            }
+            if (seleccionadoCategoriaProfesional == "Mozo especialista, ayudante") {
+                salarioBase = "943.40"
+                plusTransporte = "151.95"
+                plusConvenio = "166.20"
+                retribucionConvenio = "1261.54"
+                retribucionAnual = "17968.70"
+            }
+            if (seleccionadoCategoriaProfesional == "Engradador lavador") {
+                salarioBase = "943.40"
+                plusTransporte = "151.95"
+                plusConvenio = "172.20"
+                retribucionConvenio = "1267.54"
+                retribucionAnual = "18040.74"
+            }
+            if (seleccionadoCategoriaProfesional == "Conductor 2ª, Oficial taller") {
+                salarioBase = "943.40"
+                plusTransporte = "151.95"
+                plusConvenio = "182.97"
+                retribucionConvenio = "1278.31"
+                retribucionAnual = "18169.93"
+            }
+            if (seleccionadoCategoriaProfesional == "Conductor 1ª, Oficial Taller") {
+                salarioBase = "943.40"
+                plusTransporte = "151.95"
+                plusConvenio = "202.32"
+                retribucionConvenio = "1297.67"
+                retribucionAnual = "18402.23"
+            }
+            if (seleccionadoCategoriaProfesional == "Vigilante") {
+                salarioBase = "943.40"
+                plusTransporte = "151.95"
+                plusConvenio = "157.04"
+                retribucionConvenio = "1252.39"
+                retribucionAnual = "17858.87"
+            }
+            if (seleccionadoCategoriaProfesional == "Jefe Almacén") {
+                salarioBase = "943.40"
+                plusTransporte = "151.95"
+                plusConvenio = "199.45"
+                retribucionConvenio = "1294.80"
+                retribucionAnual = "18367.82"
+            }
+            if (seleccionadoCategoriaProfesional == "Conductor, Mecánico, Jefe Taller") {
+                salarioBase = "943.40"
+                plusTransporte = "151.95"
+                plusConvenio = "202.32"
+                retribucionConvenio = "1297.67"
+                retribucionAnual = "18402.23"
+            }
+            if (seleccionadoCategoriaProfesional == "Auxiliar") {
+                salarioBase = "943.40"
+                plusTransporte = "151.95"
+                plusConvenio = "154.74"
+                retribucionConvenio = "1250.09"
+                retribucionAnual = "17831.18"
+            }
+            if (seleccionadoCategoriaProfesional == "Oficial 2ª Administración") {
+                salarioBase = "943.40"
+                plusTransporte = "151.95"
+                plusConvenio = "195.53"
+                retribucionConvenio = "1290.87"
+                retribucionAnual = "18320.67"
+            }
+            if (seleccionadoCategoriaProfesional == "Oficial 1ª Administración") {
+                salarioBase = "943.40"
+                plusTransporte = "151.95"
+                plusConvenio = "204.00"
+                retribucionConvenio = "1299.34"
+                retribucionAnual = "18422.28"
+            }
+            if (seleccionadoCategoriaProfesional == "Jefe administración, capataz") {
+                salarioBase = "943.40"
+                plusTransporte = "151.95"
+                plusConvenio = "235.22"
+                retribucionConvenio = "1330.56"
+                retribucionAnual = "18796.94"
+            }
+            if (seleccionadoCategoriaProfesional == "Inspector principal") {
+                salarioBase = "943.40"
+                plusTransporte = "151.95"
+                plusConvenio = "306.59"
+                retribucionConvenio = "1401.93"
+                retribucionAnual = "19653.39"
+            }
+            if (seleccionadoCategoriaProfesional == "Encargado almacén, jefe de servicio") {
+                salarioBase = "943.40"
+                plusTransporte = "151.95"
+                plusConvenio = "381.98"
+                retribucionConvenio = "1477.33"
+                retribucionAnual = "20558.18"
+            }
+        }
+
+        // Tablas salariales 2021 (+2%)
+        if (tablasSalariales == "2021 (+2%)") {
             if (seleccionadoCategoriaProfesional == "Mozo ordinario, limpiador, repartidor") {
                 salarioBase = "1008.98"
                 plusTransporte = "162.51"
@@ -198,8 +304,8 @@ class ViewModelNomina : ViewModel() {
             }
         }
 
-        // Tablas salariales 2021 (Definitivas)
-        if (tablasSalariales == "2021 (Definitivas)") {
+        // Tablas salariales 2021 (Definitivas +6,5%)
+        if (tablasSalariales == "2021 (Definitivas +6,5%)") {
             if (seleccionadoCategoriaProfesional == "Mozo ordinario, limpiador, repartidor") {
                 salarioBase = "1053.5"
                 plusTransporte = "169.68"
@@ -300,8 +406,8 @@ class ViewModelNomina : ViewModel() {
             }
         }
 
-        // Tablas salariales 2022
-        if (tablasSalariales == "2022") {
+        // Tablas salariales 2022 (+1,5%)
+        if (tablasSalariales == "2022 (+1,5%)") {
             if (seleccionadoCategoriaProfesional == "Mozo ordinario, limpiador, repartidor" || seleccionadoCategoriaProfesional.isEmpty()) {
                 salarioBase = "1069.30"
                 plusTransporte = "172.22"
@@ -631,5 +737,53 @@ class ViewModelNomina : ViewModel() {
     // Hora ordinaria por 8 horas día
     val sancionRedondeado
         get() = (retribucionAnualConAntiguedad / totalHorasAno.toDouble()) * 8
+
+    // Atrasos y subida
+
+    // Porcentaje de subida
+    var porcentajeSubida by mutableStateOf("")
+    fun porcentajeSubidaCambia(isEnabled: String) {
+        porcentajeSubida = isEnabled
+    }
+
+    // Meses elegidos
+    var mesesElegidos by mutableStateOf("")
+    fun mesesElegidosCambia(isEnabled: String) {
+        mesesElegidos = isEnabled
+    }
+
+    // Cálculo atrasos
+    val atrasos
+        get() =
+            if (mesesElegidos == "") {
+                mesesElegidos = "0"
+                subidaMes * mesesElegidos.replace(",", ".").toDouble()
+            } else {
+                subidaMes * mesesElegidos.replace(",", ".").toDouble()
+            }
+
+    //Cálculo subida mes
+    val subidaMes
+        get() =
+            if (porcentajeSubida == "") {
+                porcentajeSubida = "0"
+                (((((salarioBase.toDouble() * 15) * (porcentajeSubida.replace(",", ".")
+                    .toDouble() / 100 + 1)) * antiguedadMultiplicador.toDouble()) +
+                        (((plusConvenio.toDouble() + plusTransporte.toDouble()) * 12) * (porcentajeSubida.replace(
+                            ",",
+                            "."
+                        ).toDouble() / 100 + 1))) / 12) -
+                        (((salarioBase.toDouble() * 15) * antiguedadMultiplicador.toDouble() +
+                                ((plusConvenio.toDouble() + plusTransporte.toDouble()) * 12)) / 12)
+            } else {
+                (((((salarioBase.toDouble() * 15) * (porcentajeSubida.replace(",", ".")
+                    .toDouble() / 100 + 1)) * antiguedadMultiplicador.toDouble()) +
+                        (((plusConvenio.toDouble() + plusTransporte.toDouble()) * 12) * (porcentajeSubida.replace(
+                            ",",
+                            "."
+                        ).toDouble() / 100 + 1))) / 12) -
+                        (((salarioBase.toDouble() * 15) * antiguedadMultiplicador.toDouble() +
+                                ((plusConvenio.toDouble() + plusTransporte.toDouble()) * 12)) / 12)
+            }
 
 }

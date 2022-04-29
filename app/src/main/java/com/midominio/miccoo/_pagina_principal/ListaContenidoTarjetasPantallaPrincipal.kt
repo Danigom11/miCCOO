@@ -8,8 +8,8 @@ val listaContenidoTarjetasPantallaPrincipal: List<DataClassContenidoTarjetasPagi
         DataClassContenidoTarjetasPaginaPrincipal(
             Screens.NOMINACOMPLETA.ruta,
             R.drawable.nomina_completa,
-            "Calcula tu nómina",
-            "Comprueba si tú nómina es correcta"
+            "Calculadora de nóminas",
+            "Comprueba si tú nómina está bien"
         ),
         DataClassContenidoTarjetasPaginaPrincipal(
             Screens.NOMINA.ruta,
@@ -20,8 +20,8 @@ val listaContenidoTarjetasPantallaPrincipal: List<DataClassContenidoTarjetasPagi
         DataClassContenidoTarjetasPaginaPrincipal(
             Screens.IPC.ruta,
             R.drawable.ipc,
-            "Subida salario",
-            "Atrasos y subida mensual"
+            "Atrasos y subida mensual",
+            "Comprueba cuanto te corresponde"
         ),
         DataClassContenidoTarjetasPaginaPrincipal(
             Screens.PERMISOSRETRIBUIDOS.ruta,

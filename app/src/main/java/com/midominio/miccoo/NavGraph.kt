@@ -13,13 +13,12 @@ import com.google.accompanist.navigation.animation.composable
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.midominio.miccoo._pagina_principal.PaginaPrincipal
 import com.midominio.miccoo._pagina_principal.Screens
+import com.midominio.miccoo.atrasosYSubida.AtrasosYSubida
 import com.midominio.miccoo.nomina_calculadora.NominaCompleta
 import com.midominio.miccoo.nomina_conceptos.Nomina
 import com.midominio.miccoo.nomina_conceptos.conceptos_otros.conceptos_explicados.*
 import com.midominio.miccoo.permisos_retribuidos.PermisosRetribuidos
 import com.midominio.miccoo.sanciones.Sanciones
-import com.midominio.miccoo.subidaSalario.Ipc
-import com.midominio.miccoo.subidaSalario.ViewModelSubidaSalario
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 
 @ExperimentalCoroutinesApi
@@ -30,8 +29,7 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 @Composable
 fun SetupNavGraph(
     navController: NavController,
-    viewModelNomina: ViewModelNomina,
-    viewModelSubidaSalario: ViewModelSubidaSalario
+    viewModelNomina: ViewModelNomina
 ) {
 
     AnimatedNavHost(
@@ -79,7 +77,7 @@ fun SetupNavGraph(
         }
         //Pantalla ipc
         composable(Screens.IPC.ruta) {
-            Ipc(viewModelSubidaSalario = viewModelSubidaSalario)
+            AtrasosYSubida(viewModelNomina = viewModelNomina)
         }
         //Pantalla sanciones
         composable(Screens.SANCIONES.ruta) {
