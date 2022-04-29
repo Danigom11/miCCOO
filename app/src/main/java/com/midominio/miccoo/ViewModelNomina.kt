@@ -67,9 +67,19 @@ class ViewModelNomina : ViewModel() {
 
     // Estado elemento seleccionado en menú desplegable tablas salariales
     var seleccionadoTablasSalariales by mutableStateOf("")
+    var tablasSalariales by mutableStateOf("")
 
     fun seleccionadoCambiaTablasSalariales(isEnabled: String) {
         seleccionadoTablasSalariales = isEnabled
+        if (seleccionadoTablasSalariales == "2021") {
+            tablasSalariales = "2021"
+        }
+        if (seleccionadoTablasSalariales == "2021 (Definitivas)") {
+            tablasSalariales = "2021 (Definitivas)"
+        }
+        if (seleccionadoTablasSalariales == "2022") {
+            tablasSalariales = "2022"
+        }
     }
 
     // CATEGORÍA PROFESIONAL
@@ -87,7 +97,7 @@ class ViewModelNomina : ViewModel() {
         seleccionadoCategoriaProfesional = isEnabled
 
         // Tablas salariales 2021
-        if (seleccionadoTablasSalariales == "2021") {
+        if (tablasSalariales == "2021") {
             if (seleccionadoCategoriaProfesional == "Mozo ordinario, limpiador, repartidor") {
                 salarioBase = "1008.98"
                 plusTransporte = "162.51"
@@ -189,7 +199,7 @@ class ViewModelNomina : ViewModel() {
         }
 
         // Tablas salariales 2021 (Definitivas)
-        if (seleccionadoTablasSalariales == "2021 (Definitivas)") {
+        if (tablasSalariales == "2021 (Definitivas)") {
             if (seleccionadoCategoriaProfesional == "Mozo ordinario, limpiador, repartidor") {
                 salarioBase = "1053.5"
                 plusTransporte = "169.68"
@@ -291,7 +301,7 @@ class ViewModelNomina : ViewModel() {
         }
 
         // Tablas salariales 2022
-        if (seleccionadoTablasSalariales == "2022") {
+        if (tablasSalariales == "2022") {
             if (seleccionadoCategoriaProfesional == "Mozo ordinario, limpiador, repartidor" || seleccionadoCategoriaProfesional.isEmpty()) {
                 salarioBase = "1069.30"
                 plusTransporte = "172.22"
@@ -497,7 +507,7 @@ class ViewModelNomina : ViewModel() {
             0.toDouble()
         }
 
-    val nocturnidadConcepto = salarioBase.toDouble() * 0.25
+    val nocturnidadConcepto get() = salarioBase.toDouble() * 0.25
 
 
     // TOTAL INGRESOS

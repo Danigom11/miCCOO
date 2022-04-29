@@ -21,13 +21,10 @@ import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import com.midominio.miccoo.BarraSuperior
-import com.midominio.miccoo.ViewModelNomina
+import com.midominio.miccoo.*
 import com.midominio.miccoo.nomina_calculadora.*
 import com.midominio.miccoo.nomina_conceptos.conceptos_fijos.ScreenConceptosFijos
 import com.midominio.miccoo.nomina_conceptos.conceptos_otros.ScreenConceptosOtros
-import com.midominio.miccoo.opcionesAntiguedad
-import com.midominio.miccoo.opcionesCategoriaProfesional
 import com.midominio.miccoo.ui.theme.MiCCOOTheme
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 
@@ -81,7 +78,25 @@ fun Nomina(viewModelNomina: ViewModelNomina, navController: NavController) {
                             horizontalAlignment = Alignment.CenterHorizontally
                         ) {
                             Column(modifier = Modifier.weight(1f)) {
-                                TextoConcepto(texto = "Solo dos preguntas")
+                                TextoConcepto(texto = "Solo tres preguntas")
+                                Spacer(modifier = Modifier.size(20.dp))
+                                Desplegable(
+                                    visible = true,
+                                    expandible = viewModelNomina.expandirTablasSalariales,
+                                    expandibleCambia = {
+                                        viewModelNomina.cambiarExpandirTablasSalariales(
+                                            it
+                                        )
+                                    },
+                                    seleccionado = viewModelNomina.seleccionadoTablasSalariales,
+                                    seleccionadoCambia = {
+                                        viewModelNomina.seleccionadoCambiaTablasSalariales(
+                                            it
+                                        )
+                                    },
+                                    label = "Tablas salariales",
+                                    opciones = opcionesTablasSalariales
+                                )
                                 Spacer(modifier = Modifier.size(20.dp))
                                 Desplegable(
                                     visible = true,
@@ -129,7 +144,14 @@ fun Nomina(viewModelNomina: ViewModelNomina, navController: NavController) {
                         Boton(
                             destino = !visible,
                             destinoCambia = {
-                                visible = !visible; visiblePreguntas = !visiblePreguntas
+                                viewModelNomina.seleccionadoCambiaTablasSalariales(
+                                    viewModelNomina.tablasSalariales
+                                )
+                                viewModelNomina.seleccionadoCambiaCategoriaProfesional(
+                                    viewModelNomina.seleccionadoCategoriaProfesional
+                                )
+                                visible = !visible
+                                visiblePreguntas = !visiblePreguntas
                             },
                             texto = "Calcular",
                             modifier = Modifier

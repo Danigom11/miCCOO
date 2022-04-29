@@ -191,8 +191,15 @@ fun NominaCompleta(viewModelNomina: ViewModelNomina) {
                                         Boton(
                                             destino = visibleCategoriaProfesional,
                                             destinoCambia = {
-                                                visibleCategoriaProfesional =
-                                                    false; visibleAntiguedad = true
+                                                viewModelNomina.seleccionadoCambiaTablasSalariales(
+                                                    viewModelNomina.tablasSalariales
+                                                )
+                                                viewModelNomina.seleccionadoCambiaCategoriaProfesional(
+                                                    viewModelNomina.seleccionadoCategoriaProfesional
+                                                )
+                                                visibleCategoriaProfesional = false
+                                                visibleAntiguedad = true
+
                                             },
                                             texto = "Siguiente",
                                             modifier = Modifier
