@@ -48,7 +48,7 @@ class ViewModelNomina : ViewModel() {
     var plusConvenio by mutableStateOf("1")
     var retribucionConvenio by mutableStateOf("1")
     var retribucionAnual by mutableStateOf("1")
-    val totalHorasAno by mutableStateOf("1800")
+    val horasAnualesMaximas by mutableStateOf("1800")
     val seguroAccidentesColectivo = 0.73
     val cotizacionContComunes = 4.70
     val cotizacionFormacion = 1.65
@@ -58,6 +58,24 @@ class ViewModelNomina : ViewModel() {
         get() = ((salarioBase.toDouble() * 3 / 12) * antiguedadMultiplicador.toDouble())
     val retribucionConvenioConAntiguedad get() = retribucionConvenio.toDouble() * antiguedadMultiplicador.toDouble()
     val retribucionAnualConAntiguedad get() = retribucionAnual.toDouble() + (antiguedadTotalMes * 12)
+
+
+    // HORAS AÑO
+    // Numero horas año elegido modificable
+    var horasAnualesElegidas by mutableStateOf("")
+    fun horasAnualesElegidasCambia(isEnabled: String) {
+        horasAnualesElegidas = isEnabled
+    }
+
+    // Multiplicador a todos los conceptos
+    val multiplicadorHorasAnuales
+        get() = horasAnualesElegidas.toDouble() / horasAnualesMaximas.toDouble()
+
+    // Estado switch contrato jornada completa
+    var seleccionadoSwitchJornadaCompleta by mutableStateOf(false)
+    fun seleccionadoSwitchCambiaJornadaCompleta(isEnabled: Boolean) {
+        seleccionadoSwitchJornadaCompleta = isEnabled
+    }
 
     // TABLAS SALARIALES
     // Estado de expandir desplegable tablas salariales
@@ -581,7 +599,7 @@ class ViewModelNomina : ViewModel() {
 
     // Hora extra
     val horaExtra
-        get() = ((retribucionAnualConAntiguedad / totalHorasAno.toDouble()) * 1.25)
+        get() = ((retribucionAnualConAntiguedad / horasAnualesMaximas.toDouble()) * 1.25)
 
     // Suma total horas extras elegidas
     val horasExtrasElegidasTotal
@@ -692,11 +710,11 @@ class ViewModelNomina : ViewModel() {
 
     // Hora ordinaria
     val horaOrdinariaRedondeada
-        get() = retribucionAnualConAntiguedad / totalHorasAno.toDouble()
+        get() = retribucionAnualConAntiguedad / horasAnualesMaximas.toDouble()
 
     // Hora extra
     val horaExtraRedondeada
-        get() = (retribucionAnualConAntiguedad / totalHorasAno.toDouble()) * 1.25
+        get() = (retribucionAnualConAntiguedad / horasAnualesMaximas.toDouble()) * 1.25
 
 
     // Antigüedades
@@ -736,7 +754,7 @@ class ViewModelNomina : ViewModel() {
     // Sanción
     // Hora ordinaria por 8 horas día
     val sancionRedondeado
-        get() = (retribucionAnualConAntiguedad / totalHorasAno.toDouble()) * 8
+        get() = (retribucionAnualConAntiguedad / horasAnualesMaximas.toDouble()) * 8
 
     // Atrasos y subida
 

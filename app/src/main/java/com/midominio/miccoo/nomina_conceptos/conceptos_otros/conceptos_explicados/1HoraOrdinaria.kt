@@ -38,7 +38,7 @@ fun HoraOrdinaria(viewModelNomina: ViewModelNomina) {
                     resultadoPrimero = numeroAMoneda.format(viewModelNomina.retribucionAnualConAntiguedad),
                     operador = ":",
                     conceptoSegundo = "Total\nhoras año",
-                    resultadoSegundo = viewModelNomina.totalHorasAno,
+                    resultadoSegundo = viewModelNomina.horasAnualesMaximas,
                     resultado = numeroAMoneda.format(viewModelNomina.horaOrdinariaRedondeada)
                 )
             }

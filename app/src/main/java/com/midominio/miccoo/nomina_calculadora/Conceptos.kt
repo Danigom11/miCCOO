@@ -272,3 +272,20 @@ fun TextoConcepto(texto: String) {
         }
     }
 }
+
+@Composable
+fun TextoConceptoSecundario(texto: String) {
+    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+        Row(
+            Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.Center
+        ) {
+            Text(
+                text = texto,
+                color = MaterialTheme.colors.onPrimary,
+                fontStyle = FontStyle.Italic,
+                fontSize = 18.sp,
+            )
+        }
+    }
+}
