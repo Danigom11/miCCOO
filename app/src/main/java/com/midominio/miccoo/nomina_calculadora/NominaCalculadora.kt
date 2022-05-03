@@ -108,7 +108,7 @@ fun NominaCompleta(viewModelNomina: ViewModelNomina) {
                                             it
                                         )
                                     },
-                                    textoLabel = "Número de horas al año"
+                                    textoLabel = "Número total de horas al año"
                                 )
                             }
                             Row {
@@ -263,6 +263,9 @@ fun NominaCompleta(viewModelNomina: ViewModelNomina) {
                                         Boton(
                                             destino = visibleCategoriaProfesional,
                                             destinoCambia = {
+                                                viewModelNomina.horasAnualesElegidasCambia(
+                                                    viewModelNomina.horasAnualesElegidas
+                                                )
                                                 viewModelNomina.seleccionadoCambiaTablasSalariales(
                                                     viewModelNomina.tablasSalariales
                                                 )

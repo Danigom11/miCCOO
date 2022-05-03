@@ -36,7 +36,8 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 @Composable
 fun AtrasosYSubida(viewModelNomina: ViewModelNomina) {
     val visibleTitulo by rememberSaveable { mutableStateOf(true) }
-    var visibleTablasSalariales by rememberSaveable { mutableStateOf(true) }
+    var visibleHorasAnuales by rememberSaveable { mutableStateOf(true) }
+    var visibleTablasSalariales by rememberSaveable { mutableStateOf(false) }
     var visibleCategoriaProfesional by rememberSaveable { mutableStateOf(false) }
     var visibleAntiguedad by rememberSaveable { mutableStateOf(false) }
     var visiblePorcentajeSubida by rememberSaveable { mutableStateOf(false) }
@@ -65,6 +66,67 @@ fun AtrasosYSubida(viewModelNomina: ViewModelNomina) {
                         TextoTitulo(texto = "Calculemos los atrasos")
                         Spacer(modifier = Modifier.size(10.dp))
                     }
+                    // Horas anuales
+                    AnimarVisibilidad(visible = visibleHorasAnuales, densidad = densidad) {
+                        Column(
+                            modifier = Modifier
+                                .height(300.dp)
+                                .border(
+                                    BorderStroke(
+                                        width = 2.dp,
+                                        brush = Brush.horizontalGradient(
+                                            listOf(
+                                                Color.Green,
+                                                Color.Red
+                                            )
+                                        )
+                                    ),
+                                    shape = RoundedCornerShape(5)
+                                ),
+                            horizontalAlignment = Alignment.CenterHorizontally
+                        ) {
+                            Column(modifier = Modifier.weight(1f)) {
+                                TextoConcepto(texto = "¿Trabajas a jornada completa?")
+                                TextoConceptoSecundario(texto = "(40 horas por semana, 1800 horas año)")
+                                Spacer(modifier = Modifier.size(20.dp))
+                                Switch(
+                                    seleccionadoSwitch = !viewModelNomina.seleccionadoSwitchJornadaCompleta,
+                                    seleccionadoSwitchCambia = {
+                                        viewModelNomina.seleccionadoSwitchCambiaJornadaCompleta(
+                                            !it
+                                        )
+                                        if (!viewModelNomina.seleccionadoSwitchJornadaCompleta) {
+                                            viewModelNomina.horasAnualesElegidasCambia(
+                                                viewModelNomina.horasAnualesMaximas
+                                            )
+                                        }
+                                    })
+                                CampoDeTexto(
+                                    visible = viewModelNomina.seleccionadoSwitchJornadaCompleta,
+                                    conceptoElegido = viewModelNomina.horasAnualesElegidas,
+                                    conceptoElegidoCambia = {
+                                        viewModelNomina.horasAnualesElegidasCambia(
+                                            it
+                                        )
+                                    },
+                                    textoLabel = "Número total de horas al año"
+                                )
+                            }
+                            Row {
+                                Boton(
+                                    destino = visibleHorasAnuales,
+                                    destinoCambia = {
+                                        visibleHorasAnuales = false
+                                        visibleTablasSalariales = true
+                                    },
+                                    texto = "Siguiente",
+                                    modifier = Modifier
+                                )
+                            }
+                            Spacer(modifier = Modifier.size(20.dp))
+                        }
+                    }
+
                     // Tablas salariales
                     AnimarVisibilidad(visible = visibleTablasSalariales, densidad = densidad) {
                         Column(
@@ -110,15 +172,30 @@ fun AtrasosYSubida(viewModelNomina: ViewModelNomina) {
                                     horizontalAlignment = Alignment.CenterHorizontally,
                                     verticalArrangement = Arrangement.Bottom
                                 ) {
-                                    Boton(
-                                        destino = visibleTablasSalariales,
-                                        destinoCambia = {
-                                            visibleTablasSalariales =
-                                                false; visibleCategoriaProfesional = true
-                                        },
-                                        texto = "Siguiente",
-                                        modifier = Modifier
-                                    )
+                                    Row(
+                                        Modifier.fillMaxWidth(),
+                                        horizontalArrangement = Arrangement.Center
+                                    ) {
+                                        Boton(
+                                            destino = visibleHorasAnuales,
+                                            destinoCambia = {
+                                                visibleTablasSalariales =
+                                                    false; visibleHorasAnuales = true
+                                            },
+                                            texto = "Anterior",
+                                            modifier = Modifier
+                                        )
+                                        Spacer(modifier = Modifier.size(20.dp))
+                                        Boton(
+                                            destino = visibleTablasSalariales,
+                                            destinoCambia = {
+                                                visibleTablasSalariales =
+                                                    false; visibleCategoriaProfesional = true
+                                            },
+                                            texto = "Siguiente",
+                                            modifier = Modifier
+                                        )
+                                    }
                                 }
                             }
                             Spacer(modifier = Modifier.size(20.dp))
@@ -187,6 +264,9 @@ fun AtrasosYSubida(viewModelNomina: ViewModelNomina) {
                                         Boton(
                                             destino = visibleCategoriaProfesional,
                                             destinoCambia = {
+                                                viewModelNomina.horasAnualesElegidasCambia(
+                                                    viewModelNomina.horasAnualesElegidas
+                                                )
                                                 viewModelNomina.seleccionadoCambiaTablasSalariales(
                                                     viewModelNomina.tablasSalariales
                                                 )
@@ -207,6 +287,7 @@ fun AtrasosYSubida(viewModelNomina: ViewModelNomina) {
                             Spacer(modifier = Modifier.size(20.dp))
                         }
                     }
+
                     //Antigüedad
                     AnimarVisibilidad(visible = visibleAntiguedad, densidad = densidad) {
                         Column(

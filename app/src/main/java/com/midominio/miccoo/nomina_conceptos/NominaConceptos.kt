@@ -56,13 +56,10 @@ fun Nomina(viewModelNomina: ViewModelNomina, navController: NavController) {
                 ) {
                     TextoTitulo(texto = "Conceptos de una nómina")
                     Spacer(modifier = Modifier.size(10.dp))
-
-
-                    // Categoría profesional
                     AnimarVisibilidad(visible = visiblePreguntas, densidad = densidad) {
                         Column(
                             modifier = Modifier
-                                .height(300.dp)
+                                .height(330.dp)
                                 .border(
                                     BorderStroke(
                                         width = 2.dp,
@@ -78,7 +75,17 @@ fun Nomina(viewModelNomina: ViewModelNomina, navController: NavController) {
                             horizontalAlignment = Alignment.CenterHorizontally
                         ) {
                             Column(modifier = Modifier.weight(1f)) {
-                                TextoConcepto(texto = "Solo tres preguntas")
+                                Spacer(modifier = Modifier.size(20.dp))
+                                CampoDeTexto(
+                                    visible = true,
+                                    conceptoElegido = viewModelNomina.horasAnualesElegidas,
+                                    conceptoElegidoCambia = {
+                                        viewModelNomina.horasAnualesElegidasCambia(
+                                            it
+                                        )
+                                    },
+                                    textoLabel = "Horas al año (Max. 1800)"
+                                )
                                 Spacer(modifier = Modifier.size(20.dp))
                                 Desplegable(
                                     visible = true,
