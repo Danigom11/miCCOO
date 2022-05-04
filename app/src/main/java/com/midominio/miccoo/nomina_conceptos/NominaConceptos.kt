@@ -36,6 +36,7 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 @Composable
 fun Nomina(viewModelNomina: ViewModelNomina, navController: NavController) {
     var visible by rememberSaveable { mutableStateOf(false) }
+    var visibleTextoError by rememberSaveable { mutableStateOf(false) }
     val densidad = LocalDensity.current
     var visiblePreguntas by rememberSaveable { mutableStateOf(true) }
     val density = LocalDensity.current
@@ -151,18 +152,26 @@ fun Nomina(viewModelNomina: ViewModelNomina, navController: NavController) {
                         Boton(
                             destino = !visible,
                             destinoCambia = {
-                                viewModelNomina.seleccionadoCambiaTablasSalariales(
-                                    viewModelNomina.tablasSalariales
-                                )
-                                viewModelNomina.seleccionadoCambiaCategoriaProfesional(
-                                    viewModelNomina.seleccionadoCategoriaProfesional
-                                )
-                                visible = !visible
-                                visiblePreguntas = !visiblePreguntas
+                                if (viewModelNomina.horasAnualesElegidas <= "1800") {
+                                    visibleTextoError = false
+                                    viewModelNomina.seleccionadoCambiaTablasSalariales(
+                                        viewModelNomina.tablasSalariales
+                                    )
+                                    viewModelNomina.seleccionadoCambiaCategoriaProfesional(
+                                        viewModelNomina.seleccionadoCategoriaProfesional
+                                    )
+                                    visible = !visible
+                                    visiblePreguntas = !visiblePreguntas
+                                } else {
+                                    visibleTextoError = true
+                                }
                             },
                             texto = "Calcular",
                             modifier = Modifier
                         )
+                        AnimatedVisibility(visible = visibleTextoError) {
+                            TextoConceptoSecundario(texto = "El máximo posible de horas al año para un contrato a jornada completa es de 1800")
+                        }
                     }
                     AnimatedVisibility(
                         visible = visible,

@@ -39,6 +39,7 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 fun NominaCompleta(viewModelNomina: ViewModelNomina) {
     var visibleTitulo by rememberSaveable { mutableStateOf(true) }
     var visibleHorasAnuales by rememberSaveable { mutableStateOf(true) }
+    var visibleTextoError by rememberSaveable { mutableStateOf(false) }
     var visibleTablasSalariales by rememberSaveable { mutableStateOf(false) }
     var visibleCategoriaProfesional by rememberSaveable { mutableStateOf(false) }
     var visibleAntiguedad by rememberSaveable { mutableStateOf(false) }
@@ -115,12 +116,20 @@ fun NominaCompleta(viewModelNomina: ViewModelNomina) {
                                 Boton(
                                     destino = visibleHorasAnuales,
                                     destinoCambia = {
-                                        visibleHorasAnuales = false
-                                        visibleTablasSalariales = true
+                                        if (viewModelNomina.horasAnualesElegidas <= "1800") {
+                                            visibleTextoError = false
+                                            visibleHorasAnuales = false
+                                            visibleTablasSalariales = true
+                                        } else {
+                                            visibleTextoError = true
+                                        }
                                     },
                                     texto = "Siguiente",
                                     modifier = Modifier
                                 )
+                            }
+                            AnimatedVisibility(visible = visibleTextoError) {
+                                TextoConceptoSecundario(texto = "El máximo posible de horas al año para un contrato a jornada completa es de 1800")
                             }
                             Spacer(modifier = Modifier.size(20.dp))
                         }

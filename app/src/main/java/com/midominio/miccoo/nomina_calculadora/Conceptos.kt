@@ -22,6 +22,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -285,6 +286,8 @@ fun TextoConceptoSecundario(texto: String) {
                 color = MaterialTheme.colors.onPrimary,
                 fontStyle = FontStyle.Italic,
                 fontSize = 18.sp,
+                maxLines = 2,
+                textAlign = TextAlign.Center
             )
         }
     }

@@ -43,11 +43,11 @@ val opcionesTablasSalariales = listOf(
 class ViewModelNomina : ViewModel() {
 
     // CONCEPTOS NÓMINA
-    var salarioBase by mutableStateOf("1")
-    var plusTransporte by mutableStateOf("1")
-    var plusConvenio by mutableStateOf("1")
-    var retribucionConvenio by mutableStateOf("1")
-    var retribucionAnual by mutableStateOf("1")
+    var salarioBase by mutableStateOf("0")
+    var plusTransporte by mutableStateOf("0")
+    var plusConvenio by mutableStateOf("0")
+    var retribucionConvenio by mutableStateOf("0")
+    var retribucionAnual by mutableStateOf("0")
     val horasAnualesMaximas by mutableStateOf("1800")
     val seguroAccidentesColectivo = 0.73
     val cotizacionContComunes = 4.70
