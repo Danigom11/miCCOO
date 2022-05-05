@@ -97,9 +97,7 @@ fun AtrasosYSubida(viewModelNomina: ViewModelNomina) {
                                             !it
                                         )
                                         if (!viewModelNomina.seleccionadoSwitchJornadaCompleta) {
-                                            viewModelNomina.horasAnualesElegidasCambia(
-                                                viewModelNomina.horasAnualesMaximas
-                                            )
+                                            viewModelNomina.horasAnualesElegidas = "1800"
                                         }
                                     })
                                 CampoDeTexto(
@@ -326,23 +324,27 @@ fun AtrasosYSubida(viewModelNomina: ViewModelNomina) {
                                         )
                                     }
                                 )
-                                Desplegable(
-                                    visible = viewModelNomina.seleccionadoSwitchAntiguedad,
-                                    expandible = viewModelNomina.expandirAntiguedad,
-                                    expandibleCambia = {
-                                        viewModelNomina.cambiarExpandirAntiguedad(
-                                            it
+                                AnimatedVisibility(visible = viewModelNomina.seleccionadoSwitchAntiguedad) {
+                                    Column {
+                                        Desplegable(
+                                            visible = viewModelNomina.seleccionadoSwitchAntiguedad,
+                                            expandible = viewModelNomina.expandirAntiguedad,
+                                            expandibleCambia = {
+                                                viewModelNomina.cambiarExpandirAntiguedad(
+                                                    it
+                                                )
+                                            },
+                                            seleccionado = viewModelNomina.seleccionadoAntiguedad,
+                                            seleccionadoCambia = {
+                                                viewModelNomina.seleccionadoCambiaAntiguedad(
+                                                    it
+                                                )
+                                            },
+                                            label = "Antigüedad",
+                                            opciones = opcionesAntiguedad
                                         )
-                                    },
-                                    seleccionado = viewModelNomina.seleccionadoAntiguedad,
-                                    seleccionadoCambia = {
-                                        viewModelNomina.seleccionadoCambiaAntiguedad(
-                                            it
-                                        )
-                                    },
-                                    label = "Antigüedad",
-                                    opciones = opcionesAntiguedad
-                                )
+                                    }
+                                }
                             }
                             Row(
                                 Modifier.fillMaxWidth(),

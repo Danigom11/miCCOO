@@ -100,6 +100,9 @@ fun NominaCompleta(viewModelNomina: ViewModelNomina) {
                                         viewModelNomina.seleccionadoSwitchCambiaJornadaCompleta(
                                             !it
                                         )
+                                        if (!viewModelNomina.seleccionadoSwitchJornadaCompleta) {
+                                            viewModelNomina.horasAnualesElegidas = "1800"
+                                        }
                                     })
                                 CampoDeTexto(
                                     visible = viewModelNomina.seleccionadoSwitchJornadaCompleta,

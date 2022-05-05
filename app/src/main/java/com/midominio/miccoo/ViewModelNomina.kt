@@ -62,7 +62,7 @@ class ViewModelNomina : ViewModel() {
 
     // HORAS AÑO
     // Numero horas año elegido modificable
-    var horasAnualesElegidas by mutableStateOf("")
+    var horasAnualesElegidas by mutableStateOf("1800")
     fun horasAnualesElegidasCambia(isEnabled: String) {
         horasAnualesElegidas = isEnabled
     }
