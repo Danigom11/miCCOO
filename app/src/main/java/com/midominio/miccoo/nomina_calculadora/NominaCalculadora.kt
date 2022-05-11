@@ -9,9 +9,7 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.ExperimentalMaterialApi
-import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
-import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -23,9 +21,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalDensity
-import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import com.midominio.miccoo.*
 import com.midominio.miccoo.ui.theme.MiCCOOTheme
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -45,6 +41,7 @@ fun NominaCompleta(viewModelNomina: ViewModelNomina) {
     var visibleAntiguedad by rememberSaveable { mutableStateOf(false) }
     var visibleHorasExtras by rememberSaveable { mutableStateOf(false) }
     var visibleNocturnidad by rememberSaveable { mutableStateOf(false) }
+    var visibleNocturnidadOpciones by rememberSaveable { mutableStateOf(false) }
     var visibleIrpf by rememberSaveable { mutableStateOf(false) }
     var visibleResultado by rememberSaveable { mutableStateOf(false) }
     val scrollState = rememberScrollState()
@@ -446,7 +443,7 @@ fun NominaCompleta(viewModelNomina: ViewModelNomina) {
                     AnimarVisibilidad(visible = visibleNocturnidad, densidad = densidad) {
                         Column(
                             modifier = Modifier
-                                .height(300.dp)
+                                .height(450.dp)
                                 .border(
                                     BorderStroke(
                                         width = 2.dp,
@@ -469,21 +466,21 @@ fun NominaCompleta(viewModelNomina: ViewModelNomina) {
                                         viewModelNomina.seleccionadoSwitchCambiaNocturnidad(
                                             it
                                         )
+                                        visibleNocturnidadOpciones =
+                                            viewModelNomina.seleccionadoSwitchNocturnidad
                                     }
                                 )
-                                Spacer(modifier = Modifier.size(20.dp))
-                                Box(
-                                    modifier = Modifier
-                                        .fillMaxWidth()
-                                        .padding(top = 10.dp),
+                                AnimarVisibilidad(
+                                    visible = visibleNocturnidadOpciones,
+                                    densidad = densidad
                                 ) {
-                                    Text(
-                                        text = "* Cálculo para el mes completo",
-                                        modifier = Modifier.align(Alignment.Center),
-                                        color = MaterialTheme.colors.onPrimary,
-                                        fontStyle = FontStyle.Italic,
-                                        fontSize = 18.sp,
-                                    )
+                                    Column(
+                                        modifier = Modifier
+                                            .fillMaxWidth()
+                                            .padding(start = 40.dp)
+                                    ) {
+                                        Example3()
+                                    }
                                 }
                             }
                             Row {

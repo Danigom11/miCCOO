@@ -13,6 +13,8 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowDropDown
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
@@ -229,6 +231,76 @@ fun Boton(
             )
         }
     }
+}
+
+@Composable
+fun LabelledRadioButton(
+    modifier: Modifier = Modifier,
+    label: String,
+    selected: Boolean,
+    onClick: (() -> Unit)?,
+    enabled: Boolean = true,
+    colors: RadioButtonColors = RadioButtonDefaults.colors()
+) {
+
+    Row(
+        modifier = modifier,
+        //.padding(horizontal = 16.dp)
+        //.height(56.dp),
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        RadioButton(
+            selected = selected,
+            onClick = onClick,
+            enabled = enabled,
+            colors = colors
+        )
+
+        Text(
+            text = label,
+            color = MaterialTheme.colors.onPrimary,
+            style = MaterialTheme.typography.body1.merge(),
+            modifier = Modifier.padding(start = 16.dp)
+        )
+    }
+}
+
+@Composable
+fun RadioGroup(
+    modifier: Modifier,
+    items: List<String>,
+    selection: String,
+    onItemClick: ((String) -> Unit)
+) {
+    Column(modifier = modifier) {
+        items.forEach { item ->
+            LabelledRadioButton(
+                modifier = Modifier.fillMaxWidth(),
+                label = item,
+                selected = item == selection,
+                onClick = {
+                    onItemClick(item)
+                }
+            )
+        }
+    }
+}
+
+@Composable
+fun Example3() {
+    val animalTypes = listOf("Mes completo", "Horas al día", "Horas al mes")
+    val currentSelection = remember { mutableStateOf(animalTypes.first()) }
+
+    RadioGroup(
+        modifier = Modifier
+            .padding(16.dp)
+            .fillMaxWidth(),
+        items = animalTypes,
+        selection = currentSelection.value,
+        onItemClick = { clickedItem ->
+            currentSelection.value = clickedItem
+        }
+    )
 }
 
 @Composable

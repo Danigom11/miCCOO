@@ -623,7 +623,40 @@ class ViewModelNomina : ViewModel() {
         seleccionadoSwitchNocturnidad = isEnabled
     }
 
-    // Variable cálculo nocturnidad
+    // Seleccionado mes completo nocturnidad
+    var nocturnidadSeleccionadoMesCompleto by mutableStateOf(false)
+    fun nocturnidadSeleccionadoMesCompletoCambia(isEnabled: Boolean) {
+        nocturnidadSeleccionadoMesCompleto = isEnabled
+    }
+
+    // Seleccionado mes completo nocturnidad
+    var nocturnidadSeleccionadoHorasDia by mutableStateOf(false)
+    fun nocturnidadSeleccionadoHorasDiaCambia(isEnabled: Boolean) {
+        nocturnidadSeleccionadoHorasDia = isEnabled
+    }
+
+    // Seleccionado mes completo nocturnidad
+    var nocturnidadSeleccionadoHorasMes by mutableStateOf(false)
+    fun nocturnidadSeleccionadoHorasMesCambia(isEnabled: Boolean) {
+        nocturnidadSeleccionadoHorasMes = isEnabled
+    }
+
+    // Número de horas semanales de nocturnidad elegidas
+    var horasNocturnidadSemanalesElegidas by mutableStateOf("")
+    fun horasNocturnidadSemanalesElegidasCambia(isEnabled: String) {
+        horasNocturnidadSemanalesElegidas = isEnabled
+    }
+
+    // Número de horas al mes de nocturnidad elegidas
+    var horasNocturnidadMesElegidas by mutableStateOf("")
+    fun horasNocturnidadMesElegidasCambia(isEnabled: String) {
+        horasNocturnidadMesElegidas = isEnabled
+    }
+
+    // Variable cálculo nocturnidad por hora
+    // todo
+
+    // Variable cálculo nocturnidad mes completo
     val nocturnidad
         get() = if (seleccionadoSwitchNocturnidad) {
             (salarioBase.toDouble() * 0.25)
