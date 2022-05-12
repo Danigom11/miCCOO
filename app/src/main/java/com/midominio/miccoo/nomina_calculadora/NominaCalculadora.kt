@@ -41,7 +41,9 @@ fun NominaCompleta(viewModelNomina: ViewModelNomina) {
     var visibleAntiguedad by rememberSaveable { mutableStateOf(false) }
     var visibleHorasExtras by rememberSaveable { mutableStateOf(false) }
     var visibleNocturnidad by rememberSaveable { mutableStateOf(false) }
-    var visibleNocturnidadOpciones by rememberSaveable { mutableStateOf(false) }
+    //var visibleNocturnidadOpciones by rememberSaveable { mutableStateOf(false) }
+    var visibleNocturnidadHorasDia by rememberSaveable { mutableStateOf(false) }
+    var visibleNocturnidadHorasMes by rememberSaveable { mutableStateOf(false) }
     var visibleIrpf by rememberSaveable { mutableStateOf(false) }
     var visibleResultado by rememberSaveable { mutableStateOf(false) }
     val scrollState = rememberScrollState()
@@ -466,12 +468,10 @@ fun NominaCompleta(viewModelNomina: ViewModelNomina) {
                                         viewModelNomina.seleccionadoSwitchCambiaNocturnidad(
                                             it
                                         )
-                                        visibleNocturnidadOpciones =
-                                            viewModelNomina.seleccionadoSwitchNocturnidad
                                     }
                                 )
                                 AnimarVisibilidad(
-                                    visible = visibleNocturnidadOpciones,
+                                    visible = viewModelNomina.seleccionadoSwitchNocturnidad,
                                     densidad = densidad
                                 ) {
                                     Column(
@@ -479,7 +479,62 @@ fun NominaCompleta(viewModelNomina: ViewModelNomina) {
                                             .fillMaxWidth()
                                             .padding(start = 40.dp)
                                     ) {
-                                        Example3()
+                                        RadioGrupoBotones(
+                                            modifier = Modifier
+                                                .padding(16.dp)
+                                                .fillMaxWidth(),
+                                            items = opcionesNocturnidad,
+                                            seleccion = viewModelNomina.nocturnidadElegidaEtiqueta.value,
+                                            onItemClick = { clickedItem ->
+                                                viewModelNomina.nocturnidadElegidaEtiqueta.value =
+                                                    clickedItem
+                                                if (viewModelNomina.nocturnidadElegidaEtiqueta.value == opcionesNocturnidad[0]) {
+                                                    visibleNocturnidadHorasMes = false
+                                                    visibleNocturnidadHorasDia = false
+                                                }
+                                                if (viewModelNomina.nocturnidadElegidaEtiqueta.value == opcionesNocturnidad[1]) {
+                                                    visibleNocturnidadHorasMes = false
+                                                    visibleNocturnidadHorasDia = true
+                                                }
+                                                if (viewModelNomina.nocturnidadElegidaEtiqueta.value == opcionesNocturnidad[2]) {
+                                                    visibleNocturnidadHorasDia = false
+                                                    visibleNocturnidadHorasMes = true
+                                                }
+
+                                            }
+                                        )
+                                        // Nocturnidad horas día campo de texto
+                                        AnimarVisibilidad(
+                                            visible = visibleNocturnidadHorasDia,
+                                            densidad = densidad
+                                        ) {
+                                            CampoDeTexto(
+                                                visible = visibleNocturnidadHorasDia,
+                                                conceptoElegido = viewModelNomina.nocturnidadSeleccionadoHorasDia,
+                                                conceptoElegidoCambia = {
+                                                    viewModelNomina.nocturnidadSeleccionadoHorasDiaCambia(
+                                                        it
+                                                    )
+                                                },
+                                                textoLabel = "Horas todos los días con nocturnidad"
+                                            )
+                                        }
+                                        // Nocturnidad horas mes campo de texto
+                                        AnimarVisibilidad(
+                                            visible = visibleNocturnidadHorasMes,
+                                            densidad = densidad
+                                        ) {
+                                            CampoDeTexto(
+                                                visible = visibleNocturnidadHorasMes,
+                                                conceptoElegido = viewModelNomina.nocturnidadSeleccionadoHorasMes,
+                                                conceptoElegidoCambia = {
+                                                    viewModelNomina.nocturnidadSeleccionadoHorasMesCambia(
+                                                        it
+                                                    )
+                                                },
+                                                textoLabel = "Horas en un mes con nocturnidad"
+                                            )
+                                        }
                                     }
                                 }
                             }

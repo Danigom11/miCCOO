@@ -40,6 +40,9 @@ val opcionesTablasSalariales = listOf(
     "2022 (+1,5%)"
 )
 
+val opcionesNocturnidad = listOf("Mes completo", "Horas al día", "Horas al mes")
+
+
 class ViewModelNomina : ViewModel() {
 
     // CONCEPTOS NÓMINA
@@ -623,6 +626,9 @@ class ViewModelNomina : ViewModel() {
         seleccionadoSwitchNocturnidad = isEnabled
     }
 
+    // Nocturnidad elegida
+    val nocturnidadElegidaEtiqueta = mutableStateOf(opcionesNocturnidad.first())
+
     // Seleccionado mes completo nocturnidad
     var nocturnidadSeleccionadoMesCompleto by mutableStateOf(false)
     fun nocturnidadSeleccionadoMesCompletoCambia(isEnabled: Boolean) {
@@ -630,14 +636,14 @@ class ViewModelNomina : ViewModel() {
     }
 
     // Seleccionado mes completo nocturnidad
-    var nocturnidadSeleccionadoHorasDia by mutableStateOf(false)
-    fun nocturnidadSeleccionadoHorasDiaCambia(isEnabled: Boolean) {
+    var nocturnidadSeleccionadoHorasDia by mutableStateOf("")
+    fun nocturnidadSeleccionadoHorasDiaCambia(isEnabled: String) {
         nocturnidadSeleccionadoHorasDia = isEnabled
     }
 
     // Seleccionado mes completo nocturnidad
-    var nocturnidadSeleccionadoHorasMes by mutableStateOf(false)
-    fun nocturnidadSeleccionadoHorasMesCambia(isEnabled: Boolean) {
+    var nocturnidadSeleccionadoHorasMes by mutableStateOf("")
+    fun nocturnidadSeleccionadoHorasMesCambia(isEnabled: String) {
         nocturnidadSeleccionadoHorasMes = isEnabled
     }
 

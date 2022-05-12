@@ -52,6 +52,7 @@ android {
         }
     }
     buildToolsVersion '32.0.0'
+    namespace 'com.midominio.miccoo'
 }
 
 dependencies {

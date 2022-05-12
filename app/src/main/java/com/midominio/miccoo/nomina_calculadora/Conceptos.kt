@@ -13,8 +13,6 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowDropDown
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
@@ -234,30 +232,27 @@ fun Boton(
 }
 
 @Composable
-fun LabelledRadioButton(
+fun RadioBotonEtiquetado(
     modifier: Modifier = Modifier,
-    label: String,
-    selected: Boolean,
+    etiqueta: String,
+    selecionado: Boolean,
     onClick: (() -> Unit)?,
-    enabled: Boolean = true,
-    colors: RadioButtonColors = RadioButtonDefaults.colors()
+    enabled: Boolean = true
 ) {
 
     Row(
         modifier = modifier,
-        //.padding(horizontal = 16.dp)
-        //.height(56.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
         RadioButton(
-            selected = selected,
+            selected = selecionado,
             onClick = onClick,
             enabled = enabled,
-            colors = colors
+            colors = RadioButtonDefaults.colors(selectedColor = Color.Red)
         )
 
         Text(
-            text = label,
+            text = etiqueta,
             color = MaterialTheme.colors.onPrimary,
             style = MaterialTheme.typography.body1.merge(),
             modifier = Modifier.padding(start = 16.dp)
@@ -266,41 +261,24 @@ fun LabelledRadioButton(
 }
 
 @Composable
-fun RadioGroup(
+fun RadioGrupoBotones(
     modifier: Modifier,
     items: List<String>,
-    selection: String,
+    seleccion: String,
     onItemClick: ((String) -> Unit)
 ) {
     Column(modifier = modifier) {
         items.forEach { item ->
-            LabelledRadioButton(
+            RadioBotonEtiquetado(
                 modifier = Modifier.fillMaxWidth(),
-                label = item,
-                selected = item == selection,
+                etiqueta = item,
+                selecionado = item == seleccion,
                 onClick = {
                     onItemClick(item)
                 }
             )
         }
     }
-}
-
-@Composable
-fun Example3() {
-    val animalTypes = listOf("Mes completo", "Horas al día", "Horas al mes")
-    val currentSelection = remember { mutableStateOf(animalTypes.first()) }
-
-    RadioGroup(
-        modifier = Modifier
-            .padding(16.dp)
-            .fillMaxWidth(),
-        items = animalTypes,
-        selection = currentSelection.value,
-        onItemClick = { clickedItem ->
-            currentSelection.value = clickedItem
-        }
-    )
 }
 
 @Composable
