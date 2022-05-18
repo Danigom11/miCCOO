@@ -100,12 +100,8 @@ fun ResultadoIpc(viewModelNomina: ViewModelNomina) {
             )
         }
         Text(
-            text = "- Falta añadir: horas extras, nocturnidad...",
+            text = "- Falta: horas extras, nocturnidad, bajas...",
             color = MaterialTheme.colors.onPrimary,
-        )
-        Text(
-            text = "- Calculado para contrato a tiempo completo",
-            color = MaterialTheme.colors.onPrimary
         )
         Text(
             text = "- Resultado en bruto",

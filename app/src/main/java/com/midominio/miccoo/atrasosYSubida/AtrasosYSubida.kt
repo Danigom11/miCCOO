@@ -71,7 +71,7 @@ fun AtrasosYSubida(viewModelNomina: ViewModelNomina) {
                     AnimarVisibilidad(visible = visibleHorasAnuales, densidad = densidad) {
                         Column(
                             modifier = Modifier
-                                .height(300.dp)
+                                .height(alturaCuadros)
                                 .border(
                                     BorderStroke(
                                         width = 2.dp,
@@ -138,7 +138,7 @@ fun AtrasosYSubida(viewModelNomina: ViewModelNomina) {
                     AnimarVisibilidad(visible = visibleTablasSalariales, densidad = densidad) {
                         Column(
                             modifier = Modifier
-                                .height(300.dp)
+                                .height(alturaCuadros)
                                 .border(
                                     BorderStroke(
                                         width = 2.dp,
@@ -173,6 +173,10 @@ fun AtrasosYSubida(viewModelNomina: ViewModelNomina) {
                                     label = "Tablas salariales",
                                     opciones = opcionesTablasSalariales
                                 )
+                                Spacer(modifier = Modifier.size(20.dp))
+                                Column(Modifier.padding(8.dp)) {
+                                    TextoConceptoSecundario(texto = "NOTA: Si quieres calcular los atrasos de 2021 elige las tablas salariales de \n2020 (Definitivas)")
+                                }
                             }
                             AnimatedVisibility(visible = viewModelNomina.seleccionadoTablasSalariales.isNotEmpty()) {
                                 Column(
@@ -213,7 +217,7 @@ fun AtrasosYSubida(viewModelNomina: ViewModelNomina) {
                     AnimarVisibilidad(visible = visibleCategoriaProfesional, densidad = densidad) {
                         Column(
                             modifier = Modifier
-                                .height(300.dp)
+                                .height(alturaCuadros)
                                 .border(
                                     BorderStroke(
                                         width = 2.dp,
@@ -299,7 +303,7 @@ fun AtrasosYSubida(viewModelNomina: ViewModelNomina) {
                     AnimarVisibilidad(visible = visibleAntiguedad, densidad = densidad) {
                         Column(
                             modifier = Modifier
-                                .height(300.dp)
+                                .height(alturaCuadros)
                                 .border(
                                     BorderStroke(
                                         width = 2.dp,
@@ -377,7 +381,7 @@ fun AtrasosYSubida(viewModelNomina: ViewModelNomina) {
                     AnimarVisibilidad(visible = visiblePorcentajeSubida, densidad = densidad) {
                         Column(
                             modifier = Modifier
-                                .height(300.dp)
+                                .height(alturaCuadros)
                                 .border(
                                     BorderStroke(
                                         width = 2.dp,
@@ -437,7 +441,7 @@ fun AtrasosYSubida(viewModelNomina: ViewModelNomina) {
                     AnimarVisibilidad(visible = visibleMeses, densidad = densidad) {
                         Column(
                             modifier = Modifier
-                                .height(300.dp)
+                                .height(alturaCuadros)
                                 .border(
                                     BorderStroke(
                                         width = 2.dp,

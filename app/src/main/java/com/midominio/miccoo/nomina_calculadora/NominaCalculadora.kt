@@ -41,7 +41,6 @@ fun NominaCompleta(viewModelNomina: ViewModelNomina) {
     var visibleAntiguedad by rememberSaveable { mutableStateOf(false) }
     var visibleHorasExtras by rememberSaveable { mutableStateOf(false) }
     var visibleNocturnidad by rememberSaveable { mutableStateOf(false) }
-    //var visibleNocturnidadOpciones by rememberSaveable { mutableStateOf(false) }
     var visibleNocturnidadHorasDia by rememberSaveable { mutableStateOf(false) }
     var visibleNocturnidadHorasMes by rememberSaveable { mutableStateOf(false) }
     var visibleIrpf by rememberSaveable { mutableStateOf(false) }
@@ -74,7 +73,7 @@ fun NominaCompleta(viewModelNomina: ViewModelNomina) {
                     AnimarVisibilidad(visible = visibleHorasAnuales, densidad = densidad) {
                         Column(
                             modifier = Modifier
-                                .height(300.dp)
+                                .height(alturaCuadros)
                                 .border(
                                     BorderStroke(
                                         width = 2.dp,
@@ -141,7 +140,7 @@ fun NominaCompleta(viewModelNomina: ViewModelNomina) {
                     AnimarVisibilidad(visible = visibleTablasSalariales, densidad = densidad) {
                         Column(
                             modifier = Modifier
-                                .height(300.dp)
+                                .height(alturaCuadros)
                                 .border(
                                     BorderStroke(
                                         width = 2.dp,
@@ -216,7 +215,7 @@ fun NominaCompleta(viewModelNomina: ViewModelNomina) {
                     AnimarVisibilidad(visible = visibleCategoriaProfesional, densidad = densidad) {
                         Column(
                             modifier = Modifier
-                                .height(300.dp)
+                                .height(alturaCuadros)
                                 .border(
                                     BorderStroke(
                                         width = 2.dp,
@@ -302,7 +301,7 @@ fun NominaCompleta(viewModelNomina: ViewModelNomina) {
                     AnimarVisibilidad(visible = visibleAntiguedad, densidad = densidad) {
                         Column(
                             modifier = Modifier
-                                .height(300.dp)
+                                .height(alturaCuadros)
                                 .border(
                                     BorderStroke(
                                         width = 2.dp,
@@ -381,7 +380,7 @@ fun NominaCompleta(viewModelNomina: ViewModelNomina) {
                     AnimarVisibilidad(visible = visibleHorasExtras, densidad = densidad) {
                         Column(
                             modifier = Modifier
-                                .height(300.dp)
+                                .height(alturaCuadros)
                                 .border(
                                     BorderStroke(
                                         width = 2.dp,
@@ -445,7 +444,7 @@ fun NominaCompleta(viewModelNomina: ViewModelNomina) {
                     AnimarVisibilidad(visible = visibleNocturnidad, densidad = densidad) {
                         Column(
                             modifier = Modifier
-                                .height(450.dp)
+                                .height(alturaCuadros)
                                 .border(
                                     BorderStroke(
                                         width = 2.dp,
@@ -503,39 +502,40 @@ fun NominaCompleta(viewModelNomina: ViewModelNomina) {
 
                                             }
                                         )
-                                        // Nocturnidad horas día campo de texto
-                                        AnimarVisibilidad(
-                                            visible = visibleNocturnidadHorasDia,
-                                            densidad = densidad
-                                        ) {
-                                            CampoDeTexto(
-                                                visible = visibleNocturnidadHorasDia,
-                                                conceptoElegido = viewModelNomina.nocturnidadSeleccionadoHorasDia,
-                                                conceptoElegidoCambia = {
-                                                    viewModelNomina.nocturnidadSeleccionadoHorasDiaCambia(
-                                                        it
-                                                    )
-                                                },
-                                                textoLabel = "Horas todos los días con nocturnidad"
-                                            )
-                                        }
-                                        // Nocturnidad horas mes campo de texto
-                                        AnimarVisibilidad(
-                                            visible = visibleNocturnidadHorasMes,
-                                            densidad = densidad
-                                        ) {
-                                            CampoDeTexto(
-                                                visible = visibleNocturnidadHorasMes,
-                                                conceptoElegido = viewModelNomina.nocturnidadSeleccionadoHorasMes,
-                                                conceptoElegidoCambia = {
-                                                    viewModelNomina.nocturnidadSeleccionadoHorasMesCambia(
-                                                        it
-                                                    )
-                                                },
-                                                textoLabel = "Horas en un mes con nocturnidad"
-                                            )
-                                        }
                                     }
+                                    // Nocturnidad mes incompleto
+                                    AnimarVisibilidad(
+                                        visible = visibleNocturnidadHorasDia,
+                                        densidad = densidad
+                                    ) {
+                                        CampoDeTexto(
+                                            visible = visibleNocturnidadHorasDia,
+                                            conceptoElegido = viewModelNomina.horasNocturnidadSemanalesElegidas,
+                                            conceptoElegidoCambia = {
+                                                viewModelNomina.horasNocturnidadSemanalesElegidasCambia(
+                                                    it
+                                                )
+                                            },
+                                            textoLabel = "Horas todos los días con nocturnidad"
+                                        )
+                                    }
+                                    // Nocturnidad horas sueltas
+                                    AnimarVisibilidad(
+                                        visible = visibleNocturnidadHorasMes,
+                                        densidad = densidad
+                                    ) {
+                                        CampoDeTexto(
+                                            visible = visibleNocturnidadHorasMes,
+                                            conceptoElegido = viewModelNomina.horasNocturnidadMesElegidas,
+                                            conceptoElegidoCambia = {
+                                                viewModelNomina.horasNocturnidadMesElegidasCambia(
+                                                    it
+                                                )
+                                            },
+                                            textoLabel = "Horas en un mes con nocturnidad"
+                                        )
+                                    }
+
                                 }
                             }
                             Row {
@@ -552,6 +552,22 @@ fun NominaCompleta(viewModelNomina: ViewModelNomina) {
                                 Boton(
                                     destino = visibleNocturnidad,
                                     destinoCambia = {
+                                        if (viewModelNomina.nocturnidadElegidaEtiqueta.value == opcionesNocturnidad[0]) {
+                                            viewModelNomina.nocturnidadDefinitiva =
+                                                viewModelNomina.nocturnidadMesCompleto.toString()
+                                        }
+                                        if (viewModelNomina.nocturnidadElegidaEtiqueta.value == opcionesNocturnidad[1]) {
+                                            viewModelNomina.nocturnidadDefinitiva =
+                                                viewModelNomina.nocturnidadMesIncompletoHorasTodosDias.toString()
+                                        }
+                                        if (viewModelNomina.nocturnidadElegidaEtiqueta.value == opcionesNocturnidad[2]) {
+                                            viewModelNomina.nocturnidadDefinitiva =
+                                                viewModelNomina.nocturnidadPorHora.toString()
+                                        }
+                                        if (!viewModelNomina.seleccionadoSwitchNocturnidad) {
+                                            viewModelNomina.nocturnidadDefinitiva = 0.toString()
+                                        }
+
                                         visibleNocturnidad = false; visibleIrpf = true
                                     },
                                     texto = "Siguiente",
@@ -566,7 +582,7 @@ fun NominaCompleta(viewModelNomina: ViewModelNomina) {
                     AnimarVisibilidad(visible = visibleIrpf, densidad = densidad) {
                         Column(
                             modifier = Modifier
-                                .height(300.dp)
+                                .height(alturaCuadros)
                                 .border(
                                     BorderStroke(
                                         width = 2.dp,

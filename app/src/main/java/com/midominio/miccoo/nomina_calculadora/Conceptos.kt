@@ -34,6 +34,8 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 // Texto título
 // Texto concepto
 
+val alturaCuadros = 450.dp
+
 @ExperimentalMaterialApi
 @Composable
 fun Desplegable(
@@ -336,7 +338,7 @@ fun TextoConceptoSecundario(texto: String) {
                 color = MaterialTheme.colors.onPrimary,
                 fontStyle = FontStyle.Italic,
                 fontSize = 18.sp,
-                maxLines = 2,
+                maxLines = 5,
                 textAlign = TextAlign.Center
             )
         }

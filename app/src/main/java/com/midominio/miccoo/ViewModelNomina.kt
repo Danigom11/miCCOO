@@ -629,25 +629,7 @@ class ViewModelNomina : ViewModel() {
     // Nocturnidad elegida
     val nocturnidadElegidaEtiqueta = mutableStateOf(opcionesNocturnidad.first())
 
-    // Seleccionado mes completo nocturnidad
-    var nocturnidadSeleccionadoMesCompleto by mutableStateOf(false)
-    fun nocturnidadSeleccionadoMesCompletoCambia(isEnabled: Boolean) {
-        nocturnidadSeleccionadoMesCompleto = isEnabled
-    }
-
-    // Seleccionado mes completo nocturnidad
-    var nocturnidadSeleccionadoHorasDia by mutableStateOf("")
-    fun nocturnidadSeleccionadoHorasDiaCambia(isEnabled: String) {
-        nocturnidadSeleccionadoHorasDia = isEnabled
-    }
-
-    // Seleccionado mes completo nocturnidad
-    var nocturnidadSeleccionadoHorasMes by mutableStateOf("")
-    fun nocturnidadSeleccionadoHorasMesCambia(isEnabled: String) {
-        nocturnidadSeleccionadoHorasMes = isEnabled
-    }
-
-    // Número de horas semanales de nocturnidad elegidas
+    // Número de horas elegidas mes incompleto
     var horasNocturnidadSemanalesElegidas by mutableStateOf("")
     fun horasNocturnidadSemanalesElegidasCambia(isEnabled: String) {
         horasNocturnidadSemanalesElegidas = isEnabled
@@ -659,19 +641,20 @@ class ViewModelNomina : ViewModel() {
         horasNocturnidadMesElegidas = isEnabled
     }
 
-    // Variable cálculo nocturnidad por hora
-    // todo
+    // 1. Variable nocturnidad mes completo
+    val nocturnidadMesCompleto get() = salarioBase.toDouble() * 0.25
 
-    // Variable cálculo nocturnidad mes completo
-    val nocturnidad
-        get() = if (seleccionadoSwitchNocturnidad) {
-            (salarioBase.toDouble() * 0.25)
-        } else {
-            0.toDouble()
-        }
+    // 2. Variable cálculo nocturnidad mes incompleto
+    private val nocturnidadMultiplicadorHorasElegidasMes get() = horasNocturnidadSemanalesElegidas.toDouble() / 8
+    val nocturnidadMesIncompletoHorasTodosDias
+        get() = (salarioBase.toDouble() * 0.25) * nocturnidadMultiplicadorHorasElegidasMes
 
-    val nocturnidadConcepto get() = salarioBase.toDouble() * 0.25
+    // 3. Variable cálculo nocturnidad por hora
+    val nocturnidadPorHora
+        get() = (((salarioBase.toDouble() * 12) / horasAnualesElegidas.toDouble()) * 0.25) * horasNocturnidadMesElegidas.toDouble()
 
+    // Nocturnidad definitiva
+    var nocturnidadDefinitiva by mutableStateOf("0")
 
     // TOTAL INGRESOS
     val totalIngresos
@@ -682,7 +665,7 @@ class ViewModelNomina : ViewModel() {
                         pagasExtrasProrrateadasMasAntiguedad +
                         antiguedadConcepto +
                         horasExtrasElegidasTotal +
-                        nocturnidad +
+                        nocturnidadDefinitiva.toDouble() +
                         seguroAccidentesColectivo
                 )
 
@@ -700,7 +683,8 @@ class ViewModelNomina : ViewModel() {
                     (retribucionConvenio.toDouble() +
                             pagasExtrasProrrateadasMasAntiguedad +
                             antiguedadConcepto +
-                            horasExtrasElegidasTotal) *
+                            horasExtrasElegidasTotal +
+                            nocturnidadDefinitiva.toDouble()) *
                             (irpfElegida.replace(",", ".").toDouble() * 0.01)
                     )
         } else {
@@ -734,8 +718,6 @@ class ViewModelNomina : ViewModel() {
                         totalDescuentoCotizacionFormacion +
                         totalDescuentoCotizacionContComunes
                 )
-
-    // ANTIGÜO VIEWMODEL VERIFICAR!!!!
 
     // Pagas extras sin cambios
     val pagasExtrasProrrateadasFijasAntiguedadTotal

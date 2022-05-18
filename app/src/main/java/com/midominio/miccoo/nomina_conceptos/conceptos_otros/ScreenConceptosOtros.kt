@@ -45,7 +45,7 @@ fun ScreenConceptosOtros(
             ClassDatosTarjetaConceptoOtros(
                 colorBorde = Color.Green,
                 concepto = "Nocturnidad",
-                valor = numeroAMoneda.format(viewModelNomina.nocturnidadConcepto),
+                valor = numeroAMoneda.format(viewModelNomina.nocturnidadMesCompleto),
                 click = Screens.NOCTURNIDAD.ruta
             ),
             // Antigüedad

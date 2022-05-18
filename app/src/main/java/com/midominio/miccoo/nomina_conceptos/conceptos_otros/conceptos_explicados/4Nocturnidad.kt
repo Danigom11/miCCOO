@@ -40,7 +40,7 @@ fun Nocturnidad(viewModelNomina: ViewModelNomina) {
                     operador = "+",
                     conceptoSegundo = "Porcentaje",
                     resultadoSegundo = "25%",
-                    resultado = numeroAMoneda.format(viewModelNomina.nocturnidadConcepto)
+                    resultado = numeroAMoneda.format(viewModelNomina.nocturnidadMesCompleto)
                 )
             }
         }

@@ -151,7 +151,7 @@ fun ResultadoNominaCompleta(viewModelNomina: ViewModelNomina) {
                         color = MaterialTheme.colors.onPrimary
                     )
                     Text(
-                        text = numeroAMoneda.format(viewModelNomina.nocturnidad),
+                        text = numeroAMoneda.format(viewModelNomina.nocturnidadDefinitiva.toDouble()),
                         fontSize = 20.sp,
                         modifier = Modifier.align(Alignment.CenterEnd),
                         color = MaterialTheme.colors.onPrimary
