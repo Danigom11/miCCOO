@@ -34,5 +34,11 @@ val listaContenidoTarjetasPantallaPrincipal: List<DataClassContenidoTarjetasPagi
             R.drawable.sanciones,
             "Sanciones",
             "Leves, graves o muy graves"
+        ),
+        DataClassContenidoTarjetasPaginaPrincipal(
+            Screens.TESTS.ruta,
+            R.drawable.tests,
+            "Tests",
+            "¡Ponte a prueba!"
         )
     )

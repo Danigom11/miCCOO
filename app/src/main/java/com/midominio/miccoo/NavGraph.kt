@@ -19,6 +19,8 @@ import com.midominio.miccoo.nomina_conceptos.Nomina
 import com.midominio.miccoo.nomina_conceptos.conceptos_otros.conceptos_explicados.*
 import com.midominio.miccoo.permisos_retribuidos.PermisosRetribuidos
 import com.midominio.miccoo.sanciones.Sanciones
+import com.midominio.miccoo.tests.Tests
+import com.midominio.miccoo.tests.ViewModelTests
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 
 @ExperimentalCoroutinesApi
@@ -29,9 +31,9 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 @Composable
 fun SetupNavGraph(
     navController: NavController,
-    viewModelNomina: ViewModelNomina
+    viewModelNomina: ViewModelNomina,
+    viewModelTests: ViewModelTests
 ) {
-
     AnimatedNavHost(
         navController = navController as NavHostController,
         startDestination = Screens.PANTALLAPRINCIPAL.ruta,
@@ -115,6 +117,10 @@ fun SetupNavGraph(
         //Pantalla sanción
         composable(Screens.SANCION.ruta) {
             Sancion(viewModelNomina = viewModelNomina)
+        }
+        //Pantalla tests
+        composable(Screens.TESTS.ruta) {
+            Tests(viewModelTests = viewModelTests)
         }
     }
 }

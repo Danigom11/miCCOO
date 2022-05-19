@@ -110,7 +110,7 @@ fun TarjetaModeloPantallaPrincipal(
                         .height(90.dp)
                 ) {
                     Text(
-                        dataClassContenidoPrincipal.permisoRetribuido,
+                        dataClassContenidoPrincipal.tarjeta,
                         style = MaterialTheme.typography.h5,
                         fontWeight = FontWeight.Bold,
                         modifier = Modifier
