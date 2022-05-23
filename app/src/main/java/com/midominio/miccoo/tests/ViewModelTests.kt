@@ -22,8 +22,4 @@ import androidx.lifecycle.ViewModel
 // Volver.
 
 
-class ViewModelTests : ViewModel() {
-    //
-
-
-}
+class ViewModelTests : ViewModel()
