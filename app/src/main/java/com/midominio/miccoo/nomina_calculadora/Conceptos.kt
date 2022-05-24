@@ -27,12 +27,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 
-// Desplegable
-// Switch
-// Campo de texto
-// Botón
-// Texto título
-// Texto concepto
 
 val alturaCuadros = 450.dp
 

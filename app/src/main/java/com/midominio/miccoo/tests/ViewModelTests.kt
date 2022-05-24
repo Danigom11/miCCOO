@@ -21,5 +21,4 @@ import androidx.lifecycle.ViewModel
 // Variable para comentario final. Con >< poner un comentario distinto según el resultado obtenido del uno al diez.
 // Volver.
 
-
 class ViewModelTests : ViewModel()
