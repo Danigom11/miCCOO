@@ -49,11 +49,4 @@ val pregunta6 = TestsPreguntas(
     "No puede ser, es obligatorio utilizarlos antes de que acabe el año."
 )
 
-val listaTests = listOf(
-    pregunta1,
-    pregunta2,
-    pregunta3,
-    pregunta4,
-    pregunta5,
-    pregunta6
-)
+

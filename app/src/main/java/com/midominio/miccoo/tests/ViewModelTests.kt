@@ -1,5 +1,6 @@
 package com.midominio.miccoo.tests
 
+import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 
 
@@ -21,4 +22,19 @@ import androidx.lifecycle.ViewModel
 // Variable para comentario final. Con >< poner un comentario distinto según el resultado obtenido del uno al diez.
 // Volver.
 
-class ViewModelTests : ViewModel()
+class ViewModelTests : ViewModel() {
+    val listaTests = listOf(
+        pregunta1,
+        pregunta2,
+        pregunta3,
+        pregunta4,
+        pregunta5,
+        pregunta6
+    )
+
+    val opcionElegida = mutableStateOf(listaTests.first())
+
+    val randomPregunta = listaTests.random()
+
+
+}
