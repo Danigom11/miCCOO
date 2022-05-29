@@ -483,25 +483,24 @@ fun NominaCompleta(viewModelNomina: ViewModelNomina) {
                                                 .padding(16.dp)
                                                 .fillMaxWidth(),
                                             items = opcionesNocturnidad,
-                                            seleccion = viewModelNomina.nocturnidadElegidaEtiqueta.value,
-                                            onItemClick = { clickedItem ->
-                                                viewModelNomina.nocturnidadElegidaEtiqueta.value =
-                                                    clickedItem
-                                                if (viewModelNomina.nocturnidadElegidaEtiqueta.value == opcionesNocturnidad[0]) {
-                                                    visibleNocturnidadHorasMes = false
-                                                    visibleNocturnidadHorasDia = false
-                                                }
-                                                if (viewModelNomina.nocturnidadElegidaEtiqueta.value == opcionesNocturnidad[1]) {
-                                                    visibleNocturnidadHorasMes = false
-                                                    visibleNocturnidadHorasDia = true
-                                                }
-                                                if (viewModelNomina.nocturnidadElegidaEtiqueta.value == opcionesNocturnidad[2]) {
-                                                    visibleNocturnidadHorasDia = false
-                                                    visibleNocturnidadHorasMes = true
-                                                }
-
+                                            seleccion = viewModelNomina.nocturnidadElegidaEtiqueta.value
+                                        ) { clickedItem ->
+                                            viewModelNomina.nocturnidadElegidaEtiqueta.value =
+                                                clickedItem
+                                            if (viewModelNomina.nocturnidadElegidaEtiqueta.value == opcionesNocturnidad[0]) {
+                                                visibleNocturnidadHorasMes = false
+                                                visibleNocturnidadHorasDia = false
                                             }
-                                        )
+                                            if (viewModelNomina.nocturnidadElegidaEtiqueta.value == opcionesNocturnidad[1]) {
+                                                visibleNocturnidadHorasMes = false
+                                                visibleNocturnidadHorasDia = true
+                                            }
+                                            if (viewModelNomina.nocturnidadElegidaEtiqueta.value == opcionesNocturnidad[2]) {
+                                                visibleNocturnidadHorasDia = false
+                                                visibleNocturnidadHorasMes = true
+                                            }
+
+                                        }
                                     }
                                     // Nocturnidad mes incompleto
                                     AnimarVisibilidad(

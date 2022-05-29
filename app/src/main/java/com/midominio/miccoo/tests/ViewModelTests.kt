@@ -23,18 +23,16 @@ import androidx.lifecycle.ViewModel
 // Volver.
 
 class ViewModelTests : ViewModel() {
-    val listaTests = listOf(
-        pregunta1,
-        pregunta2,
-        pregunta3,
-        pregunta4,
-        pregunta5,
-        pregunta6
-    )
+
+    var pregunta = mutableStateOf("")
+    var respuestaCorrecta = mutableStateOf("")
+    var respuestaIncorrectaUno = mutableStateOf("")
+    var respuestaIncorrectaDos = mutableStateOf("")
+    var numeroPosicionListaPreguntas = mutableStateOf("0")
 
     val opcionElegida = mutableStateOf(listaTests.first())
 
-    val randomPregunta = listaTests.random()
+    // val randomPregunta = listaTests.random()
 
 
 }
