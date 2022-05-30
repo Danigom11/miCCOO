@@ -154,6 +154,7 @@ fun Tests(viewModelTests: ViewModelTests) {
                             Boton(
                                 destino = visibleTests, destinoCambia = {
                                     visibleTests = false
+                                    preguntaAzarNumero = (0..5).random()
                                     visibleTestsSiguiente = true
                                 }, texto = "Siguiente",
                                 modifier = Modifier
@@ -247,6 +248,7 @@ fun Tests(viewModelTests: ViewModelTests) {
                             Boton(
                                 destino = visibleTestsSiguiente, destinoCambia = {
                                     visibleTestsSiguiente = false
+                                    preguntaAzarNumero = (0..5).random()
                                     visibleTests = true
                                 }, texto = "Siguiente",
                                 modifier = Modifier
