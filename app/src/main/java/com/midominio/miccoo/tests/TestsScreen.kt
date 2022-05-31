@@ -1,6 +1,10 @@
 package com.midominio.miccoo.tests
 
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.ExperimentalAnimationApi
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.scaleOut
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
@@ -18,9 +22,9 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.midominio.miccoo.BarraSuperior
-import com.midominio.miccoo.nomina_calculadora.AnimarVisibilidad
 import com.midominio.miccoo.nomina_calculadora.Boton
 import com.midominio.miccoo.nomina_calculadora.TextoConcepto
+import com.midominio.miccoo.nomina_calculadora.alturaCuadros
 import com.midominio.miccoo.ui.theme.ComicNeue
 import com.midominio.miccoo.ui.theme.MiCCOOTheme
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -31,14 +35,13 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 @ExperimentalAnimationApi
 @Composable
 fun Tests(viewModelTests: ViewModelTests) {
-    var preguntaAzarNumero = (0..5).random()
-    var estadoPreguntaAzarNumero = remember { mutableStateOf(preguntaAzarNumero) }
+    var numeroPregunta by remember { mutableStateOf(1) }
     val respuestaElegida = remember { mutableStateOf("") }
-    val pregunta = listaTests[estadoPreguntaAzarNumero.value].pregunta
-    val respuestaUno = listaTests[estadoPreguntaAzarNumero.value].respuestaCorrecta
-    val respuestaDos = listaTests[estadoPreguntaAzarNumero.value].respuestaIncorrectaUno
+    val pregunta = listaTests[numeroPregunta].pregunta
+    val respuestaUno = listaTests[numeroPregunta].respuestaCorrecta
+    val respuestaDos = listaTests[numeroPregunta].respuestaIncorrectaUno
     val respuestaTres =
-        listaTests[estadoPreguntaAzarNumero.value].respuestaIncorrectaDos
+        listaTests[numeroPregunta].respuestaIncorrectaDos
     val densidad = LocalDensity.current
     var visibleTests by rememberSaveable { mutableStateOf(true) }
     var visibleTestsSiguiente by rememberSaveable { mutableStateOf(false) }
@@ -54,6 +57,7 @@ fun Tests(viewModelTests: ViewModelTests) {
             content = {
                 Column(
                     modifier = Modifier
+                        .height(alturaCuadros)
                         .border(
                             BorderStroke(
                                 width = 2.dp,
@@ -68,7 +72,16 @@ fun Tests(viewModelTests: ViewModelTests) {
                         ),
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
-                    AnimarVisibilidad(visible = visibleTests, densidad = densidad) {
+                    AnimatedVisibility(
+                        visible = visibleTests,
+                        enter = fadeIn(
+                            animationSpec = tween(
+                                durationMillis = 4000,
+                                delayMillis = 100
+                            )
+                        ),
+                        exit = scaleOut()
+                    ) {
                         Column {
                             Spacer(modifier = Modifier.size(30.dp))
                             TextoConcepto(texto = "¡PONTE A PRUEBA!")
@@ -148,21 +161,33 @@ fun Tests(viewModelTests: ViewModelTests) {
                                     )
                                 }
                             }
+                            Spacer(modifier = Modifier.size(20.dp))
+                            Box(
+                                Modifier.fillMaxWidth(),
+                                contentAlignment = Alignment.BottomCenter
+                            ) {
+                                Boton(
+                                    destino = visibleTests, destinoCambia = {
+                                        visibleTests = false
+                                        numeroPregunta = (0..5).random()
+                                        visibleTestsSiguiente = true
+                                    }, texto = "Siguiente",
+                                    modifier = Modifier
+                                )
+                            }
+                            Spacer(modifier = Modifier.size(20.dp))
                         }
-                        Spacer(modifier = Modifier.size(20.dp))
-                        Box(Modifier.fillMaxWidth(), contentAlignment = Alignment.BottomCenter) {
-                            Boton(
-                                destino = visibleTests, destinoCambia = {
-                                    visibleTests = false
-                                    preguntaAzarNumero = (0..5).random()
-                                    visibleTestsSiguiente = true
-                                }, texto = "Siguiente",
-                                modifier = Modifier
-                            )
-                        }
-                        Spacer(modifier = Modifier.size(20.dp))
                     }
-                    AnimarVisibilidad(visible = visibleTestsSiguiente, densidad = densidad) {
+                    AnimatedVisibility(
+                        visible = visibleTestsSiguiente,
+                        enter = fadeIn(
+                            animationSpec = tween(
+                                durationMillis = 4000,
+                                delayMillis = 100
+                            )
+                        ),
+                        exit = scaleOut()
+                    ) {
                         Column {
                             Spacer(modifier = Modifier.size(30.dp))
                             TextoConcepto(texto = "¡PONTE A PRUEBA!")
@@ -242,19 +267,23 @@ fun Tests(viewModelTests: ViewModelTests) {
                                     )
                                 }
                             }
+
+                            Spacer(modifier = Modifier.size(20.dp))
+                            Box(
+                                Modifier.fillMaxWidth(),
+                                contentAlignment = Alignment.BottomCenter
+                            ) {
+                                Boton(
+                                    destino = visibleTestsSiguiente, destinoCambia = {
+                                        visibleTestsSiguiente = false
+                                        numeroPregunta = (0..5).random()
+                                        visibleTests = true
+                                    }, texto = "Siguiente",
+                                    modifier = Modifier
+                                )
+                            }
+                            Spacer(modifier = Modifier.size(20.dp))
                         }
-                        Spacer(modifier = Modifier.size(20.dp))
-                        Box(Modifier.fillMaxWidth(), contentAlignment = Alignment.BottomCenter) {
-                            Boton(
-                                destino = visibleTestsSiguiente, destinoCambia = {
-                                    visibleTestsSiguiente = false
-                                    preguntaAzarNumero = (0..5).random()
-                                    visibleTests = true
-                                }, texto = "Siguiente",
-                                modifier = Modifier
-                            )
-                        }
-                        Spacer(modifier = Modifier.size(20.dp))
                     }
                 }
             }
