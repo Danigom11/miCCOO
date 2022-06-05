@@ -17,7 +17,6 @@ import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -35,15 +34,15 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 @ExperimentalAnimationApi
 @Composable
 fun Tests(viewModelTests: ViewModelTests) {
-    var numeroPregunta by remember { mutableStateOf(1) }
+    var numeroPregunta by remember { mutableStateOf(listaPosicionesListaPreguntas.random()) }
     val respuestaElegida = remember { mutableStateOf("") }
     val pregunta = listaTests[numeroPregunta].pregunta
     val respuestaUno = listaTests[numeroPregunta].respuestaCorrecta
     val respuestaDos = listaTests[numeroPregunta].respuestaIncorrectaUno
     val respuestaTres =
         listaTests[numeroPregunta].respuestaIncorrectaDos
-    val densidad = LocalDensity.current
-    var visibleTests by rememberSaveable { mutableStateOf(true) }
+    var visibleIntroduccionTests by rememberSaveable { mutableStateOf(true) }
+    var visibleTests by rememberSaveable { mutableStateOf(false) }
     var visibleTestsSiguiente by rememberSaveable { mutableStateOf(false) }
 
     MiCCOOTheme {
@@ -73,10 +72,61 @@ fun Tests(viewModelTests: ViewModelTests) {
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
                     AnimatedVisibility(
+                        visible = visibleIntroduccionTests,
+                        enter = fadeIn(
+                            animationSpec = tween(
+                                durationMillis = 3000,
+                                delayMillis = 100
+                            )
+                        ),
+                        exit = scaleOut()
+                    ) {
+                        Column {
+                            Spacer(modifier = Modifier.size(30.dp))
+                            TextoConcepto(texto = "¡PONTE A PRUEBA!")
+                            Spacer(modifier = Modifier.size(20.dp))
+                            Column(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .padding(start = 30.dp, end = 30.dp)
+                            ) {
+                                Row(
+                                    verticalAlignment = Alignment.CenterVertically
+                                ) {
+                                    Text(
+                                        text = "Haz un test de solo 5 preguntas y descubre cuanto sabes",
+                                        color = MaterialTheme.colors.onPrimary,
+                                        fontSize = 24.sp,
+                                        style = TextStyle(
+                                            fontFamily = ComicNeue
+                                        ),
+
+                                        modifier = Modifier.fillMaxWidth()
+                                    )
+                                }
+                                Spacer(modifier = Modifier.size(20.dp))
+                                Box(
+                                    Modifier.fillMaxWidth(),
+                                    contentAlignment = Alignment.BottomCenter
+                                ) {
+                                    Boton(
+                                        destino = visibleIntroduccionTests, destinoCambia = {
+                                            visibleIntroduccionTests = false
+                                            numeroPregunta = listaPosicionesListaPreguntas.lastIndex
+                                            visibleTests = true
+                                        }, texto = "¡Adelante!",
+                                        modifier = Modifier
+                                    )
+                                }
+                                Spacer(modifier = Modifier.size(20.dp))
+                            }
+                        }
+                    }
+                    AnimatedVisibility(
                         visible = visibleTests,
                         enter = fadeIn(
                             animationSpec = tween(
-                                durationMillis = 4000,
+                                durationMillis = 3000,
                                 delayMillis = 100
                             )
                         ),
@@ -169,7 +219,8 @@ fun Tests(viewModelTests: ViewModelTests) {
                                 Boton(
                                     destino = visibleTests, destinoCambia = {
                                         visibleTests = false
-                                        numeroPregunta = (0..5).random()
+                                        listaTests.removeAt(numeroPregunta)
+                                        numeroPregunta = listaPosicionesListaPreguntas.lastIndex
                                         visibleTestsSiguiente = true
                                     }, texto = "Siguiente",
                                     modifier = Modifier
@@ -182,7 +233,7 @@ fun Tests(viewModelTests: ViewModelTests) {
                         visible = visibleTestsSiguiente,
                         enter = fadeIn(
                             animationSpec = tween(
-                                durationMillis = 4000,
+                                durationMillis = 3000,
                                 delayMillis = 100
                             )
                         ),
@@ -276,7 +327,8 @@ fun Tests(viewModelTests: ViewModelTests) {
                                 Boton(
                                     destino = visibleTestsSiguiente, destinoCambia = {
                                         visibleTestsSiguiente = false
-                                        numeroPregunta = (0..5).random()
+                                        listaTests.removeAt(numeroPregunta)
+                                        numeroPregunta = listaPosicionesListaPreguntas.lastIndex
                                         visibleTests = true
                                     }, texto = "Siguiente",
                                     modifier = Modifier

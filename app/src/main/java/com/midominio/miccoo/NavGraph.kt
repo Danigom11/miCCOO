@@ -36,12 +36,12 @@ fun SetupNavGraph(
 ) {
     AnimatedNavHost(
         navController = navController as NavHostController,
-        startDestination = Screens.PANTALLAPRINCIPAL.ruta,
+        startDestination = Screens.PANTALLAINICIO.ruta,
     ) {
         //Definir rutas de las pantallas
         //Pantalla inicial
         composable(
-            route = Screens.PANTALLAPRINCIPAL.ruta,
+            route = Screens.PANTALLAINICIO.ruta,
 
             exitTransition = {
                 slideOutHorizontally(
@@ -63,6 +63,10 @@ fun SetupNavGraph(
             },
 
             ) {
+            PantallaInicio(navController)
+        }
+        //Pantalla inicio
+        composable(Screens.PANTALLAPRINCIPAL.ruta) {
             PaginaPrincipal(navController = navController)
         }
         //Pantalla permisos retribuidos

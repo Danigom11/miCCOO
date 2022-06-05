@@ -1,6 +1,7 @@
 package com.midominio.miccoo._pagina_principal
 
 sealed class Screens(val ruta: String) {
+    object PANTALLAINICIO : Screens("PantallaInicio")
     object PANTALLAPRINCIPAL : Screens("PantallaPrincipal")
     object PERMISOSRETRIBUIDOS : Screens("PermisosRetribuidos")
     object NOMINACOMPLETA : Screens("NominaCompleta")
