@@ -61,6 +61,7 @@ fun PantallaInicio(navController: NavHostController) {
                 Modifier
                     .size(300.dp, 300.dp)
                     .alpha(alphaAnimacion.value)
+
             )
             Text(
                 text = "miCCOO",
