@@ -30,7 +30,7 @@ fun PrimeraPantalla() {
             .verticalScroll(state = ScrollState(1))
     ) {
         Text(
-            text = "Amonestación verbal o por escrito; suspensión de empleo y sueldo de hasta dos días.\n",
+            text = "Por faltas leves: Prescribe a los 10 días. Amonestación verbal o por escrito; suspensión de empleo y sueldo de hasta dos días.\n",
             color = MaterialTheme.colors.onPrimary,
             fontStyle = FontStyle.Italic,
             textAlign = TextAlign.Center
@@ -121,7 +121,7 @@ fun SegundaPantalla() {
             .verticalScroll(state = ScrollState(1))
     ) {
         Text(
-            text = "Por faltas graves: Suspensión de empleo y sueldo de 3 a 15 días; postergación para el ascenso hasta 3 años.\n",
+            text = "Por faltas graves: Prescribe a los 20 días. Suspensión de empleo y sueldo de 3 a 15 días; postergación para el ascenso hasta 3 años.\n",
             color = MaterialTheme.colors.onPrimary,
             fontStyle = FontStyle.Italic,
             textAlign = TextAlign.Center
@@ -291,7 +291,7 @@ fun TerceraPantalla() {
         // .background(colorResource(id = R.color.primaryColor))
     ) {
         Text(
-            text = "Por faltas muy graves: Suspensión de empleo y sueldo de 16 a 45 días; inhabilitación definitiva para el ascenso; despido.\n",
+            text = "Por faltas muy graves: Prescribe a los 60 días. Suspensión de empleo y sueldo de 16 a 45 días; inhabilitación definitiva para el ascenso; despido.\n",
             fontStyle = FontStyle.Italic,
             textAlign = TextAlign.Center, color = MaterialTheme.colors.onPrimary
         )
