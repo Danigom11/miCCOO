@@ -97,9 +97,9 @@ fun TarjetaModeloPantallaPrincipal(
                             shape = RoundedCornerShape(20.dp)
                         )
                         .border(
-                            1.5.dp,
-                            MaterialTheme.colors.secondaryVariant,
-                            RoundedCornerShape(20.dp)
+                            width = 1.5.dp,
+                            color = Color.Red.copy(alpha = 0.2f),
+                            shape = RoundedCornerShape(20.dp)
                         )
                 )
                 Spacer(modifier = Modifier.width(12.dp))

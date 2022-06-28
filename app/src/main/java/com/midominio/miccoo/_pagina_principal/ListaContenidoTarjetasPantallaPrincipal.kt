@@ -8,7 +8,7 @@ val listaContenidoTarjetasPantallaPrincipal: List<DataClassContenidoTarjetasPagi
         DataClassContenidoTarjetasPaginaPrincipal(
             Screens.NOMINACOMPLETA.ruta,
             R.drawable.nomina_completa,
-            "Calculadora de nóminas",
+            "Nómina",
             "Comprueba si tú nómina está bien"
         ),
         DataClassContenidoTarjetasPaginaPrincipal(
@@ -20,7 +20,7 @@ val listaContenidoTarjetasPantallaPrincipal: List<DataClassContenidoTarjetasPagi
         DataClassContenidoTarjetasPaginaPrincipal(
             Screens.IPC.ruta,
             R.drawable.ipc,
-            "Atrasos y subida mensual",
+            "Atrasos y subida",
             "Comprueba cuanto te corresponde"
         ),
         DataClassContenidoTarjetasPaginaPrincipal(
@@ -36,9 +36,16 @@ val listaContenidoTarjetasPantallaPrincipal: List<DataClassContenidoTarjetasPagi
             "Leves, graves o muy graves"
         ),
         DataClassContenidoTarjetasPaginaPrincipal(
+            Screens.DOCUMENTOS.ruta,
+            R.drawable.documentos,
+            "Documentos",
+            "Peticiones, solicitudes..."
+        )
+
+        /*DataClassContenidoTarjetasPaginaPrincipal(
             Screens.TESTS.ruta,
             R.drawable.tests,
             "Tests",
             "¡Ponte a prueba!"
-        )
+        )*/
     )

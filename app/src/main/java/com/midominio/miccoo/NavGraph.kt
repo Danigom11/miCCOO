@@ -14,6 +14,7 @@ import com.google.accompanist.pager.ExperimentalPagerApi
 import com.midominio.miccoo._pagina_principal.PaginaPrincipal
 import com.midominio.miccoo._pagina_principal.Screens
 import com.midominio.miccoo.atrasosYSubida.AtrasosYSubida
+import com.midominio.miccoo.documentos.Documentos
 import com.midominio.miccoo.nomina_calculadora.NominaCompleta
 import com.midominio.miccoo.nomina_conceptos.Nomina
 import com.midominio.miccoo.nomina_conceptos.conceptos_otros.conceptos_explicados.*
@@ -121,6 +122,10 @@ fun SetupNavGraph(
         //Pantalla sanción
         composable(Screens.SANCION.ruta) {
             Sancion(viewModelNomina = viewModelNomina)
+        }
+        //Pantalla tests
+        composable(Screens.DOCUMENTOS.ruta) {
+            Documentos()
         }
         //Pantalla tests
         composable(Screens.TESTS.ruta) {

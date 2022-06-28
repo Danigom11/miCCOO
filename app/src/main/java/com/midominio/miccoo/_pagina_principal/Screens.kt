@@ -16,5 +16,6 @@ sealed class Screens(val ruta: String) {
     object DESPIDO : Screens("6Despido")
     object HUELGA : Screens("7Huelga")
     object SANCION : Screens("8Sancion")
+    object DOCUMENTOS : Screens("Documentos")
     object TESTS : Screens("Tests")
 }
