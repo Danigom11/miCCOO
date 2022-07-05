@@ -30,6 +30,7 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 @Composable
 fun Documentos() {
     val densidad = LocalDensity.current
+    val separacionBotones = 10.dp
     var visibleListaDocumentos by rememberSaveable { mutableStateOf(true) }
     var visibleSolicitudCambioJornada by rememberSaveable { mutableStateOf(false) }
 
@@ -42,11 +43,124 @@ fun Documentos() {
                 BarraSuperior()
             },
             content = {
+                // Página con documentos
                 AnimarVisibilidad(visible = visibleListaDocumentos, densidad = densidad) {
                     Column {
                         TextoTitulo(texto = "Documentos")
                         Column(Modifier.padding(start = 10.dp)) {
-                            Spacer(modifier = Modifier.size(20.dp))
+                            Spacer(modifier = Modifier.size(separacionBotones))
+
+                            // Solicitud de cambio de jornada
+                            BotonDocumentos(
+                                visibleListaDocumentos = visibleListaDocumentos,
+                                visibleCambia = {
+                                    visibleListaDocumentos = false
+                                    visibleSolicitudCambioJornada = true
+                                },
+                                texto = "Solicitud de cambio de jornada"
+                            )
+                            Spacer(modifier = Modifier.size(separacionBotones))
+
+                            // Solicitud atrasos
+                            BotonDocumentos(
+                                visibleListaDocumentos = visibleListaDocumentos,
+                                visibleCambia = {
+                                    visibleListaDocumentos = false
+                                    visibleSolicitudCambioJornada = true
+                                },
+                                texto = "Solicitud de cambio de jornada"
+                            )
+                            Spacer(modifier = Modifier.size(separacionBotones))
+
+                            // Solicitud de cambio de jornada por cuidado de menores o mayores
+                            BotonDocumentos(
+                                visibleListaDocumentos = visibleListaDocumentos,
+                                visibleCambia = {
+                                    visibleListaDocumentos = false
+                                    visibleSolicitudCambioJornada = true
+                                },
+                                texto = "Solicitud de cambio de jornada"
+                            )
+                            Spacer(modifier = Modifier.size(separacionBotones))
+
+                            // Solicitud de excedencia general
+                            BotonDocumentos(
+                                visibleListaDocumentos = visibleListaDocumentos,
+                                visibleCambia = {
+                                    visibleListaDocumentos = false
+                                    visibleSolicitudCambioJornada = true
+                                },
+                                texto = "Solicitud de cambio de jornada"
+                            )
+                            Spacer(modifier = Modifier.size(separacionBotones))
+
+                            // Solicitud de excedencia por cuidado de menores
+                            BotonDocumentos(
+                                visibleListaDocumentos = visibleListaDocumentos,
+                                visibleCambia = {
+                                    visibleListaDocumentos = false
+                                    visibleSolicitudCambioJornada = true
+                                },
+                                texto = "Solicitud de cambio de jornada"
+                            )
+                            Spacer(modifier = Modifier.size(separacionBotones))
+
+                            // Comunicación dejar trabajo
+                            BotonDocumentos(
+                                visibleListaDocumentos = visibleListaDocumentos,
+                                visibleCambia = {
+                                    visibleListaDocumentos = false
+                                    visibleSolicitudCambioJornada = true
+                                },
+                                texto = "Solicitud de cambio de jornada"
+                            )
+                            Spacer(modifier = Modifier.size(separacionBotones))
+
+                            // Solicitud cambio de categoría profesional
+                            BotonDocumentos(
+                                visibleListaDocumentos = visibleListaDocumentos,
+                                visibleCambia = {
+                                    visibleListaDocumentos = false
+                                    visibleSolicitudCambioJornada = true
+                                },
+                                texto = "Solicitud de cambio de jornada"
+                            )
+                            Spacer(modifier = Modifier.size(separacionBotones))
+
+                            // Solicitud cambio de contingencias con acceso a web oficial con el documento
+                            BotonDocumentos(
+                                visibleListaDocumentos = visibleListaDocumentos,
+                                visibleCambia = {
+                                    visibleListaDocumentos = false
+                                    visibleSolicitudCambioJornada = true
+                                },
+                                texto = "Solicitud de cambio de jornada"
+                            )
+                            Spacer(modifier = Modifier.size(separacionBotones))
+
+                            // Denuncia a inspección de trabajo con acceso a web oficial para descargarlo
+                            BotonDocumentos(
+                                visibleListaDocumentos = visibleListaDocumentos,
+                                visibleCambia = {
+                                    visibleListaDocumentos = false
+                                    visibleSolicitudCambioJornada = true
+                                },
+                                texto = "Solicitud de cambio de jornada"
+                            )
+                            Spacer(modifier = Modifier.size(separacionBotones))
+
+                            // Carta de queja
+                            BotonDocumentos(
+                                visibleListaDocumentos = visibleListaDocumentos,
+                                visibleCambia = {
+                                    visibleListaDocumentos = false
+                                    visibleSolicitudCambioJornada = true
+                                },
+                                texto = "Solicitud de cambio de jornada"
+                            )
+                            Spacer(modifier = Modifier.size(separacionBotones))
+
+                            // Alegaciones
                             BotonDocumentos(
                                 visibleListaDocumentos = visibleListaDocumentos,
                                 visibleCambia = {
@@ -58,6 +172,8 @@ fun Documentos() {
                         }
                     }
                 }
+
+                // Solicitud de cambio de jornada
                 AnimarVisibilidad(visible = visibleSolicitudCambioJornada, densidad = densidad) {
                     Column {
                         SelectionContainer(Modifier.padding(8.dp)) {
@@ -90,6 +206,347 @@ fun Documentos() {
                         }
                     }
                 }
+
+                // Solicitud atrasos
+                AnimarVisibilidad(visible = visibleSolicitudCambioJornada, densidad = densidad) {
+                    Column {
+                        SelectionContainer(Modifier.padding(8.dp)) {
+                            Text(
+                                text = "\n\nA LA ATENCIÓN DE RRHH \n\n\n" +
+                                        "En ____________ a _____________ de ____________ de 20___ \n\n" +
+                                        "Don/Doña___________________________________________________, DNI______________, por medio de la presente solicito formalmente el cambio de horario laboral debido a razones personales. \n\n" +
+                                        "La jornada que solicito es de \n" +
+                                        "_____________________________________________________________.\n\n" +
+                                        "Rogándole acuse recibo del presente documento, reciba un cordial saludo. \n\n" +
+                                        "LA EMPRESA \t\t\t\t\t\tEL/LA TRABAJADOR/A\n",
+                                color = MaterialTheme.colors.onPrimary
+                            )
+                        }
+                        Column(
+                            Modifier.fillMaxWidth(),
+                            horizontalAlignment = Alignment.CenterHorizontally,
+                            verticalArrangement = Arrangement.Bottom
+                        ) {
+                            Spacer(modifier = Modifier.size(40.dp))
+                            Boton(
+                                destino = visibleSolicitudCambioJornada,
+                                destinoCambia = {
+                                    visibleSolicitudCambioJornada = false
+                                    visibleListaDocumentos = true
+                                },
+                                texto = "Volver",
+                                modifier = Modifier
+                            )
+                        }
+                    }
+                }
+
+                // Solicitud de cambio de jornada por cuidado de menores o mayores
+                AnimarVisibilidad(visible = visibleSolicitudCambioJornada, densidad = densidad) {
+                    Column {
+                        SelectionContainer(Modifier.padding(8.dp)) {
+                            Text(
+                                text = "\n\nA LA ATENCIÓN DE RRHH \n\n\n" +
+                                        "En ____________ a _____________ de ____________ de 20___ \n\n" +
+                                        "Don/Doña___________________________________________________, DNI______________, por medio de la presente solicito formalmente el cambio de horario laboral debido a razones personales. \n\n" +
+                                        "La jornada que solicito es de \n" +
+                                        "_____________________________________________________________.\n\n" +
+                                        "Rogándole acuse recibo del presente documento, reciba un cordial saludo. \n\n" +
+                                        "LA EMPRESA \t\t\t\t\t\tEL/LA TRABAJADOR/A\n",
+                                color = MaterialTheme.colors.onPrimary
+                            )
+                        }
+                        Column(
+                            Modifier.fillMaxWidth(),
+                            horizontalAlignment = Alignment.CenterHorizontally,
+                            verticalArrangement = Arrangement.Bottom
+                        ) {
+                            Spacer(modifier = Modifier.size(40.dp))
+                            Boton(
+                                destino = visibleSolicitudCambioJornada,
+                                destinoCambia = {
+                                    visibleSolicitudCambioJornada = false
+                                    visibleListaDocumentos = true
+                                },
+                                texto = "Volver",
+                                modifier = Modifier
+                            )
+                        }
+                    }
+                }
+
+                // Solicitud de excedencia general
+                AnimarVisibilidad(visible = visibleSolicitudCambioJornada, densidad = densidad) {
+                    Column {
+                        SelectionContainer(Modifier.padding(8.dp)) {
+                            Text(
+                                text = "\n\nA LA ATENCIÓN DE RRHH \n\n\n" +
+                                        "En ____________ a _____________ de ____________ de 20___ \n\n" +
+                                        "Don/Doña___________________________________________________, DNI______________, por medio de la presente solicito formalmente el cambio de horario laboral debido a razones personales. \n\n" +
+                                        "La jornada que solicito es de \n" +
+                                        "_____________________________________________________________.\n\n" +
+                                        "Rogándole acuse recibo del presente documento, reciba un cordial saludo. \n\n" +
+                                        "LA EMPRESA \t\t\t\t\t\tEL/LA TRABAJADOR/A\n",
+                                color = MaterialTheme.colors.onPrimary
+                            )
+                        }
+                        Column(
+                            Modifier.fillMaxWidth(),
+                            horizontalAlignment = Alignment.CenterHorizontally,
+                            verticalArrangement = Arrangement.Bottom
+                        ) {
+                            Spacer(modifier = Modifier.size(40.dp))
+                            Boton(
+                                destino = visibleSolicitudCambioJornada,
+                                destinoCambia = {
+                                    visibleSolicitudCambioJornada = false
+                                    visibleListaDocumentos = true
+                                },
+                                texto = "Volver",
+                                modifier = Modifier
+                            )
+                        }
+                    }
+                }
+
+                // Solicitud de excedencia por cuidado de menores
+                AnimarVisibilidad(visible = visibleSolicitudCambioJornada, densidad = densidad) {
+                    Column {
+                        SelectionContainer(Modifier.padding(8.dp)) {
+                            Text(
+                                text = "\n\nA LA ATENCIÓN DE RRHH \n\n\n" +
+                                        "En ____________ a _____________ de ____________ de 20___ \n\n" +
+                                        "Don/Doña___________________________________________________, DNI______________, por medio de la presente solicito formalmente el cambio de horario laboral debido a razones personales. \n\n" +
+                                        "La jornada que solicito es de \n" +
+                                        "_____________________________________________________________.\n\n" +
+                                        "Rogándole acuse recibo del presente documento, reciba un cordial saludo. \n\n" +
+                                        "LA EMPRESA \t\t\t\t\t\tEL/LA TRABAJADOR/A\n",
+                                color = MaterialTheme.colors.onPrimary
+                            )
+                        }
+                        Column(
+                            Modifier.fillMaxWidth(),
+                            horizontalAlignment = Alignment.CenterHorizontally,
+                            verticalArrangement = Arrangement.Bottom
+                        ) {
+                            Spacer(modifier = Modifier.size(40.dp))
+                            Boton(
+                                destino = visibleSolicitudCambioJornada,
+                                destinoCambia = {
+                                    visibleSolicitudCambioJornada = false
+                                    visibleListaDocumentos = true
+                                },
+                                texto = "Volver",
+                                modifier = Modifier
+                            )
+                        }
+                    }
+                }
+
+                // Comunicación dejar trabajo
+                AnimarVisibilidad(visible = visibleSolicitudCambioJornada, densidad = densidad) {
+                    Column {
+                        SelectionContainer(Modifier.padding(8.dp)) {
+                            Text(
+                                text = "\n\nA LA ATENCIÓN DE RRHH \n\n\n" +
+                                        "En ____________ a _____________ de ____________ de 20___ \n\n" +
+                                        "Don/Doña___________________________________________________, DNI______________, por medio de la presente solicito formalmente el cambio de horario laboral debido a razones personales. \n\n" +
+                                        "La jornada que solicito es de \n" +
+                                        "_____________________________________________________________.\n\n" +
+                                        "Rogándole acuse recibo del presente documento, reciba un cordial saludo. \n\n" +
+                                        "LA EMPRESA \t\t\t\t\t\tEL/LA TRABAJADOR/A\n",
+                                color = MaterialTheme.colors.onPrimary
+                            )
+                        }
+                        Column(
+                            Modifier.fillMaxWidth(),
+                            horizontalAlignment = Alignment.CenterHorizontally,
+                            verticalArrangement = Arrangement.Bottom
+                        ) {
+                            Spacer(modifier = Modifier.size(40.dp))
+                            Boton(
+                                destino = visibleSolicitudCambioJornada,
+                                destinoCambia = {
+                                    visibleSolicitudCambioJornada = false
+                                    visibleListaDocumentos = true
+                                },
+                                texto = "Volver",
+                                modifier = Modifier
+                            )
+                        }
+                    }
+                }
+
+                // Solicitud cambio de categoría profesional
+                AnimarVisibilidad(visible = visibleSolicitudCambioJornada, densidad = densidad) {
+                    Column {
+                        SelectionContainer(Modifier.padding(8.dp)) {
+                            Text(
+                                text = "\n\nA LA ATENCIÓN DE RRHH \n\n\n" +
+                                        "En ____________ a _____________ de ____________ de 20___ \n\n" +
+                                        "Don/Doña___________________________________________________, DNI______________, por medio de la presente solicito formalmente el cambio de horario laboral debido a razones personales. \n\n" +
+                                        "La jornada que solicito es de \n" +
+                                        "_____________________________________________________________.\n\n" +
+                                        "Rogándole acuse recibo del presente documento, reciba un cordial saludo. \n\n" +
+                                        "LA EMPRESA \t\t\t\t\t\tEL/LA TRABAJADOR/A\n",
+                                color = MaterialTheme.colors.onPrimary
+                            )
+                        }
+                        Column(
+                            Modifier.fillMaxWidth(),
+                            horizontalAlignment = Alignment.CenterHorizontally,
+                            verticalArrangement = Arrangement.Bottom
+                        ) {
+                            Spacer(modifier = Modifier.size(40.dp))
+                            Boton(
+                                destino = visibleSolicitudCambioJornada,
+                                destinoCambia = {
+                                    visibleSolicitudCambioJornada = false
+                                    visibleListaDocumentos = true
+                                },
+                                texto = "Volver",
+                                modifier = Modifier
+                            )
+                        }
+                    }
+                }
+
+                // Solicitud cambio de contingencias con acceso a web oficial con el documento
+                AnimarVisibilidad(visible = visibleSolicitudCambioJornada, densidad = densidad) {
+                    Column {
+                        SelectionContainer(Modifier.padding(8.dp)) {
+                            Text(
+                                text = "\n\nA LA ATENCIÓN DE RRHH \n\n\n" +
+                                        "En ____________ a _____________ de ____________ de 20___ \n\n" +
+                                        "Don/Doña___________________________________________________, DNI______________, por medio de la presente solicito formalmente el cambio de horario laboral debido a razones personales. \n\n" +
+                                        "La jornada que solicito es de \n" +
+                                        "_____________________________________________________________.\n\n" +
+                                        "Rogándole acuse recibo del presente documento, reciba un cordial saludo. \n\n" +
+                                        "LA EMPRESA \t\t\t\t\t\tEL/LA TRABAJADOR/A\n",
+                                color = MaterialTheme.colors.onPrimary
+                            )
+                        }
+                        Column(
+                            Modifier.fillMaxWidth(),
+                            horizontalAlignment = Alignment.CenterHorizontally,
+                            verticalArrangement = Arrangement.Bottom
+                        ) {
+                            Spacer(modifier = Modifier.size(40.dp))
+                            Boton(
+                                destino = visibleSolicitudCambioJornada,
+                                destinoCambia = {
+                                    visibleSolicitudCambioJornada = false
+                                    visibleListaDocumentos = true
+                                },
+                                texto = "Volver",
+                                modifier = Modifier
+                            )
+                        }
+                    }
+                }
+
+                // Denuncia a inspección de trabajo con acceso a web oficial para descargarlo
+                AnimarVisibilidad(visible = visibleSolicitudCambioJornada, densidad = densidad) {
+                    Column {
+                        SelectionContainer(Modifier.padding(8.dp)) {
+                            Text(
+                                text = "\n\nA LA ATENCIÓN DE RRHH \n\n\n" +
+                                        "En ____________ a _____________ de ____________ de 20___ \n\n" +
+                                        "Don/Doña___________________________________________________, DNI______________, por medio de la presente solicito formalmente el cambio de horario laboral debido a razones personales. \n\n" +
+                                        "La jornada que solicito es de \n" +
+                                        "_____________________________________________________________.\n\n" +
+                                        "Rogándole acuse recibo del presente documento, reciba un cordial saludo. \n\n" +
+                                        "LA EMPRESA \t\t\t\t\t\tEL/LA TRABAJADOR/A\n",
+                                color = MaterialTheme.colors.onPrimary
+                            )
+                        }
+                        Column(
+                            Modifier.fillMaxWidth(),
+                            horizontalAlignment = Alignment.CenterHorizontally,
+                            verticalArrangement = Arrangement.Bottom
+                        ) {
+                            Spacer(modifier = Modifier.size(40.dp))
+                            Boton(
+                                destino = visibleSolicitudCambioJornada,
+                                destinoCambia = {
+                                    visibleSolicitudCambioJornada = false
+                                    visibleListaDocumentos = true
+                                },
+                                texto = "Volver",
+                                modifier = Modifier
+                            )
+                        }
+                    }
+                }
+
+                // Carta de queja
+                AnimarVisibilidad(visible = visibleSolicitudCambioJornada, densidad = densidad) {
+                    Column {
+                        SelectionContainer(Modifier.padding(8.dp)) {
+                            Text(
+                                text = "\n\nA LA ATENCIÓN DE RRHH \n\n\n" +
+                                        "En ____________ a _____________ de ____________ de 20___ \n\n" +
+                                        "Don/Doña___________________________________________________, DNI______________, por medio de la presente solicito formalmente el cambio de horario laboral debido a razones personales. \n\n" +
+                                        "La jornada que solicito es de \n" +
+                                        "_____________________________________________________________.\n\n" +
+                                        "Rogándole acuse recibo del presente documento, reciba un cordial saludo. \n\n" +
+                                        "LA EMPRESA \t\t\t\t\t\tEL/LA TRABAJADOR/A\n",
+                                color = MaterialTheme.colors.onPrimary
+                            )
+                        }
+                        Column(
+                            Modifier.fillMaxWidth(),
+                            horizontalAlignment = Alignment.CenterHorizontally,
+                            verticalArrangement = Arrangement.Bottom
+                        ) {
+                            Spacer(modifier = Modifier.size(40.dp))
+                            Boton(
+                                destino = visibleSolicitudCambioJornada,
+                                destinoCambia = {
+                                    visibleSolicitudCambioJornada = false
+                                    visibleListaDocumentos = true
+                                },
+                                texto = "Volver",
+                                modifier = Modifier
+                            )
+                        }
+                    }
+                }
+
+                // Alegaciones
+                AnimarVisibilidad(visible = visibleSolicitudCambioJornada, densidad = densidad) {
+                    Column {
+                        SelectionContainer(Modifier.padding(8.dp)) {
+                            Text(
+                                text = "\n\nA LA ATENCIÓN DE RRHH \n\n\n" +
+                                        "En ____________ a _____________ de ____________ de 20___ \n\n" +
+                                        "Don/Doña___________________________________________________, DNI______________, por medio de la presente solicito formalmente el cambio de horario laboral debido a razones personales. \n\n" +
+                                        "La jornada que solicito es de \n" +
+                                        "_____________________________________________________________.\n\n" +
+                                        "Rogándole acuse recibo del presente documento, reciba un cordial saludo. \n\n" +
+                                        "LA EMPRESA \t\t\t\t\t\tEL/LA TRABAJADOR/A\n",
+                                color = MaterialTheme.colors.onPrimary
+                            )
+                        }
+                        Column(
+                            Modifier.fillMaxWidth(),
+                            horizontalAlignment = Alignment.CenterHorizontally,
+                            verticalArrangement = Arrangement.Bottom
+                        ) {
+                            Spacer(modifier = Modifier.size(40.dp))
+                            Boton(
+                                destino = visibleSolicitudCambioJornada,
+                                destinoCambia = {
+                                    visibleSolicitudCambioJornada = false
+                                    visibleListaDocumentos = true
+                                },
+                                texto = "Volver",
+                                modifier = Modifier
+                            )
+                        }
+                    }
+                }
+
             }
         )
     }
