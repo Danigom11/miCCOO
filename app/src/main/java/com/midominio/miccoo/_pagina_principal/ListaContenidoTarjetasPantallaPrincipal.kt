@@ -39,7 +39,7 @@ val listaContenidoTarjetasPantallaPrincipal: List<DataClassContenidoTarjetasPagi
             Screens.DOCUMENTOS.ruta,
             R.drawable.documentos,
             "Documentos",
-            "Peticiones, solicitudes..."
+            "Todo lo que puedas necesitar"
         )
 
         /*DataClassContenidoTarjetasPaginaPrincipal(
