@@ -1,14 +1,11 @@
 package com.midominio.miccoo
 
-import android.content.Intent
-import android.net.Uri
 import androidx.compose.animation.*
 import androidx.compose.animation.core.FastOutSlowInEasing
 import androidx.compose.animation.core.tween
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.ExperimentalComposeUiApi
-import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import com.google.accompanist.navigation.animation.AnimatedNavHost
@@ -17,12 +14,12 @@ import com.google.accompanist.pager.ExperimentalPagerApi
 import com.midominio.miccoo._pagina_principal.PaginaPrincipal
 import com.midominio.miccoo._pagina_principal.Screens
 import com.midominio.miccoo.atrasosYSubida.AtrasosYSubida
+import com.midominio.miccoo.documentos.Documentos
 import com.midominio.miccoo.nomina_calculadora.NominaCompleta
 import com.midominio.miccoo.nomina_conceptos.Nomina
 import com.midominio.miccoo.nomina_conceptos.conceptos_otros.conceptos_explicados.*
 import com.midominio.miccoo.permisos_retribuidos.PermisosRetribuidos
 import com.midominio.miccoo.sanciones.Sanciones
-import com.midominio.miccoo.tests.Tests
 import com.midominio.miccoo.tests.ViewModelTests
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 
@@ -37,8 +34,6 @@ fun SetupNavGraph(
     viewModelNomina: ViewModelNomina,
     viewModelTests: ViewModelTests
 ) {
-    val context = LocalContext.current
-
     AnimatedNavHost(
         navController = navController as NavHostController,
         startDestination = Screens.PANTALLAINICIO.ruta,
@@ -129,16 +124,11 @@ fun SetupNavGraph(
         }
         //Pantalla documentos
         composable(Screens.DOCUMENTOS.ruta) {
-            context.startActivity(
-                Intent(Intent.ACTION_VIEW).also {
-                    it.data =
-                        Uri.parse("https://drive.google.com/drive/folders/1pxhr3RZpIa-Q5_ljmJretfM2K15uR4s1?usp=sharing")
-                }
-            )
+            Documentos()
         }
         //Pantalla tests
-        composable(Screens.TESTS.ruta) {
+        /*composable(Screens.TESTS.ruta) {
             Tests(viewModelTests = viewModelTests)
-        }
+        }*/
     }
 }

@@ -59,7 +59,7 @@ fun BarraSuperior() {
                     )
                     CompositionLocalProvider(LocalContentAlpha provides ContentAlpha.medium) {
                         Text(
-                            text = "Tu asistente sindical.",
+                            text = "Tu asistente sindical",
                             modifier = Modifier
                                 .padding(start = 10.dp),
                             fontSize = MaterialTheme.typography.button.fontSize,
